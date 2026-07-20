@@ -427,3 +427,80 @@ unchecked items are real gaps, not just untested:
 - Stage: Battlefield itself isn't ported (`TestStage.Default` is a flat
   placeholder, not real Battlefield geometry) — platforms/ledges/blast
   zones only exist in that simplified form.
+
+## Melee Lite Translation Directive — Step 1: Battlefield collision + blast zones
+
+New direction as of this session: the Fox/Falco hybrid is paused/ignored
+entirely (not deleted, just not being worked on), and the project is
+re-scoped to a strict 6-step, Fox+Battlefield-only foundation, built
+bottom-up so each layer is verified before the next depends on it. This
+entry covers Step 1 only: Battlefield's collision geometry and blast zone.
+
+**What was ported, transcribed directly from `src/stages/vs-stages/
+battlefield.js`** (not approximated): the main ground segment, all 5
+ceiling segments and all 6+6 wallL/wallR segments that make up the
+underside chamfer/notch shape, all 3 one-way platforms, the blast zone box,
+both ledge positions, and all 4 starting-point/respawn-point pairs with
+their facing directions. Every value cross-checked programmatically against
+an independently-computed conversion table before being trusted, and one
+real transcription bug (a sign flip on the blast zone's upper-Y corner)
+was caught and fixed this way rather than shipped.
+
+**Key finding, confirmed by reading the source rather than assumed:**
+MeleeLight's stage/physics data is Y-UP (gravity is `cVel.y -= gravity`,
+i.e. falling makes Y more negative; the blast-zone floor check is
+`pos.y < blastzone.min.y`). This engine's `FxVec2`/`FxAabb` are explicitly
+Y-DOWN (stated in `FxVec2.cs`'s own doc comment). Every Y coordinate in the
+new `Stages/Battlefield.cs` is therefore the source value negated — same
+adaptation this codebase already made for Gravity's sign when Fox's
+attributes were first ported, not a new convention invented for this file.
+
+**Architecture gap surfaced, not yet fixed (flagging clearly, not silently
+patching over it):** Battlefield's real shape needs arbitrary line-segment
+collision — most of the ceiling/wall segments are diagonal, not
+axis-aligned — but this engine's existing `CollisionResolver.cs` only knows
+how to resolve an AABB body against AABB solids and flat one-way platforms.
+It cannot walk Battlefield's real geometry at all as it stands. Also,
+MeleeLight's actual ground-collision algorithm (`physics.js`:
+`dealWithGround`/`fallOffGround`/`moveAlongGround`) is a full ECB-corner-vs-
+segment resolver with edge connectivity and teetering — a fundamentally
+different model from `CollisionResolver.cs`'s current one. Rewriting the
+resolver to consume real segments is explicitly **Step 2's job** (Core
+physics), not this one — porting the resolution algorithm now, before
+ground/air/gravity/jump physics are themselves verified, is exactly the
+"fixing dozens of interacting systems at once" the 6-step ordering exists
+to avoid.
+
+**What Step 1 actually delivers, concretely:**
+- `Core/Sim/Collision/FxSegment.cs` — new 2-point line-segment primitive
+  (real ground/ceiling/wall shapes aren't axis-aligned; `FxAabb` can't
+  represent them).
+- `Core/Sim/Collision/FxAabb.cs` — added `FromMinMax` (for blast-zone-style
+  corner data) and `Contains` (point-in-box, for blast zone checks) as
+  pure additions; existing center+halfsize API untouched.
+- `Core/Sim/Collision/StageGeometry.cs` — added `Ground`/`Ceiling`/`WallL`/
+  `WallR` segment lists, `BlastZone` (nullable — `TestStage`'s debug floor
+  still has none), `Ledges`, `StartingPoints`/`RespawnPoints` (paired
+  position+facing via a new `FacingPoint` struct instead of parallel
+  arrays), and `IsPastBlastZone`. All additive — `Solids`/`Platforms` and
+  every existing consumer (`TestStage.cs`, `TestBody.cs`,
+  `CollisionResolver.cs`, `DeterminismTest.cs`) are untouched and unaffected.
+- `Stages/Battlefield.cs` — the real transcribed data itself, thoroughly
+  doc-commented with exactly what was and wasn't ported and why (render-only
+  fields, the undefined `connected` graph, and the genuinely-nonexistent
+  camera-bounds constant — see the file's own header for details on each).
+
+**Explicitly NOT done / NOT verified, for Step 2 (or whoever picks this
+up):**
+- No collision RESOLUTION against this geometry exists yet — only the data
+  and two simple, movement-independent queries (`IsPastBlastZone`, and the
+  raw segment/ledge/spawn lists themselves for Step 2 to consume). Nothing
+  in `PlayerMover`/`CollisionResolver` reads `Battlefield.Geometry` yet.
+- No camera-bounds constant — flagged in `Battlefield.cs` as genuinely
+  absent from MeleeLight's own Battlefield definition, not invented.
+- No `dotnet build` — no .NET SDK in this sandbox. Verified by hand: brace
+  balance on every touched/new file, every literal cross-checked against an
+  independently computed conversion table (catching the blast-zone sign
+  bug), and confirmed `FxVec2`'s constructor/field names and the project's
+  glob-based `.csproj` (new files under `Stages/` are picked up
+  automatically, no manual file-list edit needed).
