@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://btr8xjme2qvkd"]
+
+[ext_resource type="Script" uid="uid://cabcynotw3s7k" path="res://Main.cs" id="1"]
+[ext_resource type="Script" uid="uid://cfs1514ywojmw" path="res://Core/SimDriver.cs" id="2"]
+[ext_resource type="Script" uid="uid://c25g58l2rglfp" path="res://Core/Input/ControllerManager.cs" id="3_r0du0"]
+
+[node name="Main" type="Node2D" unique_id=1503825211]
+script = ExtResource("1")
+
+[node name="SimDriver" type="Node" parent="." unique_id=1312282439]
+script = ExtResource("2")
+
+[node name="TestSprite" type="Sprite2D" parent="." unique_id=1965821381]
+position = Vector2(100, 300)
+
+[node name="TestSprite2" type="Sprite2D" parent="." unique_id=1965821382]
+position = Vector2(700, 300)
+
+[node name="DebugLabel" type="Label" parent="." unique_id=992995785]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 460.0
+offset_bottom = 420.0
+theme_override_font_sizes/font_size = 20
+
+[node name="ControllerManager" type="Node" parent="." unique_id=1871455948]
+script = ExtResource("3_r0du0")
+SimDriverPath = NodePath("../SimDriver")

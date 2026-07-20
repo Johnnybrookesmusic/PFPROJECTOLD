@@ -1,0 +1,10 @@
+* text=auto eol=lf
+*.cs text diff=csharp
+*.tscn text
+*.tres text
+*.godot text
+*.png binary
+*.jpg binary
+*.wav binary
+*.ogg binary
+*.ttf binary

@@ -1,0 +1,166 @@
+{
+  "_readme": [
+	"Transcribed by hand from fightcore.gg screenshots (Falco's move list), not",
+	"parsed from a DAT file the way fox_physics.json was. Treat every field here",
+	"as needing cross-validation against the actual PlFc.dat parse once that's",
+	"run, the way the synopsis doc describes for PlCo.dat. This file exists so",
+	"Phase 9/10 (Character framework / first fighter) has real numbers to build",
+	"hitbox/move structs against sooner, not as a replacement for the DAT parse.",
+	"",
+	"UNITS: frame numbers are 1-indexed action frames (matches fightcore.gg's",
+	"display, e.g. Jab1 First Active = 2 means the hitbox turns on during the",
+	"2nd frame of the animation). 'x/y' style values in the source screenshots",
+	"(e.g. Damage '12/9%') mean 'hit 1 value / hit 2 value' for multi-hit moves",
+	"or 'clean / late' hitbox variants where the source didn't separately label",
+	"which is which -- see each move's _variants note.",
+	"",
+	"Laser (Blaster) First/Last Active in the source screenshot is the",
+	"PROJECTILE's travel/lifetime window, NOT Falco's melee-hitbox active",
+	"frames -- same caveat the project synopsis already flagged. Do not treat",
+	"it as a normal move's active-frame window when wiring hit-detection.",
+	"",
+	"Falco Phantasm (Side-B) here has clean numbers that differ from the",
+	"synopsis doc's earlier hand-written notes (Ground: 18-21/9%/65,",
+	"BKB74/KBG60; Air: 18-21/20%/270,BKB70/KBG70) -- the Air damage disagrees",
+	"(20% in the doc vs 7% in this screenshot capture). Screenshot value used",
+	"here since it's a direct capture rather than a remembered figure; flag",
+    "for re-verification against PlFc.dat when that's parsed."
+  ],
+
+  "attributesSummary": {
+	"_source": "fightcore.gg character list page, NOT the DAT dump -- cross-reference only, same caveat as above",
+	"weight": 80,
+	"gravity": 3.1,
+	"walkSpeed": 1.4,
+	"runSpeed": 1.5,
+	"waveDashLengthRank": 14,
+	"initialDash": 1.82,
+	"dashFrames": 11,
+	"jumpSquatFrames": 5,
+	"canWallJump": true
+  },
+
+  "moves": {
+	"jab1": {
+	  "category": "grounded", "firstActive": 2, "lastActive": 3, "totalFrames": 17, "iasa": 16,
+	  "damage": 4, "angle": 70, "effect": "Normal", "baseKnockback": null, "knockbackGrowth": 100
+	},
+	"jab2": {
+	  "category": "grounded", "firstActive": 2, "lastActive": 3, "totalFrames": 19, "iasa": 18,
+	  "damage": 4, "angle": 50, "effect": "Normal", "baseKnockback": null, "knockbackGrowth": 100
+	},
+	"rapidJabs": {
+	  "category": "grounded", "firstActive": null, "lastActive": null, "totalFrames": null, "iasa": null,
+	  "damage": 1, "angle": 80, "effect": "Normal", "baseKnockback": 10, "knockbackGrowth": 80,
+	  "_note": "Source table showed no frame-window data for the looping hits, only the per-hit damage/angle/KB."
+	},
+	"dashAttack": {
+	  "category": "grounded", "firstActive": 4, "lastActive": 17, "totalFrames": 39, "iasa": 36,
+	  "damage": [9, 6], "angle": 72, "effect": "Normal", "baseKnockback": [35, 20], "knockbackGrowth": 90,
+	  "_variants": "damage/baseKnockback pairs are [clean, late]"
+	},
+	"upSmash": {
+	  "category": "grounded", "firstActive": 7, "lastActive": 15, "totalFrames": 43, "iasa": null,
+	  "damage": [14, 12], "angle": [95, 361], "effect": "Normal", "baseKnockback": [25, 10], "knockbackGrowth": 100,
+	  "_variants": "damage/angle/baseKnockback pairs are [clean, late]"
+	},
+	"forwardSmash": {
+	  "category": "grounded", "firstActive": 12, "lastActive": 21, "totalFrames": 39, "iasa": null,
+	  "damage": [17, 14], "angle": [361, 110], "effect": "Normal", "baseKnockback": [40, 10], "knockbackGrowth": [90, 105],
+	  "_variants": "pairs are [clean, late]"
+	},
+	"downSmash": {
+	  "category": "grounded", "firstActive": 6, "lastActive": 10, "totalFrames": 49, "iasa": 46,
+	  "damage": [13, 16], "angle": [80, 25], "effect": "Normal", "baseKnockback": 20, "knockbackGrowth": 70,
+	  "_variants": "damage 13% appears to be the front hit, 16% the back hit (angle pair 80/25 mirrors that)"
+	},
+	"forwardTilt": {
+	  "category": "grounded", "firstActive": 5, "lastActive": 9, "totalFrames": 26, "iasa": null,
+	  "damage": 9, "angle": 361, "effect": "Normal", "baseKnockback": null, "knockbackGrowth": 100,
+	  "_note": "Identical numbers captured for the up-angled and down-angled variants (forwardTiltUp / forwardTiltDown below); source screenshot may not distinguish them, or Falco's tilt truly doesn't vary by angle -- verify against PlFc.dat."
+	},
+	"forwardTiltUp": {
+	  "category": "grounded", "firstActive": 5, "lastActive": 9, "totalFrames": 26, "iasa": null,
+	  "damage": 9, "angle": 361, "effect": "Normal", "baseKnockback": null, "knockbackGrowth": 100
+	},
+	"forwardTiltDown": {
+	  "category": "grounded", "firstActive": 5, "lastActive": 9, "totalFrames": 26, "iasa": null,
+	  "damage": 9, "angle": 361, "effect": "Normal", "baseKnockback": null, "knockbackGrowth": 100
+	},
+	"upTilt": {
+	  "category": "grounded", "firstActive": 5, "lastActive": 11, "totalFrames": 23, "iasa": 23,
+	  "damage": 9, "angle": [97, 90], "effect": "Normal", "baseKnockback": 30, "knockbackGrowth": 120
+	},
+	"downTilt": {
+	  "category": "grounded", "firstActive": 7, "lastActive": 9, "totalFrames": 29, "iasa": 28,
+	  "damage": 13, "angle": 75, "effect": "Slash", "baseKnockback": 25, "knockbackGrowth": 125
+	},
+
+	"neutralAir": {
+	  "category": "aerial", "firstActive": 4, "lastActive": 31, "totalFrames": 49, "iasa": 42,
+	  "landingLag": 15, "lCancelledLandingLag": 7, "autocancelBefore": 4, "autocancelAfter": 36,
+	  "damage": [12, 9], "angle": 361, "effect": "Normal", "baseKnockback": [10, 0], "knockbackGrowth": 100,
+	  "_variants": "damage/baseKnockback pairs are [clean, late]"
+	},
+	"upAir": {
+	  "category": "aerial", "firstActive": 8, "lastActive": 14, "totalFrames": 39, "iasa": 36,
+	  "landingLag": 18, "lCancelledLandingLag": 9, "autocancelBefore": 8, "autocancelAfter": 25,
+	  "damage": [6, 10], "angle": [90, 70], "effect": ["Slash", "Normal"], "baseKnockback": [30, 40, 22], "knockbackGrowth": [20, 120],
+	  "_variants": "3-way baseKnockback split doesn't cleanly pair with the 2-way damage/angle/effect split in the source table; transcribed as-is, needs the real PlFc.dat parse to disambiguate hit1/hit2/hit3"
+	},
+	"backAir": {
+	  "category": "aerial", "firstActive": 4, "lastActive": 19, "totalFrames": 39, "iasa": 38,
+	  "landingLag": 20, "lCancelledLandingLag": 10, "autocancelBefore": 4, "autocancelAfter": 22,
+	  "damage": [9, 15], "angle": 361, "effect": "Normal", "baseKnockback": null, "knockbackGrowth": 100,
+	  "_variants": "damage pair is [clean, late]; note this is one of Falco's signature kill moves"
+	},
+	"forwardAir": {
+	  "category": "aerial", "firstActive": 6, "lastActive": 45, "totalFrames": 59, "iasa": 53,
+	  "landingLag": 22, "lCancelledLandingLag": 11, "autocancelBefore": 6, "autocancelAfter": 48,
+	  "damage": [9, 8, 7, 5, 3], "angle": 361, "effect": "Normal", "baseKnockback": [10, 50], "knockbackGrowth": 100,
+	  "_variants": "multi-hit (up to 5 hits) hitting-late damage decay: 9/8/7/5/3%"
+	},
+	"downAir": {
+	  "category": "aerial", "firstActive": 5, "lastActive": 24, "totalFrames": 49, "iasa": null,
+	  "landingLag": 18, "lCancelledLandingLag": 9, "autocancelBefore": 5, "autocancelAfter": 29,
+	  "damage": [12, 9], "angle": 290, "effect": "Normal", "baseKnockback": [10, 20], "knockbackGrowth": 100,
+	  "_variants": "damage/baseKnockback pairs are [clean, late]"
+	},
+
+	"blasterGround": {
+	  "category": "special", "firstActive": 23, "lastActive": 122, "totalFrames": 57,
+	  "damage": 3, "angle": 361, "effect": "Normal", "setKnockback": 5, "knockbackGrowth": 100,
+	  "_note": "firstActive/lastActive is the LASER PROJECTILE's travel/lifetime window, not Falco's own melee-hitbox active frames -- see file-level _readme."
+	},
+	"blasterAir": {
+	  "category": "special", "firstActive": 13, "lastActive": 112, "totalFrames": 42,
+	  "damage": 3, "angle": 361, "effect": "Normal", "setKnockback": 5, "knockbackGrowth": 100,
+	  "_note": "same projectile-window caveat as blasterGround"
+	},
+	"falcoPhantasm": {
+	  "category": "special", "firstActive": 18, "lastActive": 21, "totalFrames": 59, "landingLag": 20,
+	  "damage": 7, "angle": 65, "effect": "Slash", "baseKnockback": 74, "knockbackGrowth": 60
+	},
+	"falcoPhantasmAir": {
+	  "category": "special", "firstActive": 18, "lastActive": 21, "totalFrames": 59, "landingLag": 20,
+	  "damage": 7, "angle": 270, "effect": "Slash", "baseKnockback": 70, "knockbackGrowth": 70,
+	  "_note": "damage disagrees with the earlier hand-noted 20% in the project synopsis doc -- see file-level _readme, re-verify against PlFc.dat"
+	},
+	"reflectorGround": {
+	  "category": "special", "firstActive": 1, "lastActive": 1, "totalFrames": 3,
+	  "damage": 8, "angle": 84, "effect": "Electric", "baseKnockback": 110, "knockbackGrowth": 50
+	},
+	"reflectorAir": {
+	  "category": "special", "firstActive": 1, "lastActive": 1, "totalFrames": 3,
+	  "damage": 8, "angle": 84, "effect": "Electric", "baseKnockback": 110, "knockbackGrowth": 50
+	},
+	"fireBird": {
+	  "category": "special", "firstActive": 43, "lastActive": 64, "totalFrames": 84, "landingLag": 6,
+	  "damage": 16, "angle": 80, "effect": "Flame", "baseKnockback": 80, "knockbackGrowth": 60
+	},
+	"fireBirdAir": {
+	  "category": "special", "firstActive": 43, "lastActive": 64, "totalFrames": 84, "landingLag": 6,
+	  "damage": 16, "angle": 80, "effect": "Flame", "baseKnockback": 80, "knockbackGrowth": 60
+	}
+  }
+}
