@@ -1,0 +1,22 @@
+[
+  {
+    "path": "ftDataFox.ShieldPoseJOBJ",
+    "type": "HSDRaw.Common.HSD_JOBJ"
+  },
+  {
+    "path": "ftDataFox.ShieldPoseJOBJ.Children[0]",
+    "type": "HSDRaw.Common.HSD_JOBJ"
+  },
+  {
+    "path": "ftDataFox.ShadowModel",
+    "type": "HSDRaw.Common.HSD_JOBJ"
+  },
+  {
+    "path": "PlyFox5K_Share_ACTION_Wait1_figatree",
+    "type": "HSDRaw.Common.Animation.HSD_FigaTree"
+  },
+  {
+    "path": "PlyFox5K_Share_ACTION_Wait1_figatree.Nodes",
+    "type": "System.Collections.Generic.List`1[HSDRaw.Common.Animation.FigaTreeNode]"
+  }
+]

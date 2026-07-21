@@ -1,0 +1,1728 @@
+{
+    "name": "Fox",
+    "bone_count": 73,
+    "bones": [
+        {
+            "id": 0,
+            "parent": null,
+            "children": [
+                1,
+                72
+            ],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON_ROOT, ENVELOPE_MODEL, CLASSICAL_SCALING, LIGHTING, TEXGEN, SPECULAR, OPA, ROOT_OPA",
+            "has_mesh": true
+        },
+        {
+            "id": 1,
+            "parent": 0,
+            "children": [
+                2
+            ],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                -0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 2,
+            "parent": 1,
+            "children": [
+                3
+            ],
+            "translation": [
+                -0.0,
+                8.30000114440918,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 3,
+            "parent": 2,
+            "children": [
+                4,
+                71
+            ],
+            "translation": [
+                -0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 4,
+            "parent": 3,
+            "children": [
+                5,
+                11,
+                17,
+                21
+            ],
+            "translation": [
+                -0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 5,
+            "parent": 4,
+            "children": [
+                6
+            ],
+            "translation": [
+                1.1095759868621826,
+                -1.0778460502624512,
+                0.37384501099586487
+            ],
+            "rotation": [
+                -1.570796012878418,
+                0.0,
+                -1.570796012878418
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 6,
+            "parent": 5,
+            "children": [
+                7
+            ],
+            "translation": [
+                -0.0,
+                -0.0,
+                0.0
+            ],
+            "rotation": [
+                0.003851999994367361,
+                -0.0202380008995533,
+                0.045131001621484756
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 7,
+            "parent": 6,
+            "children": [
+                8
+            ],
+            "translation": [
+                3.1733410358428955,
+                -0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.01745299994945526
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 8,
+            "parent": 7,
+            "children": [
+                9
+            ],
+            "translation": [
+                2.6450400352478027,
+                0.09851100295782089,
+                0.03150000050663948
+            ],
+            "rotation": [
+                0.0,
+                -1.9999999949504854e-06,
+                -1.5991380214691162
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 9,
+            "parent": 8,
+            "children": [
+                10
+            ],
+            "translation": [
+                9.999999974752427e-07,
+                -1.9999999949504854e-06,
+                -0.0
+            ],
+            "rotation": [
+                -0.018312999978661537,
+                0.008523999713361263,
+                0.261929988861084
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 10,
+            "parent": 9,
+            "children": [],
+            "translation": [
+                1.7927379608154297,
+                0.33013400435447693,
+                -0.023945000022649765
+            ],
+            "rotation": [
+                -0.0,
+                0.0,
+                -0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 11,
+            "parent": 4,
+            "children": [
+                12
+            ],
+            "translation": [
+                -1.1095839738845825,
+                -1.0778460502624512,
+                0.37384501099586487
+            ],
+            "rotation": [
+                -1.570796012878418,
+                0.0,
+                -1.570796012878418
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 12,
+            "parent": 11,
+            "children": [
+                13
+            ],
+            "translation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "rotation": [
+                -0.0052089998498559,
+                0.01917099952697754,
+                0.049949999898672104
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 13,
+            "parent": 12,
+            "children": [
+                14
+            ],
+            "translation": [
+                3.17932391166687,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.01745299994945526
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 14,
+            "parent": 13,
+            "children": [
+                15
+            ],
+            "translation": [
+                2.6475210189819336,
+                0.10779199749231339,
+                0.012016000226140022
+            ],
+            "rotation": [
+                0.0,
+                9.999999974752427e-07,
+                -1.5991380214691162
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 15,
+            "parent": 14,
+            "children": [
+                16
+            ],
+            "translation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "rotation": [
+                0.02059599943459034,
+                0.009197999723255634,
+                0.253154993057251
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 16,
+            "parent": 15,
+            "children": [],
+            "translation": [
+                1.8148380517959595,
+                0.3350380063056946,
+                -0.06591299921274185
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                -0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 17,
+            "parent": 4,
+            "children": [
+                18
+            ],
+            "translation": [
+                0.0,
+                -0.6524620056152344,
+                -0.7886459827423096
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 18,
+            "parent": 17,
+            "children": [
+                19
+            ],
+            "translation": [
+                0.0,
+                -0.2177879959344864,
+                -3.220979928970337
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 19,
+            "parent": 18,
+            "children": [
+                20
+            ],
+            "translation": [
+                0.0,
+                0.2801930010318756,
+                -1.9213329553604126
+            ],
+            "rotation": [
+                0.17000000178813934,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 20,
+            "parent": 19,
+            "children": [],
+            "translation": [
+                0.0,
+                0.2352609932422638,
+                -2.972609043121338
+            ],
+            "rotation": [
+                0.14000000059604645,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 21,
+            "parent": 4,
+            "children": [
+                22
+            ],
+            "translation": [
+                -0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 22,
+            "parent": 21,
+            "children": [
+                23,
+                40,
+                53
+            ],
+            "translation": [
+                -0.0,
+                1.1329309940338135,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 23,
+            "parent": 22,
+            "children": [
+                24
+            ],
+            "translation": [
+                0.800000011920929,
+                0.9652100205421448,
+                0.21775299310684204
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 24,
+            "parent": 23,
+            "children": [
+                25
+            ],
+            "translation": [
+                1.7825570106506348,
+                -0.010111000388860703,
+                0.010753000155091286
+            ],
+            "rotation": [
+                -1.570796012878418,
+                -0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 25,
+            "parent": 24,
+            "children": [
+                26,
+                39
+            ],
+            "translation": [
+                0.0,
+                -0.0,
+                -0.0
+            ],
+            "rotation": [
+                -0.0007539999787695706,
+                -0.0045980000868439674,
+                0.10398799926042557
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 26,
+            "parent": 25,
+            "children": [
+                27
+            ],
+            "translation": [
+                2.012706995010376,
+                0.0,
+                -0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                -0.11245399713516235
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 27,
+            "parent": 26,
+            "children": [
+                28,
+                30,
+                32,
+                34,
+                36,
+                37
+            ],
+            "translation": [
+                2.2035388946533203,
+                0.02210799977183342,
+                -0.004579999949783087
+            ],
+            "rotation": [
+                -0.0012169999536126852,
+                0.0007009999826550484,
+                0.011180000379681587
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 28,
+            "parent": 27,
+            "children": [
+                29
+            ],
+            "translation": [
+                1.4885770082473755,
+                -0.4343560039997101,
+                0.2051839977502823
+            ],
+            "rotation": [
+                0.0028470000252127647,
+                0.0,
+                -0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 29,
+            "parent": 28,
+            "children": [],
+            "translation": [
+                0.5330650210380554,
+                -0.0008670000243000686,
+                -0.08026500046253204
+            ],
+            "rotation": [
+                -0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 30,
+            "parent": 27,
+            "children": [
+                31
+            ],
+            "translation": [
+                1.4900950193405151,
+                -0.07767900079488754,
+                0.21593700349330902
+            ],
+            "rotation": [
+                0.0002519999979995191,
+                0.0,
+                -0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 31,
+            "parent": 30,
+            "children": [],
+            "translation": [
+                0.5696939826011658,
+                0.010307000018656254,
+                -0.058733999729156494
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 32,
+            "parent": 27,
+            "children": [
+                33
+            ],
+            "translation": [
+                1.4524040222167969,
+                0.2606090009212494,
+                0.19874699413776398
+            ],
+            "rotation": [
+                0.00044800000614486635,
+                -0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 33,
+            "parent": 32,
+            "children": [],
+            "translation": [
+                0.5817490220069885,
+                0.0048870001919567585,
+                -0.07242199778556824
+            ],
+            "rotation": [
+                -0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 34,
+            "parent": 27,
+            "children": [
+                35
+            ],
+            "translation": [
+                1.3429969549179077,
+                0.6126430034637451,
+                0.15327300131320953
+            ],
+            "rotation": [
+                0.0028470000252127647,
+                -0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 35,
+            "parent": 34,
+            "children": [],
+            "translation": [
+                0.590694010257721,
+                0.0047160000540316105,
+                -0.06363700330257416
+            ],
+            "rotation": [
+                -0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 36,
+            "parent": 27,
+            "children": [],
+            "translation": [
+                -0.020702000707387924,
+                0.014937999658286572,
+                0.00013299999409355223
+            ],
+            "rotation": [
+                -0.0,
+                -0.0,
+                -0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 37,
+            "parent": 27,
+            "children": [
+                38
+            ],
+            "translation": [
+                0.9001359939575195,
+                -0.8265219926834106,
+                -0.30175501108169556
+            ],
+            "rotation": [
+                0.0,
+                -0.0,
+                -0.23999999463558197
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 38,
+            "parent": 37,
+            "children": [],
+            "translation": [
+                0.4305340051651001,
+                -0.0395519994199276,
+                6.000000212225132e-06
+            ],
+            "rotation": [
+                0.0015750000020489097,
+                0.0,
+                -0.09161300212144852
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 39,
+            "parent": 25,
+            "children": [],
+            "translation": [
+                -0.06280499696731567,
+                0.1411219984292984,
+                0.01037800032645464
+            ],
+            "rotation": [
+                1.5709309577941895,
+                0.003897000104188919,
+                -0.006473999936133623
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 40,
+            "parent": 22,
+            "children": [
+                41
+            ],
+            "translation": [
+                0.0,
+                1.6670700311660767,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 41,
+            "parent": 40,
+            "children": [
+                42,
+                46,
+                50,
+                51,
+                52
+            ],
+            "translation": [
+                -0.0,
+                0.5249999761581421,
+                -0.15000000596046448
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 42,
+            "parent": 41,
+            "children": [
+                43,
+                44,
+                45
+            ],
+            "translation": [
+                0.699999988079071,
+                2.5,
+                2.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 43,
+            "parent": 42,
+            "children": [],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.47123900055885315,
+                0.2967059910297394
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 44,
+            "parent": 42,
+            "children": [],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.47123900055885315,
+                0.2967059910297394
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 45,
+            "parent": 42,
+            "children": [],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                -0.17453299462795258,
+                0.47123900055885315,
+                0.2967059910297394
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 46,
+            "parent": 41,
+            "children": [
+                47,
+                48,
+                49
+            ],
+            "translation": [
+                -0.699999988079071,
+                2.5,
+                2.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 47,
+            "parent": 46,
+            "children": [],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                2.670353889465332,
+                -0.2967059910297394
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 48,
+            "parent": 46,
+            "children": [],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                2.670353889465332,
+                -0.2967059910297394
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 49,
+            "parent": 46,
+            "children": [],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.17453299462795258,
+                2.670353889465332,
+                -0.2967059910297394
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 50,
+            "parent": 41,
+            "children": [],
+            "translation": [
+                1.2742170095443726,
+                3.501987934112549,
+                0.5322160124778748
+            ],
+            "rotation": [
+                -0.3935059905052185,
+                0.10447999835014343,
+                0.5818229913711548
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 51,
+            "parent": 41,
+            "children": [],
+            "translation": [
+                0.0,
+                1.2387080192565918,
+                1.2027950286865234
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 52,
+            "parent": 41,
+            "children": [],
+            "translation": [
+                -1.310217022895813,
+                3.501987934112549,
+                0.5322160124778748
+            ],
+            "rotation": [
+                -0.3935059905052185,
+                3.2460711002349854,
+                2.5597689151763916
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 53,
+            "parent": 22,
+            "children": [
+                54
+            ],
+            "translation": [
+                -0.800000011920929,
+                0.9652100205421448,
+                0.21775299310684204
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 54,
+            "parent": 53,
+            "children": [
+                55
+            ],
+            "translation": [
+                -1.7871140241622925,
+                -0.010107999667525291,
+                0.010753000155091286
+            ],
+            "rotation": [
+                -1.570796012878418,
+                0.0,
+                -3.1415929794311523
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 55,
+            "parent": 54,
+            "children": [
+                56,
+                70
+            ],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                -0.00241800001822412,
+                0.004664999898523092,
+                0.12852199375629425
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 56,
+            "parent": 55,
+            "children": [
+                57
+            ],
+            "translation": [
+                2.012558937072754,
+                -0.0,
+                -1.9999999494757503e-05
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                -0.15806500613689423
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 57,
+            "parent": 56,
+            "children": [
+                58,
+                60,
+                62,
+                64,
+                66,
+                67,
+                68
+            ],
+            "translation": [
+                2.2053489685058594,
+                0.019564999267458916,
+                0.003872999921441078
+            ],
+            "rotation": [
+                0.0009660000214353204,
+                -0.00045200000749900937,
+                0.025074999779462814
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 58,
+            "parent": 57,
+            "children": [
+                59
+            ],
+            "translation": [
+                1.4916340112686157,
+                -0.42293301224708557,
+                -0.20683500170707703
+            ],
+            "rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 59,
+            "parent": 58,
+            "children": [],
+            "translation": [
+                0.5330600142478943,
+                0.0029060000088065863,
+                0.08020099997520447
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                -0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 60,
+            "parent": 57,
+            "children": [
+                61
+            ],
+            "translation": [
+                1.490591049194336,
+                -0.06621800363063812,
+                -0.21633200347423553
+            ],
+            "rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 61,
+            "parent": 60,
+            "children": [],
+            "translation": [
+                0.5696049928665161,
+                0.01420500036329031,
+                0.058720000088214874
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                -0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 62,
+            "parent": 57,
+            "children": [
+                63
+            ],
+            "translation": [
+                1.4504740238189697,
+                0.2717280089855194,
+                -0.19794799387454987
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                -0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 63,
+            "parent": 62,
+            "children": [],
+            "translation": [
+                0.5817049741744995,
+                0.008840999566018581,
+                0.07240699976682663
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                -0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 64,
+            "parent": 57,
+            "children": [
+                65
+            ],
+            "translation": [
+                1.3385499715805054,
+                0.6228049993515015,
+                -0.15122400224208832
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                -0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 65,
+            "parent": 64,
+            "children": [],
+            "translation": [
+                0.5906509757041931,
+                0.008914000354707241,
+                0.06359100341796875
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                -0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 66,
+            "parent": 57,
+            "children": [],
+            "translation": [
+                0.0039079999551177025,
+                0.002950000111013651,
+                -2.4000000848900527e-05
+            ],
+            "rotation": [
+                -0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 67,
+            "parent": 57,
+            "children": [],
+            "translation": [
+                1.1807719469070435,
+                -0.032604001462459564,
+                0.19945700466632843
+            ],
+            "rotation": [
+                -0.0034050000831484795,
+                -1.570796012878418,
+                3.145003080368042
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 68,
+            "parent": 57,
+            "children": [
+                69
+            ],
+            "translation": [
+                0.9060800075531006,
+                -0.8210970163345337,
+                0.29876700043678284
+            ],
+            "rotation": [
+                -0.0,
+                0.0,
+                -0.3316130042076111
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 69,
+            "parent": 68,
+            "children": [],
+            "translation": [
+                0.4322989881038666,
+                0.011495999991893768,
+                0.0517209991812706
+            ],
+            "rotation": [
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 70,
+            "parent": 55,
+            "children": [],
+            "translation": [
+                -0.036858998239040375,
+                0.1409830003976822,
+                -0.01005799975246191
+            ],
+            "rotation": [
+                -1.5723270177841187,
+                0.0038250000216066837,
+                3.134788990020752
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 71,
+            "parent": 3,
+            "children": [],
+            "translation": [
+                0.0,
+                -8.30000114440918,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "SKELETON, CLASSICAL_SCALING",
+            "has_mesh": false
+        },
+        {
+            "id": 72,
+            "parent": 0,
+            "children": [],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "flags": "CLASSICAL_SCALING",
+            "has_mesh": false
+        }
+    ]
+}

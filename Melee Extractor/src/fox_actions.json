@@ -1,0 +1,1670 @@
+[
+    {
+        "offset": 0,
+        "name": "PlyFox5K_Share_ACTION_WallDamage_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 57 61 6c 6c 44 61 6d 61 67 65 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 24,
+        "name": "PlyFox5K_Share_ACTION_DamageFall_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 46 61 6c 6c 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 48,
+        "name": "PlyFox5K_Share_ACTION_Wait1_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 57 61 69 74 31 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 72,
+        "name": "PlyFox5K_Share_ACTION_Wait2_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 57 61 69 74 32 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 144,
+        "name": "PlyFox5K_Share_ACTION_Wait1_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 57 61 69 74 31 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 168,
+        "name": "PlyFox5K_Share_ACTION_WalkSlow_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 57 61 6c 6b 53 6c 6f 77 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 192,
+        "name": "PlyFox5K_Share_ACTION_WalkMiddle_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 57 61 6c 6b 4d 69 64 64 6c 65 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 216,
+        "name": "PlyFox5K_Share_ACTION_WalkFast_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 57 61 6c 6b 46 61 73 74 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 240,
+        "name": "PlyFox5K_Share_ACTION_Turn_figatree",
+        "size": 36,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 54 75 72 6e 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 264,
+        "name": "PlyFox5K_Share_ACTION_TurnRun_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 54 75 72 6e 52 75 6e 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 288,
+        "name": "PlyFox5K_Share_ACTION_Dash_figatree",
+        "size": 36,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 73 68 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 312,
+        "name": "PlyFox5K_Share_ACTION_Run_figatree",
+        "size": 36,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 52 75 6e 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 336,
+        "name": "PlyFox5K_Share_ACTION_RunBrake_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 52 75 6e 42 72 61 6b 65 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 360,
+        "name": "PlyFox5K_Share_ACTION_Landing_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 61 6e 64 69 6e 67 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 384,
+        "name": "PlyFox5K_Share_ACTION_JumpF_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4a 75 6d 70 46 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 408,
+        "name": "PlyFox5K_Share_ACTION_JumpB_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4a 75 6d 70 42 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 432,
+        "name": "PlyFox5K_Share_ACTION_JumpAerialF_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4a 75 6d 70 41 65 72 69 61 6c 46 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 456,
+        "name": "PlyFox5K_Share_ACTION_JumpAerialB_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4a 75 6d 70 41 65 72 69 61 6c 42 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 480,
+        "name": "PlyFox5K_Share_ACTION_Fall_figatree",
+        "size": 36,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 46 61 6c 6c 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 504,
+        "name": "PlyFox5K_Share_ACTION_FallF_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 46 61 6c 6c 46 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 528,
+        "name": "PlyFox5K_Share_ACTION_FallB_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 46 61 6c 6c 42 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 552,
+        "name": "PlyFox5K_Share_ACTION_FallAerial_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 46 61 6c 6c 41 65 72 69 61 6c 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 576,
+        "name": "PlyFox5K_Share_ACTION_FallAerialF_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 46 61 6c 6c 41 65 72 69 61 6c 46 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 600,
+        "name": "PlyFox5K_Share_ACTION_FallAerialB_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 46 61 6c 6c 41 65 72 69 61 6c 42 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 624,
+        "name": "PlyFox5K_Share_ACTION_FallSpecial_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 46 61 6c 6c 53 70 65 63 69 61 6c 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 648,
+        "name": "PlyFox5K_Share_ACTION_FallSpecialF_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 46 61 6c 6c 53 70 65 63 69 61 6c 46 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 672,
+        "name": "PlyFox5K_Share_ACTION_FallSpecialB_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 46 61 6c 6c 53 70 65 63 69 61 6c 42 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 696,
+        "name": "PlyFox5K_Share_ACTION_DamageFall_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 46 61 6c 6c 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 720,
+        "name": "PlyFox5K_Share_ACTION_Squat_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 71 75 61 74 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 744,
+        "name": "PlyFox5K_Share_ACTION_SquatWait_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 71 75 61 74 57 61 69 74 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 792,
+        "name": "PlyFox5K_Share_ACTION_SquatWaitItem_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 71 75 61 74 57 61 69 74 49 74 65 6d 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 816,
+        "name": "PlyFox5K_Share_ACTION_SquatRv_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 71 75 61 74 52 76 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 840,
+        "name": "PlyFox5K_Share_ACTION_Landing_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 61 6e 64 69 6e 67 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 864,
+        "name": "PlyFox5K_Share_ACTION_Landing_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 61 6e 64 69 6e 67 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 888,
+        "name": "PlyFox5K_Share_ACTION_GuardOn_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 47 75 61 72 64 4f 6e 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 912,
+        "name": "PlyFox5K_Share_ACTION_Guard_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 47 75 61 72 64 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 936,
+        "name": "PlyFox5K_Share_ACTION_GuardOff_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 47 75 61 72 64 4f 66 66 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 960,
+        "name": "PlyFox5K_Share_ACTION_GuardDamage_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 47 75 61 72 64 44 61 6d 61 67 65 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 984,
+        "name": "PlyFox5K_Share_ACTION_EscapeN_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 45 73 63 61 70 65 4e 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 1008,
+        "name": "PlyFox5K_Share_ACTION_EscapeF_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 45 73 63 61 70 65 46 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 1032,
+        "name": "PlyFox5K_Share_ACTION_EscapeB_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 45 73 63 61 70 65 42 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 1056,
+        "name": "PlyFox5K_Share_ACTION_EscapeAir_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 45 73 63 61 70 65 41 69 72 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 1080,
+        "name": "PlyFox5K_Share_ACTION_Rebound_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 52 65 62 6f 75 6e 64 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 1104,
+        "name": "PlyFox5K_Share_ACTION_Attack11_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 31 31 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 1128,
+        "name": "PlyFox5K_Share_ACTION_Attack12_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 31 32 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 1176,
+        "name": "PlyFox5K_Share_ACTION_Attack100Start_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 31 30 30 53 74 61 72 74 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 1200,
+        "name": "PlyFox5K_Share_ACTION_Attack100Loop_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 31 30 30 4c 6f 6f 70 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 1224,
+        "name": "PlyFox5K_Share_ACTION_Attack100End_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 31 30 30 45 6e 64 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 1248,
+        "name": "PlyFox5K_Share_ACTION_AttackDash_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 44 61 73 68 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 1272,
+        "name": "PlyFox5K_Share_ACTION_AttackS3Hi_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 53 33 48 69 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 1296,
+        "name": "PlyFox5K_Share_ACTION_AttackS3HiS_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 53 33 48 69 53 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 1320,
+        "name": "PlyFox5K_Share_ACTION_AttackS3S_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 53 33 53 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 1344,
+        "name": "PlyFox5K_Share_ACTION_AttackS3LwS_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 53 33 4c 77 53 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 1368,
+        "name": "PlyFox5K_Share_ACTION_AttackS3Lw_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 53 33 4c 77 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 1392,
+        "name": "PlyFox5K_Share_ACTION_AttackHi3_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 48 69 33 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 1416,
+        "name": "PlyFox5K_Share_ACTION_AttackLw3_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 4c 77 33 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 1488,
+        "name": "PlyFox5K_Share_ACTION_AttackS4_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 53 34 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 1584,
+        "name": "PlyFox5K_Share_ACTION_AttackHi4_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 48 69 34 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 1608,
+        "name": "PlyFox5K_Share_ACTION_AttackLw4_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 4c 77 34 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 1632,
+        "name": "PlyFox5K_Share_ACTION_AttackAirN_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 41 69 72 4e 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 1656,
+        "name": "PlyFox5K_Share_ACTION_AttackAirF_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 41 69 72 46 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 1680,
+        "name": "PlyFox5K_Share_ACTION_AttackAirB_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 41 69 72 42 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 1704,
+        "name": "PlyFox5K_Share_ACTION_AttackAirHi_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 41 69 72 48 69 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 1728,
+        "name": "PlyFox5K_Share_ACTION_AttackAirLw_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 74 74 61 63 6b 41 69 72 4c 77 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 1752,
+        "name": "PlyFox5K_Share_ACTION_LandingAirN_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 61 6e 64 69 6e 67 41 69 72 4e 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 1776,
+        "name": "PlyFox5K_Share_ACTION_LandingAirF_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 61 6e 64 69 6e 67 41 69 72 46 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 1800,
+        "name": "PlyFox5K_Share_ACTION_LandingAirB_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 61 6e 64 69 6e 67 41 69 72 42 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 1824,
+        "name": "PlyFox5K_Share_ACTION_LandingAirHi_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 61 6e 64 69 6e 67 41 69 72 48 69 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 1848,
+        "name": "PlyFox5K_Share_ACTION_LandingAirLw_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 61 6e 64 69 6e 67 41 69 72 4c 77 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 1872,
+        "name": "PlyFox5K_Share_ACTION_LightGet_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 47 65 74 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 1896,
+        "name": "PlyFox5K_Share_ACTION_LightThrowF_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 46 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 1920,
+        "name": "PlyFox5K_Share_ACTION_LightThrowB_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 42 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 1944,
+        "name": "PlyFox5K_Share_ACTION_LightThrowHi_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 48 69 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 1968,
+        "name": "PlyFox5K_Share_ACTION_LightThrowLw_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 4c 77 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 1992,
+        "name": "PlyFox5K_Share_ACTION_LightThrowDash_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 44 61 73 68 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2016,
+        "name": "PlyFox5K_Share_ACTION_LightThrowDrop_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 44 72 6f 70 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2040,
+        "name": "PlyFox5K_Share_ACTION_LightThrowAirF_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 41 69 72 46 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2064,
+        "name": "PlyFox5K_Share_ACTION_LightThrowAirB_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 41 69 72 42 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2088,
+        "name": "PlyFox5K_Share_ACTION_LightThrowAirHi_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 41 69 72 48 69 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 2112,
+        "name": "PlyFox5K_Share_ACTION_LightThrowAirLw_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 41 69 72 4c 77 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 2136,
+        "name": "PlyFox5K_Share_ACTION_HeavyGet_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 48 65 61 76 79 47 65 74 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 2160,
+        "name": "PlyFox5K_Share_ACTION_HeavyWalk1_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 48 65 61 76 79 57 61 6c 6b 31 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2184,
+        "name": "PlyFox5K_Share_ACTION_HeavyWalk2_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 48 65 61 76 79 57 61 6c 6b 32 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2208,
+        "name": "PlyFox5K_Share_ACTION_HeavyThrowF_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 48 65 61 76 79 54 68 72 6f 77 46 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 2232,
+        "name": "PlyFox5K_Share_ACTION_HeavyThrowB_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 48 65 61 76 79 54 68 72 6f 77 42 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 2256,
+        "name": "PlyFox5K_Share_ACTION_HeavyThrowHi_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 48 65 61 76 79 54 68 72 6f 77 48 69 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 2280,
+        "name": "PlyFox5K_Share_ACTION_HeavyThrowLw_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 48 65 61 76 79 54 68 72 6f 77 4c 77 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 2304,
+        "name": "PlyFox5K_Share_ACTION_LightThrowF_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 46 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 2328,
+        "name": "PlyFox5K_Share_ACTION_LightThrowB_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 42 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 2352,
+        "name": "PlyFox5K_Share_ACTION_LightThrowHi_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 48 69 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 2376,
+        "name": "PlyFox5K_Share_ACTION_LightThrowLw_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 4c 77 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 2400,
+        "name": "PlyFox5K_Share_ACTION_LightThrowAirF_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 41 69 72 46 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2424,
+        "name": "PlyFox5K_Share_ACTION_LightThrowAirB_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 41 69 72 42 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2448,
+        "name": "PlyFox5K_Share_ACTION_LightThrowAirHi_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 41 69 72 48 69 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 2472,
+        "name": "PlyFox5K_Share_ACTION_LightThrowAirLw_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4c 69 67 68 74 54 68 72 6f 77 41 69 72 4c 77 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 2496,
+        "name": "PlyFox5K_Share_ACTION_HeavyThrowF_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 48 65 61 76 79 54 68 72 6f 77 46 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 2520,
+        "name": "PlyFox5K_Share_ACTION_HeavyThrowB_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 48 65 61 76 79 54 68 72 6f 77 42 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 2544,
+        "name": "PlyFox5K_Share_ACTION_HeavyThrowHi_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 48 65 61 76 79 54 68 72 6f 77 48 69 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 2568,
+        "name": "PlyFox5K_Share_ACTION_HeavyThrowLw_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 48 65 61 76 79 54 68 72 6f 77 4c 77 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 2592,
+        "name": "PlyFox5K_Share_ACTION_Swing1_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 31 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2616,
+        "name": "PlyFox5K_Share_ACTION_Swing3_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 33 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2640,
+        "name": "PlyFox5K_Share_ACTION_Swing4_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 34 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2664,
+        "name": "PlyFox5K_Share_ACTION_SwingDash_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 44 61 73 68 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 2688,
+        "name": "PlyFox5K_Share_ACTION_Swing1_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 31 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2712,
+        "name": "PlyFox5K_Share_ACTION_Swing3_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 33 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2736,
+        "name": "PlyFox5K_Share_ACTION_Swing4_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 34 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2760,
+        "name": "PlyFox5K_Share_ACTION_SwingDash_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 44 61 73 68 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 2784,
+        "name": "PlyFox5K_Share_ACTION_Swing1_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 31 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2808,
+        "name": "PlyFox5K_Share_ACTION_Swing3_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 33 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2832,
+        "name": "PlyFox5K_Share_ACTION_Swing4_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 34 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2856,
+        "name": "PlyFox5K_Share_ACTION_SwingDash_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 44 61 73 68 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 2880,
+        "name": "PlyFox5K_Share_ACTION_Swing1_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 31 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2904,
+        "name": "PlyFox5K_Share_ACTION_Swing3_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 33 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2928,
+        "name": "PlyFox5K_Share_ACTION_Swing4_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 34 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 2952,
+        "name": "PlyFox5K_Share_ACTION_SwingDash_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 44 61 73 68 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 2976,
+        "name": "PlyFox5K_Share_ACTION_Swing1_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 31 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 3000,
+        "name": "PlyFox5K_Share_ACTION_Swing3_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 33 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 3024,
+        "name": "PlyFox5K_Share_ACTION_Swing4_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 34 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 3048,
+        "name": "PlyFox5K_Share_ACTION_SwingDash_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 44 61 73 68 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 3072,
+        "name": "PlyFox5K_Share_ACTION_Swing1_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 31 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 3096,
+        "name": "PlyFox5K_Share_ACTION_Swing3_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 33 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 3120,
+        "name": "PlyFox5K_Share_ACTION_Swing4_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 34 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 3144,
+        "name": "PlyFox5K_Share_ACTION_SwingDash_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 77 69 6e 67 44 61 73 68 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 3168,
+        "name": "PlyFox5K_Share_ACTION_ItemHammerWait_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 48 61 6d 6d 65 72 57 61 69 74 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 3192,
+        "name": "PlyFox5K_Share_ACTION_ItemHammerMove_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 48 61 6d 6d 65 72 4d 6f 76 65 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 3216,
+        "name": "PlyFox5K_Share_ACTION_ItemParasolOpen_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 50 61 72 61 73 6f 6c 4f 70 65 6e 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 3240,
+        "name": "PlyFox5K_Share_ACTION_ItemParasolFall_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 50 61 72 61 73 6f 6c 46 61 6c 6c 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 3264,
+        "name": "PlyFox5K_Share_ACTION_ItemParasolFall_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 50 61 72 61 73 6f 6c 46 61 6c 6c 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 3288,
+        "name": "PlyFox5K_Share_ACTION_DamageFall_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 46 61 6c 6c 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 3312,
+        "name": "PlyFox5K_Share_ACTION_ItemShoot_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 68 6f 6f 74 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 3336,
+        "name": "PlyFox5K_Share_ACTION_ItemShootAir_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 68 6f 6f 74 41 69 72 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 3360,
+        "name": "PlyFox5K_Share_ACTION_ItemShoot_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 68 6f 6f 74 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 3384,
+        "name": "PlyFox5K_Share_ACTION_ItemShootAir_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 68 6f 6f 74 41 69 72 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 3408,
+        "name": "PlyFox5K_Share_ACTION_ItemShoot_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 68 6f 6f 74 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 3432,
+        "name": "PlyFox5K_Share_ACTION_ItemShootAir_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 68 6f 6f 74 41 69 72 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 3456,
+        "name": "PlyFox5K_Share_ACTION_ItemScrew_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 72 65 77 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 3480,
+        "name": "PlyFox5K_Share_ACTION_ItemScrewAir_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 72 65 77 41 69 72 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 3504,
+        "name": "PlyFox5K_Share_ACTION_ItemScrewDamage_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 72 65 77 44 61 6d 61 67 65 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 3528,
+        "name": "PlyFox5K_Share_ACTION_ItemScrewDamage_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 72 65 77 44 61 6d 61 67 65 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 3552,
+        "name": "PlyFox5K_Share_ACTION_ItemBlind_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 42 6c 69 6e 64 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 3576,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeStart_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 53 74 61 72 74 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 3600,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeRapid_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 52 61 70 69 64 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 3624,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeFire_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 46 69 72 65 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 3648,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeEnd_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 45 6e 64 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 3672,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeAirStart_figatree",
+        "size": 52,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 41 69 72 53 74 61 72 74 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 3696,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeAirRapid_figatree",
+        "size": 52,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 41 69 72 52 61 70 69 64 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 3720,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeAirFire_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 41 69 72 46 69 72 65 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 3744,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeAirEnd_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 41 69 72 45 6e 64 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 3768,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeStart_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 53 74 61 72 74 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 3792,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeRapid_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 52 61 70 69 64 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 3816,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeFire_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 46 69 72 65 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 3840,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeEnd_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 45 6e 64 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 3864,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeAirStart_figatree",
+        "size": 52,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 41 69 72 53 74 61 72 74 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 3888,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeAirRapid_figatree",
+        "size": 52,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 41 69 72 52 61 70 69 64 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 3912,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeAirFire_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 41 69 72 46 69 72 65 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 3936,
+        "name": "PlyFox5K_Share_ACTION_ItemScopeAirEnd_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 49 74 65 6d 53 63 6f 70 65 41 69 72 45 6e 64 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 3960,
+        "name": "PlyFox5K_Share_ACTION_DamageHi1_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 48 69 31 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 3984,
+        "name": "PlyFox5K_Share_ACTION_DamageHi2_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 48 69 32 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 4008,
+        "name": "PlyFox5K_Share_ACTION_DamageHi3_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 48 69 33 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 4032,
+        "name": "PlyFox5K_Share_ACTION_DamageN1_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 4e 31 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 4056,
+        "name": "PlyFox5K_Share_ACTION_DamageN2_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 4e 32 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 4080,
+        "name": "PlyFox5K_Share_ACTION_DamageN3_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 4e 33 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 4104,
+        "name": "PlyFox5K_Share_ACTION_DamageLw1_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 4c 77 31 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 4128,
+        "name": "PlyFox5K_Share_ACTION_DamageLw2_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 4c 77 32 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 4152,
+        "name": "PlyFox5K_Share_ACTION_DamageLw3_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 4c 77 33 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 4176,
+        "name": "PlyFox5K_Share_ACTION_DamageAir1_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 41 69 72 31 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 4200,
+        "name": "PlyFox5K_Share_ACTION_DamageAir2_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 41 69 72 32 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 4224,
+        "name": "PlyFox5K_Share_ACTION_DamageAir3_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 41 69 72 33 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 4248,
+        "name": "PlyFox5K_Share_ACTION_DamageFlyHi_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 46 6c 79 48 69 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 4272,
+        "name": "PlyFox5K_Share_ACTION_DamageFlyN_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 46 6c 79 4e 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 4296,
+        "name": "PlyFox5K_Share_ACTION_DamageFlyLw_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 46 6c 79 4c 77 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 4320,
+        "name": "PlyFox5K_Share_ACTION_DamageFlyTop_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 46 6c 79 54 6f 70 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 4344,
+        "name": "PlyFox5K_Share_ACTION_DamageFlyRoll_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 46 6c 79 52 6f 6c 6c 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 4392,
+        "name": "PlyFox5K_Share_ACTION_DownBoundU_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 42 6f 75 6e 64 55 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 4416,
+        "name": "PlyFox5K_Share_ACTION_DownWaitU_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 57 61 69 74 55 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 4440,
+        "name": "PlyFox5K_Share_ACTION_DownDamageU_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 44 61 6d 61 67 65 55 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 4464,
+        "name": "PlyFox5K_Share_ACTION_DownStandU_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 53 74 61 6e 64 55 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 4488,
+        "name": "PlyFox5K_Share_ACTION_DownAttackU_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 41 74 74 61 63 6b 55 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 4512,
+        "name": "PlyFox5K_Share_ACTION_DownFowardU_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 46 6f 77 61 72 64 55 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 4536,
+        "name": "PlyFox5K_Share_ACTION_DownBackU_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 42 61 63 6b 55 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 4584,
+        "name": "PlyFox5K_Share_ACTION_DownBoundD_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 42 6f 75 6e 64 44 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 4608,
+        "name": "PlyFox5K_Share_ACTION_DownWaitD_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 57 61 69 74 44 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 4632,
+        "name": "PlyFox5K_Share_ACTION_DownDamageD_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 44 61 6d 61 67 65 44 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 4656,
+        "name": "PlyFox5K_Share_ACTION_DownStandD_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 53 74 61 6e 64 44 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 4680,
+        "name": "PlyFox5K_Share_ACTION_DownAttackD_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 41 74 74 61 63 6b 44 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 4704,
+        "name": "PlyFox5K_Share_ACTION_DownFowardD_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 46 6f 77 61 72 64 44 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 4728,
+        "name": "PlyFox5K_Share_ACTION_DownBackD_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 42 61 63 6b 44 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 4752,
+        "name": "PlyFox5K_Share_ACTION_DownSpotD_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 53 70 6f 74 44 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 4776,
+        "name": "PlyFox5K_Share_ACTION_Passive_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 50 61 73 73 69 76 65 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 4800,
+        "name": "PlyFox5K_Share_ACTION_PassiveStandF_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 50 61 73 73 69 76 65 53 74 61 6e 64 46 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 4824,
+        "name": "PlyFox5K_Share_ACTION_PassiveStandB_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 50 61 73 73 69 76 65 53 74 61 6e 64 42 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 4848,
+        "name": "PlyFox5K_Share_ACTION_PassiveWall_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 50 61 73 73 69 76 65 57 61 6c 6c 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 4872,
+        "name": "PlyFox5K_Share_ACTION_PassiveWallJump_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 50 61 73 73 69 76 65 57 61 6c 6c 4a 75 6d 70 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 4896,
+        "name": "PlyFox5K_Share_ACTION_PassiveCeil_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 50 61 73 73 69 76 65 43 65 69 6c 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 4920,
+        "name": "PlyFox5K_Share_ACTION_FuraFura_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 46 75 72 61 46 75 72 61 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 4944,
+        "name": "PlyFox5K_Share_ACTION_FuraSleepStart_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 46 75 72 61 53 6c 65 65 70 53 74 61 72 74 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 4968,
+        "name": "PlyFox5K_Share_ACTION_FuraSleepLoop_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 46 75 72 61 53 6c 65 65 70 4c 6f 6f 70 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 4992,
+        "name": "PlyFox5K_Share_ACTION_FuraSleepEnd_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 46 75 72 61 53 6c 65 65 70 45 6e 64 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 5016,
+        "name": "PlyFox5K_Share_ACTION_Pass_figatree",
+        "size": 36,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 50 61 73 73 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 5040,
+        "name": "PlyFox5K_Share_ACTION_Ottotto_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4f 74 74 6f 74 74 6f 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 5064,
+        "name": "PlyFox5K_Share_ACTION_OttottoWait_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4f 74 74 6f 74 74 6f 57 61 69 74 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 5088,
+        "name": "PlyFox5K_Share_ACTION_WallDamage_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 57 61 6c 6c 44 61 6d 61 67 65 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 5112,
+        "name": "PlyFox5K_Share_ACTION_StopWall_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 74 6f 70 57 61 6c 6c 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 5136,
+        "name": "PlyFox5K_Share_ACTION_StopCeil_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 74 6f 70 43 65 69 6c 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 5160,
+        "name": "PlyFox5K_Share_ACTION_MissFoot_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 4d 69 73 73 46 6f 6f 74 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 5184,
+        "name": "PlyFox5K_Share_ACTION_CliffCatch_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 6c 69 66 66 43 61 74 63 68 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 5208,
+        "name": "PlyFox5K_Share_ACTION_CliffWait_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 6c 69 66 66 57 61 69 74 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 5256,
+        "name": "PlyFox5K_Share_ACTION_CliffClimbSlow_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 6c 69 66 66 43 6c 69 6d 62 53 6c 6f 77 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 5280,
+        "name": "PlyFox5K_Share_ACTION_CliffClimbQuick_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 6c 69 66 66 43 6c 69 6d 62 51 75 69 63 6b 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 5304,
+        "name": "PlyFox5K_Share_ACTION_CliffAttackSlow_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 6c 69 66 66 41 74 74 61 63 6b 53 6c 6f 77 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 5328,
+        "name": "PlyFox5K_Share_ACTION_CliffAttackQuick_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 6c 69 66 66 41 74 74 61 63 6b 51 75 69 63 6b 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 5352,
+        "name": "PlyFox5K_Share_ACTION_CliffEscapeSlow_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 6c 69 66 66 45 73 63 61 70 65 53 6c 6f 77 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 5376,
+        "name": "PlyFox5K_Share_ACTION_CliffEscapeQuick_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 6c 69 66 66 45 73 63 61 70 65 51 75 69 63 6b 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 5400,
+        "name": "PlyFox5K_Share_ACTION_CliffJumpSlow1_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 6c 69 66 66 4a 75 6d 70 53 6c 6f 77 31 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 5424,
+        "name": "PlyFox5K_Share_ACTION_CliffJumpSlow2_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 6c 69 66 66 4a 75 6d 70 53 6c 6f 77 32 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 5448,
+        "name": "PlyFox5K_Share_ACTION_CliffJumpQuick1_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 6c 69 66 66 4a 75 6d 70 51 75 69 63 6b 31 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 5472,
+        "name": "PlyFox5K_Share_ACTION_CliffJumpQuick2_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 6c 69 66 66 4a 75 6d 70 51 75 69 63 6b 32 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 5712,
+        "name": "PlyFox5K_Share_ACTION_Entry_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 45 6e 74 72 79 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 5736,
+        "name": "PlyFox5K_Share_ACTION_Appeal_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 70 70 65 61 6c 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 5808,
+        "name": "PlyFox5K_Share_ACTION_Catch_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 61 74 63 68 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 5832,
+        "name": "PlyFox5K_Share_ACTION_CatchDash_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 61 74 63 68 44 61 73 68 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 5856,
+        "name": "PlyFox5K_Share_ACTION_CatchWait_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 61 74 63 68 57 61 69 74 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 5880,
+        "name": "PlyFox5K_Share_ACTION_CatchAttack_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 61 74 63 68 41 74 74 61 63 6b 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 5904,
+        "name": "PlyFox5K_Share_ACTION_CatchCut_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 61 74 63 68 43 75 74 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 5928,
+        "name": "PlyFox5K_Share_ACTION_ThrowF_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 54 68 72 6f 77 46 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 5952,
+        "name": "PlyFox5K_Share_ACTION_ThrowB_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 54 68 72 6f 77 42 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 5976,
+        "name": "PlyFox5K_Share_ACTION_ThrowHi_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 54 68 72 6f 77 48 69 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 6000,
+        "name": "PlyFox5K_Share_ACTION_ThrowLw_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 54 68 72 6f 77 4c 77 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 6024,
+        "name": "PlyFox5K_Share_ACTION_CapturePulledHi_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 61 70 74 75 72 65 50 75 6c 6c 65 64 48 69 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 6048,
+        "name": "PlyFox5K_Share_ACTION_CaptureWaitHi_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 61 70 74 75 72 65 57 61 69 74 48 69 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 6072,
+        "name": "PlyFox5K_Share_ACTION_CaptureDamageHi_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 61 70 74 75 72 65 44 61 6d 61 67 65 48 69 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 6096,
+        "name": "PlyFox5K_Share_ACTION_CapturePulledLw_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 61 70 74 75 72 65 50 75 6c 6c 65 64 4c 77 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 6120,
+        "name": "PlyFox5K_Share_ACTION_CaptureWaitLw_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 61 70 74 75 72 65 57 61 69 74 4c 77 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 6144,
+        "name": "PlyFox5K_Share_ACTION_CaptureDamageLw_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 61 70 74 75 72 65 44 61 6d 61 67 65 4c 77 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 6168,
+        "name": "PlyFox5K_Share_ACTION_CaptureCut_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 61 70 74 75 72 65 43 75 74 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 6192,
+        "name": "PlyFox5K_Share_ACTION_CaptureJump_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 43 61 70 74 75 72 65 4a 75 6d 70 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 6288,
+        "name": "PlyTaro_Share_ACTION_TFoxThrowF_figatree",
+        "size": 44,
+        "raw": "50 6c 79 54 61 72 6f 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 54 46 6f 78 54 68 72 6f 77 46 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 6312,
+        "name": "PlyTaro_Share_ACTION_TFoxThrowB_figatree",
+        "size": 44,
+        "raw": "50 6c 79 54 61 72 6f 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 54 46 6f 78 54 68 72 6f 77 42 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 6336,
+        "name": "PlyTaro_Share_ACTION_TFoxThrowHi_figatree",
+        "size": 44,
+        "raw": "50 6c 79 54 61 72 6f 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 54 46 6f 78 54 68 72 6f 77 48 69 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 6360,
+        "name": "PlyTaro_Share_ACTION_TFoxThrowLw_figatree",
+        "size": 44,
+        "raw": "50 6c 79 54 61 72 6f 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 54 46 6f 78 54 68 72 6f 77 4c 77 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 6864,
+        "name": "PlyFox5K_Share_ACTION_DamageFlyTop_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 46 6c 79 54 6f 70 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 6888,
+        "name": "PlyFox5K_Share_ACTION_DamageFall_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 61 6d 61 67 65 46 61 6c 6c 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 6912,
+        "name": "PlyFox5K_Share_ACTION_DownBoundU_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 42 6f 75 6e 64 55 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 6936,
+        "name": "PlyFox5K_Share_ACTION_DownBoundD_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 42 6f 75 6e 64 44 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 6960,
+        "name": "PlyFox5K_Share_ACTION_DownStandU_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 53 74 61 6e 64 55 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 6984,
+        "name": "PlyFox5K_Share_ACTION_DownStandD_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 44 6f 77 6e 53 74 61 6e 64 44 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 7080,
+        "name": "PlyFox5K_Share_ACTION_SpecialNStart_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 4e 53 74 61 72 74 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 7104,
+        "name": "PlyFox5K_Share_ACTION_SpecialNLoop_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 4e 4c 6f 6f 70 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 7128,
+        "name": "PlyFox5K_Share_ACTION_SpecialNEnd_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 4e 45 6e 64 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 7152,
+        "name": "PlyFox5K_Share_ACTION_SpecialAirNStart_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 41 69 72 4e 53 74 61 72 74 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 7176,
+        "name": "PlyFox5K_Share_ACTION_SpecialAirNLoop_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 41 69 72 4e 4c 6f 6f 70 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 7200,
+        "name": "PlyFox5K_Share_ACTION_SpecialAirNEnd_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 41 69 72 4e 45 6e 64 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 7224,
+        "name": "PlyFox5K_Share_ACTION_SpecialSStart_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 53 53 74 61 72 74 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 7248,
+        "name": "PlyFox5K_Share_ACTION_SpecialS_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 53 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 7272,
+        "name": "PlyFox5K_Share_ACTION_SpecialSEnd_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 53 45 6e 64 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 7296,
+        "name": "PlyFox5K_Share_ACTION_SpecialAirSStart_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 41 69 72 53 53 74 61 72 74 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 7320,
+        "name": "PlyFox5K_Share_ACTION_SpecialAirS_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 41 69 72 53 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 7344,
+        "name": "PlyFox5K_Share_ACTION_SpecialAirSEnd_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 41 69 72 53 45 6e 64 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 7368,
+        "name": "PlyFox5K_Share_ACTION_SpecialHiHold_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 48 69 48 6f 6c 64 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 7392,
+        "name": "PlyFox5K_Share_ACTION_SpecialHiHoldAir_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 48 69 48 6f 6c 64 41 69 72 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 7416,
+        "name": "PlyFox5K_Share_ACTION_SpecialHi_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 48 69 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 7440,
+        "name": "PlyFox5K_Share_ACTION_SpecialHiLanding_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 48 69 4c 61 6e 64 69 6e 67 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 7464,
+        "name": "PlyFox5K_Share_ACTION_SpecialHiFall_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 48 69 46 61 6c 6c 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 7488,
+        "name": "PlyFox5K_Share_ACTION_SpecialHiBound_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 48 69 42 6f 75 6e 64 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 7512,
+        "name": "PlyFox5K_Share_ACTION_SpecialLwStart_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 4c 77 53 74 61 72 74 5f 66 69 67 61 74 72 65 65 00 00 00"
+    },
+    {
+        "offset": 7536,
+        "name": "PlyFox5K_Share_ACTION_SpecialLwLoop_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 4c 77 4c 6f 6f 70 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 7560,
+        "name": "PlyFox5K_Share_ACTION_SpecialLwHit_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 4c 77 48 69 74 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 7584,
+        "name": "PlyFox5K_Share_ACTION_SpecialLwEnd_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 4c 77 45 6e 64 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 7608,
+        "name": "PlyFox5K_Share_ACTION_SpecialAirLwStart_figatree",
+        "size": 52,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 41 69 72 4c 77 53 74 61 72 74 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 7632,
+        "name": "PlyFox5K_Share_ACTION_SpecialAirLwLoop_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 41 69 72 4c 77 4c 6f 6f 70 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 7656,
+        "name": "PlyFox5K_Share_ACTION_SpecialAirLwHit_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 41 69 72 4c 77 48 69 74 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 7680,
+        "name": "PlyFox5K_Share_ACTION_SpecialAirLwEnd_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 53 70 65 63 69 61 6c 41 69 72 4c 77 45 6e 64 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 7704,
+        "name": "PlyFox5K_Share_ACTION_AppealSStartR_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 70 70 65 61 6c 53 53 74 61 72 74 52 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 7728,
+        "name": "PlyFox5K_Share_ACTION_AppealSStartL_figatree",
+        "size": 48,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 70 70 65 61 6c 53 53 74 61 72 74 4c 5f 66 69 67 61 74 72 65 65 00 00 00 00"
+    },
+    {
+        "offset": 7752,
+        "name": "PlyFox5K_Share_ACTION_AppealSR_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 70 70 65 61 6c 53 52 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 7776,
+        "name": "PlyFox5K_Share_ACTION_AppealSL_figatree",
+        "size": 40,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 70 70 65 61 6c 53 4c 5f 66 69 67 61 74 72 65 65 00"
+    },
+    {
+        "offset": 7800,
+        "name": "PlyFox5K_Share_ACTION_AppealSEndR_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 70 70 65 61 6c 53 45 6e 64 52 5f 66 69 67 61 74 72 65 65 00 00"
+    },
+    {
+        "offset": 7824,
+        "name": "PlyFox5K_Share_ACTION_AppealSEndL_figatree",
+        "size": 44,
+        "raw": "50 6c 79 46 6f 78 35 4b 5f 53 68 61 72 65 5f 41 43 54 49 4f 4e 5f 41 70 70 65 61 6c 53 45 6e 64 4c 5f 66 69 67 61 74 72 65 65 00 00"
+    }
+]

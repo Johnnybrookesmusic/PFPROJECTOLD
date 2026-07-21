@@ -1,0 +1,267 @@
+{
+    "Unknown0x00": {
+        "offset": "0x0",
+        "float": 4.0,
+        "hex": "40 80 00 00"
+    },
+    "Unknown0x04": {
+        "offset": "0x4",
+        "float": 1.0,
+        "hex": "3F 80 00 00"
+    },
+    "Unknown0x08": {
+        "offset": "0x8",
+        "float": 4.0,
+        "hex": "40 80 00 00"
+    },
+    "Unknown0x0C": {
+        "offset": "0xc",
+        "float": 1.0,
+        "hex": "3F 80 00 00"
+    },
+    "Unknown0x10": {
+        "offset": "0x10",
+        "float": 0.0,
+        "hex": "00 00 00 00"
+    },
+    "Unknown0x14": {
+        "offset": "0x14",
+        "float": 7.0,
+        "hex": "40 E0 00 00"
+    },
+    "Unknown0x18": {
+        "offset": "0x18",
+        "float": 0.0,
+        "hex": "00 00 00 00"
+    },
+    "Unknown0x1C": {
+        "offset": "0x1c",
+        "float": 7.567011707354012e-44,
+        "hex": "00 00 00 36"
+    },
+    "Unknown0x20": {
+        "offset": "0x20",
+        "float": 1.0369608636003646e-43,
+        "hex": "00 00 00 4A"
+    },
+    "Unknown0x24": {
+        "offset": "0x24",
+        "float": 15.0,
+        "hex": "41 70 00 00"
+    },
+    "Unknown0x28": {
+        "offset": "0x28",
+        "float": 1.5,
+        "hex": "3F C0 00 00"
+    },
+    "Unknown0x2C": {
+        "offset": "0x2c",
+        "float": 0.05000000074505806,
+        "hex": "3D 4C CC CD"
+    },
+    "Unknown0x30": {
+        "offset": "0x30",
+        "float": 0.01666666753590107,
+        "hex": "3C 88 88 89"
+    },
+    "Unknown0x34": {
+        "offset": "0x34",
+        "float": 4.0,
+        "hex": "40 80 00 00"
+    },
+    "Unknown0x38": {
+        "offset": "0x38",
+        "float": 0.10000000149011612,
+        "hex": "3D CC CC CD"
+    },
+    "Unknown0x3C": {
+        "offset": "0x3c",
+        "float": 2.0,
+        "hex": "40 00 00 00"
+    },
+    "Unknown0x40": {
+        "offset": "0x40",
+        "float": 0.07000000029802322,
+        "hex": "3D 8F 5C 29"
+    },
+    "Unknown0x44": {
+        "offset": "0x44",
+        "float": 5.0,
+        "hex": "40 A0 00 00"
+    },
+    "Unknown0x48": {
+        "offset": "0x48",
+        "float": 0.07999999821186066,
+        "hex": "3D A3 D7 0A"
+    },
+    "Unknown0x4C": {
+        "offset": "0x4c",
+        "float": 0.4000000059604645,
+        "hex": "3E CC CC CD"
+    },
+    "Unknown0x50": {
+        "offset": "0x50",
+        "float": 20.0,
+        "hex": "41 A0 00 00"
+    },
+    "Unknown0x54": {
+        "offset": "0x54",
+        "float": 15.0,
+        "hex": "41 70 00 00"
+    },
+    "Unknown0x58": {
+        "offset": "0x58",
+        "float": 1.25,
+        "hex": "3F A0 00 00"
+    },
+    "Unknown0x5C": {
+        "offset": "0x5c",
+        "float": 0.019999999552965164,
+        "hex": "3C A3 D7 0A"
+    },
+    "Unknown0x60": {
+        "offset": "0x60",
+        "float": 0.014999999664723873,
+        "hex": "3C 75 C2 8F"
+    },
+    "Unknown0x64": {
+        "offset": "0x64",
+        "float": 0.5,
+        "hex": "3F 00 00 00"
+    },
+    "Unknown0x68": {
+        "offset": "0x68",
+        "float": 30.0,
+        "hex": "41 F0 00 00"
+    },
+    "Unknown0x6C": {
+        "offset": "0x6c",
+        "float": 2.1019476964872256e-44,
+        "hex": "00 00 00 0F"
+    },
+    "Unknown0x70": {
+        "offset": "0x70",
+        "float": 6.0,
+        "hex": "40 C0 00 00"
+    },
+    "Unknown0x74": {
+        "offset": "0x74",
+        "float": 3.799999952316284,
+        "hex": "40 73 33 33"
+    },
+    "Unknown0x78": {
+        "offset": "0x78",
+        "float": 0.10000000149011612,
+        "hex": "3D CC CC CD"
+    },
+    "Unknown0x7C": {
+        "offset": "0x7c",
+        "float": 1.5,
+        "hex": "3F C0 00 00"
+    },
+    "Unknown0x80": {
+        "offset": "0x80",
+        "float": 20.0,
+        "hex": "41 A0 00 00"
+    },
+    "Unknown0x84": {
+        "offset": "0x84",
+        "float": 0.800000011920929,
+        "hex": "3F 4C CC CD"
+    },
+    "Unknown0x88": {
+        "offset": "0x88",
+        "float": 0.125,
+        "hex": "3E 00 00 00"
+    },
+    "Unknown0x8C": {
+        "offset": "0x8c",
+        "float": 0.4000000059604645,
+        "hex": "3E CC CC CD"
+    },
+    "Unknown0x90": {
+        "offset": "0x90",
+        "float": 18.0,
+        "hex": "41 90 00 00"
+    },
+    "Unknown0x94": {
+        "offset": "0x94",
+        "float": 20.0,
+        "hex": "41 A0 00 00"
+    },
+    "Unknown0x98": {
+        "offset": "0x98",
+        "float": 18.0,
+        "hex": "41 90 00 00"
+    },
+    "Unknown0x9C": {
+        "offset": "0x9c",
+        "float": 4.0,
+        "hex": "40 80 00 00"
+    },
+    "Unknown0xA0": {
+        "offset": "0xa0",
+        "float": 2.0,
+        "hex": "40 00 00 00"
+    },
+    "Unknown0xA4": {
+        "offset": "0xa4",
+        "float": 5.605193857299268e-45,
+        "hex": "00 00 00 04"
+    },
+    "Unknown0xA8": {
+        "offset": "0xa8",
+        "float": 2.0,
+        "hex": "40 00 00 00"
+    },
+    "Unknown0xAC": {
+        "offset": "0xac",
+        "float": 0.02666666731238365,
+        "hex": "3C DA 74 0E"
+    },
+    "Unknown0xB0": {
+        "offset": "0xb0",
+        "float": 1.401298464324817e-45,
+        "hex": "00 00 00 01"
+    },
+    "Unknown0xB4": {
+        "offset": "0xb4",
+        "float": 7.006492321624085e-44,
+        "hex": "00 00 00 32"
+    },
+    "Unknown0xB8": {
+        "offset": "0xb8",
+        "float": 0.0,
+        "hex": "00 00 00 00"
+    },
+    "Unknown0xBC": {
+        "offset": "0xbc",
+        "float": 6.5,
+        "hex": "40 D0 00 00"
+    },
+    "Unknown0xC0": {
+        "offset": "0xc0",
+        "float": 0.0,
+        "hex": "00 00 00 00"
+    },
+    "Unknown0xC4": {
+        "offset": "0xc4",
+        "float": 8.5,
+        "hex": "41 08 00 00"
+    },
+    "Unknown0xC8": {
+        "offset": "0xc8",
+        "float": 1.5,
+        "hex": "3F C0 00 00"
+    },
+    "Unknown0xCC": {
+        "offset": "0xcc",
+        "float": 1.0,
+        "hex": "3F 80 00 00"
+    },
+    "Unknown0xD0": {
+        "offset": "0xd0",
+        "float": 0.0,
+        "hex": "00 00 00 00"
+    }
+}

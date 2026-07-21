@@ -1,0 +1,19 @@
+{
+    "root": "ftDataFox",
+    "type": "HSDRaw.Melee.Pl.SBM_PlayerData",
+    "data": {
+        "type": "HSDRaw.Melee.Pl.SBM_PlayerData",
+        "depth": 0,
+        "fields": [
+            {
+                "name": "_s",
+                "type": "HSDRaw.HSDStruct",
+                "child": {
+                    "type": "HSDRaw.HSDStruct",
+                    "depth": 1,
+                    "fields": []
+                }
+            }
+        ]
+    }
+}

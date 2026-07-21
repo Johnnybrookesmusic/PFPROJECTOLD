@@ -1,0 +1,1055 @@
+{
+    "type": "HSDRaw.Melee.Pl.SBM_PlayerData",
+    "fields": {
+        "TrimmedSize": 96,
+        "Attributes": {
+            "type": "HSDRaw.Melee.Pl.SBM_CommonFighterAttributes",
+            "fields": {
+                "TrimmedSize": 388,
+                "InitialWalkSpeed": 0.20000000298023224,
+                "WalkAcceleration": 0.10000000149011612,
+                "MaxWalkSpeed": 1.600000023841858,
+                "WalkAnimationSpeed": 0.23000000417232513,
+                "Unknown0x10": 0.5699999928474426,
+                "WalkAnimationSpeed2": 0.9200000166893005,
+                "Friction": 0.07999999821186066,
+                "InitialDashSpeed": 1.899999976158142,
+                "StopTurnInitialSpeed": 0.10000000149011612,
+                "Unknown0x24": 0.019999999552965164,
+                "InitialRunSpeed": 2.200000047683716,
+                "RunSpeed": 1.7280000448226929,
+                "RunAcceleration": 30.0,
+                "Unknown0x34": 3.0,
+                "JumpStartUpLag": 3.0,
+                "Unknown0x3C": 0.7200000286102295,
+                "InitialJumpVerticalSpeed": 3.680000066757202,
+                "Unknown0x44": 0.8299999833106995,
+                "InitialJumpHorizontalSpeed": 1.7000000476837158,
+                "InitialShortHopVerticalSpeed": 2.0999999046325684,
+                "AirJumpMultiplier": 1.2000000476837158,
+                "Unkown0x54": 0.8999999761581421,
+                "NumberOfJumps": 2,
+                "Gravity": 0.23000000417232513,
+                "TerminalVelocity": 2.799999952316284,
+                "AerialSpeed": 0.05999999865889549,
+                "AerialFriction": 0.019999999552965164,
+                "MaxAerialHorizontalSpeed": 0.8299999833106995,
+                "Unknown0x70": 0.019999999552965164,
+                "FastFallTerminalVelocity": 3.4000000953674316,
+                "TiltTurnForcedVelocity": 3.0,
+                "Unknown0x7C": 30.0,
+                "Unknown0x80": 0.0,
+                "Unknown0x84": 4.0,
+                "Weight": 75.0,
+                "ModelScale": 0.9599999785423279,
+                "ShieldSize": 14.375,
+                "ShieldBreakInitialVelocity": 3.299999952316284,
+                "Unknown0x98": 5.605193857299268e-45,
+                "Unknown0x9C": 16.0,
+                "Unknown0xA0": 0.0,
+                "Unknown0xA4": 1,
+                "LedgeJumpHorizontalVelocity": 1.100000023841858,
+                "LedgeJumpVerticalVelocity": 4.0,
+                "Unknown0xB0": 1.0,
+                "Unknown0xB4": 1.0,
+                "Unknown0xB8": 0.20000000298023224,
+                "Unknown0xBC": 1.899999976158142,
+                "Unknown0xC0": 0.0,
+                "Unknown0xC4": 6.0,
+                "Unknown0xC8": 0.0,
+                "Unknown0xCC": 0.0,
+                "Unknown0xD0": 9.0,
+                "Unknown0xD4": 0.0,
+                "Unknown0xD8": 6.0,
+                "NormalLandingLag": 2.0899999141693115,
+                "NairLandingLag": 16.0,
+                "Unknown0xE4": 4.0,
+                "Unknown0xE8": 15.0,
+                "FairLandingLag": 22.0,
+                "BairLandingLag": 20.0,
+                "DairLandingLag": 18.0,
+                "UairLandingLag": 18.0,
+                "Unknown0xFC": 22.0,
+                "Unknown0x100": 0.5,
+                "Unknown0x104": 1.399999976158142,
+                "Unknown0x108": 3.299999952316284,
+                "Unknown0x10C": 0.699999988079071,
+                "Unknown0x110": 0.8999999761581421,
+                "Unknown0x114": 0.8500000238418579,
+                "Unknown0x118": 3.299999952316284,
+                "Unknown0x11C": 0.30000001192092896,
+                "Unknown0x120": -0.8500000238418579,
+                "Unknown0x124": 3.299999952316284,
+                "Unknown0x128": 0.30000001192092896,
+                "Unknown0x12C": 1.0,
+                "Unknown0x130": 0.0,
+                "Unknown0x134": 4.199999809265137,
+                "Unknown0x138": 0.30000001192092896,
+                "Unknown0x13C": 1.0,
+                "Unknown0x140": 3.700000047683716,
+                "Unknown0x144": 1.2000000476837158,
+                "Unknown0x148": 0.5,
+                "Unknown0x14C": 7.5,
+                "Unknown0x150": -1.5,
+                "Unknown0x154": -2.0,
+                "Unknown0x158": 2.299999952316284,
+                "Unknown0x15C": 1.0,
+                "Unknown0x160": 1.0,
+                "Unknown0x164": 1.0,
+                "Unknown0x168": 1.0,
+                "Unknown0x16C": 3.0828566215145976e-44,
+                "Unknown0x170": 0.0,
+                "Unknown0x174": 0.0,
+                "Unknown0x178": 0.0,
+                "Unknown0x17C": 0.0,
+                "Unknown0x180": 1.5407439555097887e-33
+            }
+        },
+        "Attributes2": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "UnknownNode": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "SubActionTable": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Unknown0x10": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "WinSubAction": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Unknown0x18": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Unknown0x1C": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "ShieldPoseJOBJ": {
+            "type": "HSDRaw.Common.HSD_JOBJ",
+            "fields": {
+                "TrimmedSize": 64,
+                "Flags": {
+                    "type": "HSDRaw.Common.JOBJ_FLAG",
+                    "fields": {}
+                },
+                "Child": {
+                    "type": "HSDRaw.Common.HSD_JOBJ",
+                    "fields": {
+                        "TrimmedSize": 64,
+                        "Flags": {
+                            "type": "HSDRaw.Common.JOBJ_FLAG",
+                            "fields": {}
+                        },
+                        "Child": {
+                            "type": "HSDRaw.Common.HSD_JOBJ",
+                            "fields": {
+                                "TrimmedSize": 64,
+                                "Flags": {
+                                    "type": "HSDRaw.Common.JOBJ_FLAG",
+                                    "fields": {}
+                                },
+                                "Child": {
+                                    "type": "HSDRaw.Common.HSD_JOBJ",
+                                    "fields": {
+                                        "TrimmedSize": "MAX_DEPTH",
+                                        "Flags": "MAX_DEPTH",
+                                        "Child": "MAX_DEPTH",
+                                        "Next": null,
+                                        "Dobj": null,
+                                        "RX": "MAX_DEPTH",
+                                        "RY": "MAX_DEPTH",
+                                        "RZ": "MAX_DEPTH",
+                                        "SX": "MAX_DEPTH",
+                                        "SY": "MAX_DEPTH",
+                                        "SZ": "MAX_DEPTH",
+                                        "TX": "MAX_DEPTH",
+                                        "TY": "MAX_DEPTH",
+                                        "TZ": "MAX_DEPTH",
+                                        "Children": "MAX_DEPTH",
+                                        "DepthFirstList": "MAX_DEPTH",
+                                        "List": "MAX_DEPTH"
+                                    }
+                                },
+                                "Next": null,
+                                "Dobj": null,
+                                "RX": 0.0,
+                                "RY": 0.0,
+                                "RZ": 0.0,
+                                "SX": 1.0,
+                                "SY": 1.0,
+                                "SZ": 1.0,
+                                "TX": -0.0,
+                                "TY": 8.30000114440918,
+                                "TZ": 0.0,
+                                "Children": {
+                                    "type": "HSDRaw.Common.HSD_JOBJ[]",
+                                    "fields": {
+                                        "Length": "MAX_DEPTH",
+                                        "LongLength": "MAX_DEPTH",
+                                        "Rank": "MAX_DEPTH",
+                                        "SyncRoot": "MAX_DEPTH",
+                                        "IsReadOnly": "MAX_DEPTH",
+                                        "IsFixedSize": "MAX_DEPTH",
+                                        "IsSynchronized": "MAX_DEPTH"
+                                    }
+                                },
+                                "DepthFirstList": {
+                                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                                    "fields": {
+                                        "Capacity": "MAX_DEPTH",
+                                        "Count": "MAX_DEPTH",
+                                        "System.Collections.IList.IsFixedSize": "MAX_DEPTH",
+                                        "System.Collections.Generic.ICollection<T>.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.IList.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.ICollection.IsSynchronized": "MAX_DEPTH",
+                                        "System.Collections.ICollection.SyncRoot": "MAX_DEPTH",
+                                        "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                                    }
+                                },
+                                "List": {
+                                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                                    "fields": {
+                                        "Capacity": "MAX_DEPTH",
+                                        "Count": "MAX_DEPTH",
+                                        "System.Collections.IList.IsFixedSize": "MAX_DEPTH",
+                                        "System.Collections.Generic.ICollection<T>.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.IList.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.ICollection.IsSynchronized": "MAX_DEPTH",
+                                        "System.Collections.ICollection.SyncRoot": "MAX_DEPTH",
+                                        "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                                    }
+                                }
+                            }
+                        },
+                        "Next": {
+                            "type": "HSDRaw.Common.HSD_JOBJ",
+                            "fields": {
+                                "TrimmedSize": 64,
+                                "Flags": {
+                                    "type": "HSDRaw.Common.JOBJ_FLAG",
+                                    "fields": {}
+                                },
+                                "Child": null,
+                                "Next": null,
+                                "Dobj": null,
+                                "RX": 0.0,
+                                "RY": 0.0,
+                                "RZ": 0.0,
+                                "SX": 1.0,
+                                "SY": 1.0,
+                                "SZ": 1.0,
+                                "TX": 0.0,
+                                "TY": 0.0,
+                                "TZ": 0.0,
+                                "Children": {
+                                    "type": "HSDRaw.Common.HSD_JOBJ[]",
+                                    "fields": {
+                                        "Length": "MAX_DEPTH",
+                                        "LongLength": "MAX_DEPTH",
+                                        "Rank": "MAX_DEPTH",
+                                        "SyncRoot": "MAX_DEPTH",
+                                        "IsReadOnly": "MAX_DEPTH",
+                                        "IsFixedSize": "MAX_DEPTH",
+                                        "IsSynchronized": "MAX_DEPTH"
+                                    }
+                                },
+                                "DepthFirstList": {
+                                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                                    "fields": {
+                                        "Capacity": "MAX_DEPTH",
+                                        "Count": "MAX_DEPTH",
+                                        "System.Collections.IList.IsFixedSize": "MAX_DEPTH",
+                                        "System.Collections.Generic.ICollection<T>.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.IList.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.ICollection.IsSynchronized": "MAX_DEPTH",
+                                        "System.Collections.ICollection.SyncRoot": "MAX_DEPTH",
+                                        "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                                    }
+                                },
+                                "List": {
+                                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                                    "fields": {
+                                        "Capacity": "MAX_DEPTH",
+                                        "Count": "MAX_DEPTH",
+                                        "System.Collections.IList.IsFixedSize": "MAX_DEPTH",
+                                        "System.Collections.Generic.ICollection<T>.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.IList.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.ICollection.IsSynchronized": "MAX_DEPTH",
+                                        "System.Collections.ICollection.SyncRoot": "MAX_DEPTH",
+                                        "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                                    }
+                                }
+                            }
+                        },
+                        "Dobj": null,
+                        "RX": 0.0,
+                        "RY": 0.0,
+                        "RZ": -0.0,
+                        "SX": 1.0,
+                        "SY": 1.0,
+                        "SZ": 1.0,
+                        "TX": 0.0,
+                        "TY": 0.0,
+                        "TZ": 0.0,
+                        "Children": {
+                            "type": "HSDRaw.Common.HSD_JOBJ[]",
+                            "fields": {
+                                "Length": 1,
+                                "LongLength": 1,
+                                "Rank": 1,
+                                "SyncRoot": {
+                                    "type": "HSDRaw.Common.HSD_JOBJ[]",
+                                    "fields": {
+                                        "Length": "MAX_DEPTH",
+                                        "LongLength": "MAX_DEPTH",
+                                        "Rank": "MAX_DEPTH",
+                                        "SyncRoot": "MAX_DEPTH",
+                                        "IsReadOnly": "MAX_DEPTH",
+                                        "IsFixedSize": "MAX_DEPTH",
+                                        "IsSynchronized": "MAX_DEPTH"
+                                    }
+                                },
+                                "IsReadOnly": false,
+                                "IsFixedSize": true,
+                                "IsSynchronized": false
+                            }
+                        },
+                        "DepthFirstList": {
+                            "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                            "fields": {
+                                "Capacity": 128,
+                                "Count": 72,
+                                "System.Collections.IList.IsFixedSize": false,
+                                "System.Collections.Generic.ICollection<T>.IsReadOnly": false,
+                                "System.Collections.IList.IsReadOnly": false,
+                                "System.Collections.ICollection.IsSynchronized": false,
+                                "System.Collections.ICollection.SyncRoot": {
+                                    "type": "System.Object",
+                                    "fields": {}
+                                },
+                                "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                            }
+                        },
+                        "List": {
+                            "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                            "fields": {
+                                "Capacity": 4,
+                                "Count": 2,
+                                "System.Collections.IList.IsFixedSize": false,
+                                "System.Collections.Generic.ICollection<T>.IsReadOnly": false,
+                                "System.Collections.IList.IsReadOnly": false,
+                                "System.Collections.ICollection.IsSynchronized": false,
+                                "System.Collections.ICollection.SyncRoot": {
+                                    "type": "System.Object",
+                                    "fields": {}
+                                },
+                                "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                            }
+                        }
+                    }
+                },
+                "Next": null,
+                "Dobj": null,
+                "RX": 0.0,
+                "RY": 0.0,
+                "RZ": 0.0,
+                "SX": 1.0,
+                "SY": 1.0,
+                "SZ": 1.0,
+                "TX": 0.0,
+                "TY": 0.0,
+                "TZ": 0.0,
+                "Children": {
+                    "type": "HSDRaw.Common.HSD_JOBJ[]",
+                    "fields": {
+                        "Length": 2,
+                        "LongLength": 2,
+                        "Rank": 1,
+                        "SyncRoot": {
+                            "type": "HSDRaw.Common.HSD_JOBJ[]",
+                            "fields": {
+                                "Length": 2,
+                                "LongLength": 2,
+                                "Rank": 1,
+                                "SyncRoot": {
+                                    "type": "HSDRaw.Common.HSD_JOBJ[]",
+                                    "fields": {
+                                        "Length": "MAX_DEPTH",
+                                        "LongLength": "MAX_DEPTH",
+                                        "Rank": "MAX_DEPTH",
+                                        "SyncRoot": "MAX_DEPTH",
+                                        "IsReadOnly": "MAX_DEPTH",
+                                        "IsFixedSize": "MAX_DEPTH",
+                                        "IsSynchronized": "MAX_DEPTH"
+                                    }
+                                },
+                                "IsReadOnly": false,
+                                "IsFixedSize": true,
+                                "IsSynchronized": false
+                            }
+                        },
+                        "IsReadOnly": false,
+                        "IsFixedSize": true,
+                        "IsSynchronized": false
+                    }
+                },
+                "DepthFirstList": {
+                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                    "fields": {
+                        "Capacity": 128,
+                        "Count": 73,
+                        "System.Collections.IList.IsFixedSize": false,
+                        "System.Collections.Generic.ICollection<T>.IsReadOnly": false,
+                        "System.Collections.IList.IsReadOnly": false,
+                        "System.Collections.ICollection.IsSynchronized": false,
+                        "System.Collections.ICollection.SyncRoot": {
+                            "type": "System.Object",
+                            "fields": {}
+                        },
+                        "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                    }
+                },
+                "List": {
+                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                    "fields": {
+                        "Capacity": 4,
+                        "Count": 1,
+                        "System.Collections.IList.IsFixedSize": false,
+                        "System.Collections.Generic.ICollection<T>.IsReadOnly": false,
+                        "System.Collections.IList.IsReadOnly": false,
+                        "System.Collections.ICollection.IsSynchronized": false,
+                        "System.Collections.ICollection.SyncRoot": {
+                            "type": "System.Object",
+                            "fields": {}
+                        },
+                        "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                    }
+                }
+            }
+        },
+        "Unknown0x24": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Unknown0x28": null,
+        "Unknown0x2C": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Unknown0x30": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Unknown0x34": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Unknown0x38": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Unknown0x3C": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Unknown0x40": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Unknown0x44": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Articles": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Unknown0x4C": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Unknown0x50": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Unknown0x54": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "Unknown0x58": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {
+                "TrimmedSize": -1
+            }
+        },
+        "ShadowModel": {
+            "type": "HSDRaw.Common.HSD_JOBJ",
+            "fields": {
+                "TrimmedSize": 64,
+                "Flags": {
+                    "type": "HSDRaw.Common.JOBJ_FLAG",
+                    "fields": {}
+                },
+                "Child": {
+                    "type": "HSDRaw.Common.HSD_JOBJ",
+                    "fields": {
+                        "TrimmedSize": 64,
+                        "Flags": {
+                            "type": "HSDRaw.Common.JOBJ_FLAG",
+                            "fields": {}
+                        },
+                        "Child": {
+                            "type": "HSDRaw.Common.HSD_JOBJ",
+                            "fields": {
+                                "TrimmedSize": 64,
+                                "Flags": {
+                                    "type": "HSDRaw.Common.JOBJ_FLAG",
+                                    "fields": {}
+                                },
+                                "Child": {
+                                    "type": "HSDRaw.Common.HSD_JOBJ",
+                                    "fields": {
+                                        "TrimmedSize": "MAX_DEPTH",
+                                        "Flags": "MAX_DEPTH",
+                                        "Child": "MAX_DEPTH",
+                                        "Next": null,
+                                        "Dobj": null,
+                                        "RX": "MAX_DEPTH",
+                                        "RY": "MAX_DEPTH",
+                                        "RZ": "MAX_DEPTH",
+                                        "SX": "MAX_DEPTH",
+                                        "SY": "MAX_DEPTH",
+                                        "SZ": "MAX_DEPTH",
+                                        "TX": "MAX_DEPTH",
+                                        "TY": "MAX_DEPTH",
+                                        "TZ": "MAX_DEPTH",
+                                        "Children": "MAX_DEPTH",
+                                        "DepthFirstList": "MAX_DEPTH",
+                                        "List": "MAX_DEPTH"
+                                    }
+                                },
+                                "Next": null,
+                                "Dobj": null,
+                                "RX": 0.0,
+                                "RY": 0.0,
+                                "RZ": 0.0,
+                                "SX": 1.0,
+                                "SY": 1.0,
+                                "SZ": 1.0,
+                                "TX": -0.0,
+                                "TY": 8.30000114440918,
+                                "TZ": 0.0,
+                                "Children": {
+                                    "type": "HSDRaw.Common.HSD_JOBJ[]",
+                                    "fields": {
+                                        "Length": "MAX_DEPTH",
+                                        "LongLength": "MAX_DEPTH",
+                                        "Rank": "MAX_DEPTH",
+                                        "SyncRoot": "MAX_DEPTH",
+                                        "IsReadOnly": "MAX_DEPTH",
+                                        "IsFixedSize": "MAX_DEPTH",
+                                        "IsSynchronized": "MAX_DEPTH"
+                                    }
+                                },
+                                "DepthFirstList": {
+                                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                                    "fields": {
+                                        "Capacity": "MAX_DEPTH",
+                                        "Count": "MAX_DEPTH",
+                                        "System.Collections.IList.IsFixedSize": "MAX_DEPTH",
+                                        "System.Collections.Generic.ICollection<T>.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.IList.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.ICollection.IsSynchronized": "MAX_DEPTH",
+                                        "System.Collections.ICollection.SyncRoot": "MAX_DEPTH",
+                                        "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                                    }
+                                },
+                                "List": {
+                                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                                    "fields": {
+                                        "Capacity": "MAX_DEPTH",
+                                        "Count": "MAX_DEPTH",
+                                        "System.Collections.IList.IsFixedSize": "MAX_DEPTH",
+                                        "System.Collections.Generic.ICollection<T>.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.IList.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.ICollection.IsSynchronized": "MAX_DEPTH",
+                                        "System.Collections.ICollection.SyncRoot": "MAX_DEPTH",
+                                        "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                                    }
+                                }
+                            }
+                        },
+                        "Next": {
+                            "type": "HSDRaw.Common.HSD_JOBJ",
+                            "fields": {
+                                "TrimmedSize": 64,
+                                "Flags": {
+                                    "type": "HSDRaw.Common.JOBJ_FLAG",
+                                    "fields": {}
+                                },
+                                "Child": null,
+                                "Next": null,
+                                "Dobj": null,
+                                "RX": 0.0,
+                                "RY": 0.0,
+                                "RZ": 0.0,
+                                "SX": 1.0,
+                                "SY": 1.0,
+                                "SZ": 1.0,
+                                "TX": 0.0,
+                                "TY": 0.0,
+                                "TZ": 0.0,
+                                "Children": {
+                                    "type": "HSDRaw.Common.HSD_JOBJ[]",
+                                    "fields": {
+                                        "Length": "MAX_DEPTH",
+                                        "LongLength": "MAX_DEPTH",
+                                        "Rank": "MAX_DEPTH",
+                                        "SyncRoot": "MAX_DEPTH",
+                                        "IsReadOnly": "MAX_DEPTH",
+                                        "IsFixedSize": "MAX_DEPTH",
+                                        "IsSynchronized": "MAX_DEPTH"
+                                    }
+                                },
+                                "DepthFirstList": {
+                                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                                    "fields": {
+                                        "Capacity": "MAX_DEPTH",
+                                        "Count": "MAX_DEPTH",
+                                        "System.Collections.IList.IsFixedSize": "MAX_DEPTH",
+                                        "System.Collections.Generic.ICollection<T>.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.IList.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.ICollection.IsSynchronized": "MAX_DEPTH",
+                                        "System.Collections.ICollection.SyncRoot": "MAX_DEPTH",
+                                        "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                                    }
+                                },
+                                "List": {
+                                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                                    "fields": {
+                                        "Capacity": "MAX_DEPTH",
+                                        "Count": "MAX_DEPTH",
+                                        "System.Collections.IList.IsFixedSize": "MAX_DEPTH",
+                                        "System.Collections.Generic.ICollection<T>.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.IList.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.ICollection.IsSynchronized": "MAX_DEPTH",
+                                        "System.Collections.ICollection.SyncRoot": "MAX_DEPTH",
+                                        "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                                    }
+                                }
+                            }
+                        },
+                        "Dobj": null,
+                        "RX": 0.0,
+                        "RY": 0.0,
+                        "RZ": -0.0,
+                        "SX": 1.0,
+                        "SY": 1.0,
+                        "SZ": 1.0,
+                        "TX": 0.0,
+                        "TY": 0.0,
+                        "TZ": 0.0,
+                        "Children": {
+                            "type": "HSDRaw.Common.HSD_JOBJ[]",
+                            "fields": {
+                                "Length": 1,
+                                "LongLength": 1,
+                                "Rank": 1,
+                                "SyncRoot": {
+                                    "type": "HSDRaw.Common.HSD_JOBJ[]",
+                                    "fields": {
+                                        "Length": "MAX_DEPTH",
+                                        "LongLength": "MAX_DEPTH",
+                                        "Rank": "MAX_DEPTH",
+                                        "SyncRoot": "MAX_DEPTH",
+                                        "IsReadOnly": "MAX_DEPTH",
+                                        "IsFixedSize": "MAX_DEPTH",
+                                        "IsSynchronized": "MAX_DEPTH"
+                                    }
+                                },
+                                "IsReadOnly": false,
+                                "IsFixedSize": true,
+                                "IsSynchronized": false
+                            }
+                        },
+                        "DepthFirstList": {
+                            "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                            "fields": {
+                                "Capacity": 128,
+                                "Count": 72,
+                                "System.Collections.IList.IsFixedSize": false,
+                                "System.Collections.Generic.ICollection<T>.IsReadOnly": false,
+                                "System.Collections.IList.IsReadOnly": false,
+                                "System.Collections.ICollection.IsSynchronized": false,
+                                "System.Collections.ICollection.SyncRoot": {
+                                    "type": "System.Object",
+                                    "fields": {}
+                                },
+                                "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                            }
+                        },
+                        "List": {
+                            "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                            "fields": {
+                                "Capacity": 4,
+                                "Count": 2,
+                                "System.Collections.IList.IsFixedSize": false,
+                                "System.Collections.Generic.ICollection<T>.IsReadOnly": false,
+                                "System.Collections.IList.IsReadOnly": false,
+                                "System.Collections.ICollection.IsSynchronized": false,
+                                "System.Collections.ICollection.SyncRoot": {
+                                    "type": "System.Object",
+                                    "fields": {}
+                                },
+                                "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                            }
+                        }
+                    }
+                },
+                "Next": null,
+                "Dobj": {
+                    "type": "HSDRaw.Common.HSD_DOBJ",
+                    "fields": {
+                        "TrimmedSize": 16,
+                        "Next": {
+                            "type": "HSDRaw.Common.HSD_DOBJ",
+                            "fields": {
+                                "TrimmedSize": 16,
+                                "Next": {
+                                    "type": "HSDRaw.Common.HSD_DOBJ",
+                                    "fields": {
+                                        "TrimmedSize": "MAX_DEPTH",
+                                        "Next": "MAX_DEPTH",
+                                        "Mobj": "MAX_DEPTH",
+                                        "Pobj": "MAX_DEPTH",
+                                        "List": "MAX_DEPTH"
+                                    }
+                                },
+                                "Mobj": {
+                                    "type": "HSDRaw.Common.HSD_MOBJ",
+                                    "fields": {
+                                        "TrimmedSize": "MAX_DEPTH",
+                                        "RenderFlags": "MAX_DEPTH",
+                                        "Textures": "MAX_DEPTH",
+                                        "MaterialColor": "MAX_DEPTH",
+                                        "PixelProcessing": null
+                                    }
+                                },
+                                "Pobj": {
+                                    "type": "HSDRaw.Common.HSD_POBJ",
+                                    "fields": {
+                                        "TrimmedSize": "MAX_DEPTH",
+                                        "Next": "MAX_DEPTH",
+                                        "Attributes": "MAX_DEPTH",
+                                        "Flags": "MAX_DEPTH",
+                                        "DisplayListSize": "MAX_DEPTH",
+                                        "DisplayListBuffer": "MAX_DEPTH",
+                                        "SingleBoundJOBJ": null,
+                                        "EnvelopeWeights": "MAX_DEPTH",
+                                        "DisplayList": "MAX_DEPTH",
+                                        "List": "MAX_DEPTH"
+                                    }
+                                },
+                                "List": {
+                                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_DOBJ]",
+                                    "fields": {
+                                        "Capacity": "MAX_DEPTH",
+                                        "Count": "MAX_DEPTH",
+                                        "System.Collections.IList.IsFixedSize": "MAX_DEPTH",
+                                        "System.Collections.Generic.ICollection<T>.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.IList.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.ICollection.IsSynchronized": "MAX_DEPTH",
+                                        "System.Collections.ICollection.SyncRoot": "MAX_DEPTH",
+                                        "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                                    }
+                                }
+                            }
+                        },
+                        "Mobj": {
+                            "type": "HSDRaw.Common.HSD_MOBJ",
+                            "fields": {
+                                "TrimmedSize": 24,
+                                "RenderFlags": {
+                                    "type": "HSDRaw.Common.RENDER_MODE",
+                                    "fields": {}
+                                },
+                                "Textures": {
+                                    "type": "HSDRaw.Common.HSD_TOBJ",
+                                    "fields": {
+                                        "TrimmedSize": "MAX_DEPTH",
+                                        "Next": "MAX_DEPTH",
+                                        "TexMapID": "MAX_DEPTH",
+                                        "GXTexGenSrc": "MAX_DEPTH",
+                                        "RX": "MAX_DEPTH",
+                                        "RY": "MAX_DEPTH",
+                                        "RZ": "MAX_DEPTH",
+                                        "SX": "MAX_DEPTH",
+                                        "SY": "MAX_DEPTH",
+                                        "SZ": "MAX_DEPTH",
+                                        "TX": "MAX_DEPTH",
+                                        "TY": "MAX_DEPTH",
+                                        "TZ": "MAX_DEPTH",
+                                        "WrapS": "MAX_DEPTH",
+                                        "WrapT": "MAX_DEPTH",
+                                        "WScale": "MAX_DEPTH",
+                                        "HScale": "MAX_DEPTH",
+                                        "Flags": "MAX_DEPTH",
+                                        "Blending": "MAX_DEPTH",
+                                        "MagFilter": "MAX_DEPTH",
+                                        "ImageData": "MAX_DEPTH",
+                                        "TlutData": null,
+                                        "LOD": null,
+                                        "TEV": null,
+                                        "List": "MAX_DEPTH"
+                                    }
+                                },
+                                "MaterialColor": {
+                                    "type": "HSDRaw.Common.HSD_MCOBJ",
+                                    "fields": {
+                                        "TrimmedSize": "MAX_DEPTH",
+                                        "AMB_R": "MAX_DEPTH",
+                                        "AMB_G": "MAX_DEPTH",
+                                        "AMB_B": "MAX_DEPTH",
+                                        "AMB_A": "MAX_DEPTH",
+                                        "DIF_R": "MAX_DEPTH",
+                                        "DIF_G": "MAX_DEPTH",
+                                        "DIF_B": "MAX_DEPTH",
+                                        "DIF_A": "MAX_DEPTH",
+                                        "SPC_R": "MAX_DEPTH",
+                                        "SPC_G": "MAX_DEPTH",
+                                        "SPC_B": "MAX_DEPTH",
+                                        "SPC_A": "MAX_DEPTH",
+                                        "AmbientColorABGR": "MAX_DEPTH",
+                                        "DiffuseColorABGR": "MAX_DEPTH",
+                                        "SpecularColorABGR": "MAX_DEPTH",
+                                        "Alpha": "MAX_DEPTH",
+                                        "Shininess": "MAX_DEPTH"
+                                    }
+                                },
+                                "PixelProcessing": null
+                            }
+                        },
+                        "Pobj": {
+                            "type": "HSDRaw.Common.HSD_POBJ",
+                            "fields": {
+                                "TrimmedSize": 24,
+                                "Next": {
+                                    "type": "HSDRaw.Common.HSD_POBJ",
+                                    "fields": {
+                                        "TrimmedSize": "MAX_DEPTH",
+                                        "Next": "MAX_DEPTH",
+                                        "Attributes": "MAX_DEPTH",
+                                        "Flags": "MAX_DEPTH",
+                                        "DisplayListSize": "MAX_DEPTH",
+                                        "DisplayListBuffer": "MAX_DEPTH",
+                                        "SingleBoundJOBJ": null,
+                                        "EnvelopeWeights": "MAX_DEPTH",
+                                        "DisplayList": "MAX_DEPTH",
+                                        "List": "MAX_DEPTH"
+                                    }
+                                },
+                                "Attributes": {
+                                    "type": "HSDRaw.GX.GX_Attribute[]",
+                                    "fields": {
+                                        "Length": "MAX_DEPTH",
+                                        "LongLength": "MAX_DEPTH",
+                                        "Rank": "MAX_DEPTH",
+                                        "SyncRoot": "MAX_DEPTH",
+                                        "IsReadOnly": "MAX_DEPTH",
+                                        "IsFixedSize": "MAX_DEPTH",
+                                        "IsSynchronized": "MAX_DEPTH"
+                                    }
+                                },
+                                "Flags": {
+                                    "type": "HSDRaw.Common.POBJ_FLAG",
+                                    "fields": {}
+                                },
+                                "DisplayListSize": 3648,
+                                "DisplayListBuffer": {
+                                    "type": "System.Byte[]",
+                                    "fields": {
+                                        "Length": "MAX_DEPTH",
+                                        "LongLength": "MAX_DEPTH",
+                                        "Rank": "MAX_DEPTH",
+                                        "SyncRoot": "MAX_DEPTH",
+                                        "IsReadOnly": "MAX_DEPTH",
+                                        "IsFixedSize": "MAX_DEPTH",
+                                        "IsSynchronized": "MAX_DEPTH"
+                                    }
+                                },
+                                "SingleBoundJOBJ": null,
+                                "EnvelopeWeights": {
+                                    "type": "HSDRaw.Common.HSD_Envelope[]",
+                                    "fields": {
+                                        "Length": "MAX_DEPTH",
+                                        "LongLength": "MAX_DEPTH",
+                                        "Rank": "MAX_DEPTH",
+                                        "SyncRoot": "MAX_DEPTH",
+                                        "IsReadOnly": "MAX_DEPTH",
+                                        "IsFixedSize": "MAX_DEPTH",
+                                        "IsSynchronized": "MAX_DEPTH"
+                                    }
+                                },
+                                "DisplayList": {
+                                    "type": "HSDRaw.GX.GX_DisplayList",
+                                    "fields": {}
+                                },
+                                "List": {
+                                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_POBJ]",
+                                    "fields": {
+                                        "Capacity": "MAX_DEPTH",
+                                        "Count": "MAX_DEPTH",
+                                        "System.Collections.IList.IsFixedSize": "MAX_DEPTH",
+                                        "System.Collections.Generic.ICollection<T>.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.IList.IsReadOnly": "MAX_DEPTH",
+                                        "System.Collections.ICollection.IsSynchronized": "MAX_DEPTH",
+                                        "System.Collections.ICollection.SyncRoot": "MAX_DEPTH",
+                                        "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                                    }
+                                }
+                            }
+                        },
+                        "List": {
+                            "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_DOBJ]",
+                            "fields": {
+                                "Capacity": 16,
+                                "Count": 9,
+                                "System.Collections.IList.IsFixedSize": false,
+                                "System.Collections.Generic.ICollection<T>.IsReadOnly": false,
+                                "System.Collections.IList.IsReadOnly": false,
+                                "System.Collections.ICollection.IsSynchronized": false,
+                                "System.Collections.ICollection.SyncRoot": {
+                                    "type": "System.Object",
+                                    "fields": {}
+                                },
+                                "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                            }
+                        }
+                    }
+                },
+                "RX": 0.0,
+                "RY": 0.0,
+                "RZ": 0.0,
+                "SX": 1.0,
+                "SY": 1.0,
+                "SZ": 1.0,
+                "TX": 0.0,
+                "TY": 0.0,
+                "TZ": 0.0,
+                "Children": {
+                    "type": "HSDRaw.Common.HSD_JOBJ[]",
+                    "fields": {
+                        "Length": 2,
+                        "LongLength": 2,
+                        "Rank": 1,
+                        "SyncRoot": {
+                            "type": "HSDRaw.Common.HSD_JOBJ[]",
+                            "fields": {
+                                "Length": 2,
+                                "LongLength": 2,
+                                "Rank": 1,
+                                "SyncRoot": {
+                                    "type": "HSDRaw.Common.HSD_JOBJ[]",
+                                    "fields": {
+                                        "Length": "MAX_DEPTH",
+                                        "LongLength": "MAX_DEPTH",
+                                        "Rank": "MAX_DEPTH",
+                                        "SyncRoot": "MAX_DEPTH",
+                                        "IsReadOnly": "MAX_DEPTH",
+                                        "IsFixedSize": "MAX_DEPTH",
+                                        "IsSynchronized": "MAX_DEPTH"
+                                    }
+                                },
+                                "IsReadOnly": false,
+                                "IsFixedSize": true,
+                                "IsSynchronized": false
+                            }
+                        },
+                        "IsReadOnly": false,
+                        "IsFixedSize": true,
+                        "IsSynchronized": false
+                    }
+                },
+                "DepthFirstList": {
+                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                    "fields": {
+                        "Capacity": 128,
+                        "Count": 73,
+                        "System.Collections.IList.IsFixedSize": false,
+                        "System.Collections.Generic.ICollection<T>.IsReadOnly": false,
+                        "System.Collections.IList.IsReadOnly": false,
+                        "System.Collections.ICollection.IsSynchronized": false,
+                        "System.Collections.ICollection.SyncRoot": {
+                            "type": "System.Object",
+                            "fields": {}
+                        },
+                        "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                    }
+                },
+                "List": {
+                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                    "fields": {
+                        "Capacity": 4,
+                        "Count": 1,
+                        "System.Collections.IList.IsFixedSize": false,
+                        "System.Collections.Generic.ICollection<T>.IsReadOnly": false,
+                        "System.Collections.IList.IsReadOnly": false,
+                        "System.Collections.ICollection.IsSynchronized": false,
+                        "System.Collections.ICollection.SyncRoot": {
+                            "type": "System.Object",
+                            "fields": {}
+                        },
+                        "System.Collections.IList.Item": "ERROR: Parameter count mismatch.\r\n   at System.Reflection.RuntimeMethodInfo.InvokeArgumentsCheck(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.RuntimePropertyInfo.GetValue(Object obj, Object[] index)"
+                    }
+                }
+            }
+        }
+    }
+}

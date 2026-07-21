@@ -1,0 +1,10 @@
+{
+    "file": [
+        {
+            "name": "ftDataFox",
+            "type": "HSDRaw.Melee.Pl.SBM_PlayerData",
+            "struct_size": 108
+        }
+    ],
+    "root_count": 1
+}

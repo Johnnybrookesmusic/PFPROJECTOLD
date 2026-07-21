@@ -1,0 +1,170 @@
+[
+    {
+        "path": "ROOT.ShieldPoseJOBJ",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Flags",
+        "type": "HSDRaw.Common.JOBJ_FLAG"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Flags",
+        "type": "HSDRaw.Common.JOBJ_FLAG"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Child",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Child.Flags",
+        "type": "HSDRaw.Common.JOBJ_FLAG"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Child.Children[0]",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Next",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0]",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Flags",
+        "type": "HSDRaw.Common.JOBJ_FLAG"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0]",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Flags",
+        "type": "HSDRaw.Common.JOBJ_FLAG"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Flags",
+        "type": "HSDRaw.Common.JOBJ_FLAG"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Flags",
+        "type": "HSDRaw.Common.JOBJ_FLAG"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Flags",
+        "type": "HSDRaw.Common.JOBJ_FLAG"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0]",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Child",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Child.Flags",
+        "type": "HSDRaw.Common.JOBJ_FLAG"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Child.Children[0]",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Child.Children[0].DepthFirstList[0]",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Children[0]",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Children[0].Flags",
+        "type": "HSDRaw.Common.JOBJ_FLAG"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Children[0].Child",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Children[0].Child.Flags",
+        "type": "HSDRaw.Common.JOBJ_FLAG"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Children[0].Child.DepthFirstList[0]",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Children[0].Child.List[0]",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Children[0].DepthFirstList[0]",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Children[0].DepthFirstList[0].Flags",
+        "type": "HSDRaw.Common.JOBJ_FLAG"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Children[0].DepthFirstList[0].Child",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Children[0].DepthFirstList[0].Children[0]",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Children[0].DepthFirstList[0].DepthFirstList[0]",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShieldPoseJOBJ.Child.Children[0].Children[0].Child.Child.Next.Next.Children[0].Children[0].DepthFirstList[0].DepthFirstList[1]",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShadowModel",
+        "type": "HSDRaw.Common.HSD_JOBJ"
+    },
+    {
+        "path": "ROOT.ShadowModel.Flags",
+        "type": "HSDRaw.Common.JOBJ_FLAG"
+    },
+    {
+        "path": "ROOT.ShadowModel.Dobj",
+        "type": "HSDRaw.Common.HSD_DOBJ"
+    },
+    {
+        "path": "ROOT.ShadowModel.Dobj.Mobj",
+        "type": "HSDRaw.Common.HSD_MOBJ"
+    },
+    {
+        "path": "ROOT.ShadowModel.Dobj.List[0]",
+        "type": "HSDRaw.Common.HSD_DOBJ"
+    },
+    {
+        "path": "ROOT.ShadowModel.Dobj.List[0].Mobj",
+        "type": "HSDRaw.Common.HSD_MOBJ"
+    }
+]

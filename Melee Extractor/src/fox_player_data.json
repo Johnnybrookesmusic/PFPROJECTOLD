@@ -1,0 +1,285 @@
+{
+    "type": "HSDRaw.Melee.Pl.SBM_PlayerData",
+    "fields": {
+        "Articles": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Attributes": {
+            "type": "HSDRaw.Melee.Pl.SBM_CommonFighterAttributes",
+            "fields": {}
+        },
+        "Attributes2": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "ShadowModel": {
+            "type": "HSDRaw.Common.HSD_JOBJ",
+            "fields": {
+                "Child": {
+                    "type": "HSDRaw.Common.HSD_JOBJ",
+                    "fields": {
+                        "Child": "HSDRaw.Common.HSD_JOBJ",
+                        "Children": "HSDRaw.Common.HSD_JOBJ[]",
+                        "DepthFirstList": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                        "Dobj": "None",
+                        "Flags": "SKELETON, CLASSICAL_SCALING",
+                        "List": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                        "Next": "HSDRaw.Common.HSD_JOBJ",
+                        "RX": "0.0",
+                        "RY": "0.0",
+                        "RZ": "-0.0",
+                        "SX": "1.0",
+                        "SY": "1.0",
+                        "SZ": "1.0",
+                        "TX": "0.0",
+                        "TY": "0.0",
+                        "TZ": "0.0",
+                        "TrimmedSize": "64"
+                    }
+                },
+                "Children": {
+                    "type": "HSDRaw.Common.HSD_JOBJ[]",
+                    "fields": {
+                        "IsFixedSize": "True",
+                        "IsReadOnly": "False",
+                        "IsSynchronized": "False",
+                        "Length": "2",
+                        "LongLength": "2",
+                        "Rank": "1",
+                        "SyncRoot": "HSDRaw.Common.HSD_JOBJ[]"
+                    }
+                },
+                "DepthFirstList": {
+                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                    "fields": {
+                        "Capacity": "128",
+                        "Count": "73"
+                    }
+                },
+                "Dobj": {
+                    "type": "HSDRaw.Common.HSD_DOBJ",
+                    "fields": {
+                        "List": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_DOBJ]",
+                        "Mobj": "HSDRaw.Common.HSD_MOBJ",
+                        "Next": "HSDRaw.Common.HSD_DOBJ",
+                        "Pobj": "HSDRaw.Common.HSD_POBJ",
+                        "TrimmedSize": "16"
+                    }
+                },
+                "Flags": {
+                    "type": "HSDRaw.Common.JOBJ_FLAG",
+                    "fields": {
+                        "BILLBOARD": "BILLBOARD",
+                        "CLASSICAL_SCALING": "CLASSICAL_SCALING",
+                        "EFFECTOR": "EFFECTOR",
+                        "ENVELOPE_MODEL": "ENVELOPE_MODEL",
+                        "FLIP_IK": "FLIP_IK",
+                        "HBILLBOARD": "HBILLBOARD",
+                        "HIDDEN": "HIDDEN",
+                        "INSTANCE": "INSTANCE",
+                        "JOINT1": "JOINT1",
+                        "JOINT2": "JOINT2",
+                        "LIGHTING": "LIGHTING",
+                        "MTS_INDEPEND_SRT": "MTS_INDEPEND_SRT",
+                        "MTX_DIRTY": "MTX_DIRTY",
+                        "MTX_INDEPEND_PARENT": "MTX_INDEPEND_PARENT",
+                        "NULL": "NULL",
+                        "OPA": "OPA",
+                        "PBILLBOARD": "PBILLBOARD",
+                        "PTCL": "PTCL",
+                        "RBILLBOARD": "RBILLBOARD",
+                        "ROOT_OPA": "ROOT_OPA",
+                        "ROOT_TEXEDGE": "ROOT_TEXEDGE",
+                        "ROOT_XLU": "ROOT_XLU",
+                        "SKELETON": "SKELETON",
+                        "SKELETON_ROOT": "SKELETON_ROOT",
+                        "SPECULAR": "SPECULAR",
+                        "SPLINE": "SPLINE",
+                        "TEXEDGE": "TEXEDGE",
+                        "TEXGEN": "TEXGEN",
+                        "USER_DEFINED_MTX": "USER_DEFINED_MTX",
+                        "USE_QUATERNION": "USE_QUATERNION",
+                        "VBILLBOARD": "VBILLBOARD",
+                        "XLU": "XLU",
+                        "value__": "268763534"
+                    }
+                },
+                "List": {
+                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                    "fields": {
+                        "Capacity": "4",
+                        "Count": "1"
+                    }
+                },
+                "Next": null
+            }
+        },
+        "ShieldPoseJOBJ": {
+            "type": "HSDRaw.Common.HSD_JOBJ",
+            "fields": {
+                "Child": {
+                    "type": "HSDRaw.Common.HSD_JOBJ",
+                    "fields": {
+                        "Child": "HSDRaw.Common.HSD_JOBJ",
+                        "Children": "HSDRaw.Common.HSD_JOBJ[]",
+                        "DepthFirstList": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                        "Dobj": "None",
+                        "Flags": "CLASSICAL_SCALING",
+                        "List": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                        "Next": "HSDRaw.Common.HSD_JOBJ",
+                        "RX": "0.0",
+                        "RY": "0.0",
+                        "RZ": "-0.0",
+                        "SX": "1.0",
+                        "SY": "1.0",
+                        "SZ": "1.0",
+                        "TX": "0.0",
+                        "TY": "0.0",
+                        "TZ": "0.0",
+                        "TrimmedSize": "64"
+                    }
+                },
+                "Children": {
+                    "type": "HSDRaw.Common.HSD_JOBJ[]",
+                    "fields": {
+                        "IsFixedSize": "True",
+                        "IsReadOnly": "False",
+                        "IsSynchronized": "False",
+                        "Length": "2",
+                        "LongLength": "2",
+                        "Rank": "1",
+                        "SyncRoot": "HSDRaw.Common.HSD_JOBJ[]"
+                    }
+                },
+                "DepthFirstList": {
+                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                    "fields": {
+                        "Capacity": "128",
+                        "Count": "73"
+                    }
+                },
+                "Dobj": null,
+                "Flags": {
+                    "type": "HSDRaw.Common.JOBJ_FLAG",
+                    "fields": {
+                        "BILLBOARD": "BILLBOARD",
+                        "CLASSICAL_SCALING": "CLASSICAL_SCALING",
+                        "EFFECTOR": "EFFECTOR",
+                        "ENVELOPE_MODEL": "ENVELOPE_MODEL",
+                        "FLIP_IK": "FLIP_IK",
+                        "HBILLBOARD": "HBILLBOARD",
+                        "HIDDEN": "HIDDEN",
+                        "INSTANCE": "INSTANCE",
+                        "JOINT1": "JOINT1",
+                        "JOINT2": "JOINT2",
+                        "LIGHTING": "LIGHTING",
+                        "MTS_INDEPEND_SRT": "MTS_INDEPEND_SRT",
+                        "MTX_DIRTY": "MTX_DIRTY",
+                        "MTX_INDEPEND_PARENT": "MTX_INDEPEND_PARENT",
+                        "NULL": "NULL",
+                        "OPA": "OPA",
+                        "PBILLBOARD": "PBILLBOARD",
+                        "PTCL": "PTCL",
+                        "RBILLBOARD": "RBILLBOARD",
+                        "ROOT_OPA": "ROOT_OPA",
+                        "ROOT_TEXEDGE": "ROOT_TEXEDGE",
+                        "ROOT_XLU": "ROOT_XLU",
+                        "SKELETON": "SKELETON",
+                        "SKELETON_ROOT": "SKELETON_ROOT",
+                        "SPECULAR": "SPECULAR",
+                        "SPLINE": "SPLINE",
+                        "TEXEDGE": "TEXEDGE",
+                        "TEXGEN": "TEXGEN",
+                        "USER_DEFINED_MTX": "USER_DEFINED_MTX",
+                        "USE_QUATERNION": "USE_QUATERNION",
+                        "VBILLBOARD": "VBILLBOARD",
+                        "XLU": "XLU",
+                        "value__": "8"
+                    }
+                },
+                "List": {
+                    "type": "System.Collections.Generic.List`1[HSDRaw.Common.HSD_JOBJ]",
+                    "fields": {
+                        "Capacity": "4",
+                        "Count": "1"
+                    }
+                },
+                "Next": null
+            }
+        },
+        "SubActionTable": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x10": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x18": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x1C": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x24": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x28": null,
+        "Unknown0x2C": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x30": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x34": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x38": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x3C": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x40": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x44": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x4C": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x50": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x54": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "Unknown0x58": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "UnknownNode": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        },
+        "WinSubAction": {
+            "type": "HSDRaw.HSDAccessor",
+            "fields": {}
+        }
+    }
+}
