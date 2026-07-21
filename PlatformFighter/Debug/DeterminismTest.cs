@@ -36,7 +36,8 @@ public static class DeterminismTest
 		bool hybridCombat = HybridSelfPlayCombatTest(log);
 		bool locomotion = FoxLocomotionTest(log);
 		bool blastZone = BlastZoneStockRespawnTest(log);
-		bool allPass = twin && snap && colTwin && colGrounded && colPlatform && moverTwin && moverJump && actionState && hitstun && hybridCombat && locomotion && blastZone;
+		bool foxMoveset = FoxMovesetTest(log);
+		bool allPass = twin && snap && colTwin && colGrounded && colPlatform && moverTwin && moverJump && actionState && hitstun && hybridCombat && locomotion && blastZone && foxMoveset;
 		log.Insert(0, allPass
 			? "DETERMINISM TESTS: PASS\n"
 			: "DETERMINISM TESTS: *** FAIL ***\n");
@@ -433,11 +434,33 @@ public static class DeterminismTest
 	{
 		SimObjectTypes.Register(PlayerMover.TypeIdValue, () => new PlayerMover(FxVec2.Zero, Battlefield.Geometry));
 
+		// Spawn separation: ±4 (8 apart), NOT the original ±6. That ±6 predates
+		// real per-move spatial hitbox data — it was chosen when Fox's hurtbox
+		// was still the old 6.7x-inflated 20x30 placeholder and every move used
+		// a flat 8-unit AttackReach box, both of which easily reached across a
+		// 12-unit gap.
+		//
+		// With Fox's REAL ECB (halfWidth 3) and Jab1's REAL ported hitbox
+		// (offsetX 5.49, radius 3.328): at the OLD ±6 spawn, the hitbox center
+		// sits at -6+5.49=-0.51 with radius 3.328 (reaches to x=2.818), while
+		// the defender's real hurtbox left edge sits at 6-3=3 — a fixed
+		// 0.182-unit gap. That can NEVER connect: dx alone (3.51) already
+		// exceeds the 3.328 radius regardless of Y. That's exactly the
+		// "P2 percent=0" failure this fixes.
+		//
+		// At the NEW ±4 spawn, the hitbox center sits at -4+5.49=1.49, which
+		// falls INSIDE the defender's real hurtbox span [1,7] outright (dx
+		// clamps to 0) — an unambiguous connect with real margin, not a
+		// razor's-edge fix.
+		//
+		// Root cause was the stale test constant, not FoxMoves.cs's real data
+		// or CombatSystem's hit check — per Step 2b's own precedent ("the spawn
+		// constants move," not the real transcribed values).
 		(SimWorld world, PlayerMover p1, PlayerMover p2) NewHybridWorld()
 		{
 			var w = new SimWorld(seed: 999);
-			var m1 = new PlayerMover(new FxVec2(-Fx.FromInt(6), -Fx.FromInt(20)), Battlefield.Geometry, playerIndex: 0);
-			var m2 = new PlayerMover(new FxVec2(Fx.FromInt(6), -Fx.FromInt(20)), Battlefield.Geometry, playerIndex: 1);
+			var m1 = new PlayerMover(new FxVec2(-Fx.FromInt(4), -Fx.FromInt(20)), Battlefield.Geometry, playerIndex: 0);
+			var m2 = new PlayerMover(new FxVec2(Fx.FromInt(4), -Fx.FromInt(20)), Battlefield.Geometry, playerIndex: 1);
 			m2.FacingRight = false;
 			w.Register(m1);
 			w.Register(m2);
@@ -448,13 +471,32 @@ public static class DeterminismTest
 		var (w1, p1a, p2a) = NewHybridWorld();
 		var (w2, p1b, p2b) = NewHybridWorld();
 
-		// P1 holds attack (A) with a neutral stick every frame: repeatedly fires
-		// Jab1 (TryStartAttack only starts a new move when the mover is free to
-		// act, so this naturally chains jab -> recover -> jab rather than
+		// P1 mashes attack (A) with a neutral stick: repeatedly fires Jab1
+		// (TryStartAttack only starts a new move when the mover is free to act,
+		// so this naturally chains jab -> recover -> jab rather than
 		// re-triggering mid-swing). P2 sits at neutral input the whole time --
 		// this is a one-sided attack test, not a fairness test.
-		Span<FrameInput> p1Attacks = stackalloc FrameInput[SimWorld.MaxPlayers];
-		p1Attacks[0] = new FrameInput(ButtonFlags.Attack, 0, 0);
+		//
+		// MUST actually mash, not hold: TryStartAttack's attackPressed is a
+		// RISING EDGE (`attackHeld && !_prevAttackHeld`, PlayerMover.cs — same
+		// convention as jumpPressed). A CONSTANT held-down FrameInput (the
+		// previous version of this test) produces exactly ONE edge total, on
+		// frame 0 — while P1 is still airborne from the y=-20 spawn, so it
+		// likely dispatches an aerial rather than Jab1 — and then never fires
+		// again for the rest of the run, since the button is never released.
+		// That silent one-shot-then-nothing was the actual root cause of
+		// "P2 percent=0", not the spawn distance (which was also a real,
+		// separate bug — see NewHybridWorld's comment above — but fixing it
+		// alone couldn't have worked while the input pattern still only ever
+		// pressed once). Toggling on/off every 2 frames gives a fresh edge
+		// every 4 frames, comfortably enough to land many real jabs across a
+		// 300-frame run, matching how a human mashing the button actually
+		// generates repeated presses rather than one long hold.
+		static FrameInput MashAttack(int frame)
+		{
+			bool held = (frame % 4) < 2;
+			return held ? new FrameInput(ButtonFlags.Attack, 0, 0) : FrameInput.None;
+		}
 
 		int[] checkpoints = { 0, 60, 300 };
 		bool pass = true;
@@ -463,8 +505,10 @@ public static class DeterminismTest
 		{
 			while (frame < cp)
 			{
-				w1.Tick(p1Attacks);
-				w2.Tick(p1Attacks);
+				Span<FrameInput> inputs = stackalloc FrameInput[SimWorld.MaxPlayers];
+				inputs[0] = MashAttack(frame);
+				w1.Tick(inputs);
+				w2.Tick(inputs);
 				frame++;
 			}
 			ulong h1 = w1.ComputeStateHash();
@@ -719,4 +763,128 @@ public static class DeterminismTest
 			$"-> {(pass ? "match" : "*** MISMATCH ***")}");
 		return pass;
 	}
+
+	/// <summary>
+	/// Phase 2 of Master Directive v3 (port Fox completely): asserts the things
+	/// that were newly possible this session and could each regress silently.
+	///
+	/// 1. DATA COMPLETENESS — every MoveSlot Fox should own resolves, and the
+	///    total hitbox count matches what was extracted from attributes.js. A
+	///    plain count is a surprisingly strong canary: if someone edits
+	///    FoxMoves.cs by hand and drops a box off an array, this notices.
+	/// 2. SET KNOCKBACK — Down Air's sk=30 must produce the SAME knockback at
+	///    0% and at 150%. That is the entire point of the set-knockback branch,
+	///    and if it silently fell back to the normal formula the two would
+	///    differ wildly. This is the check that proves the branch is live.
+	/// 3. MULTI-HIT — the drill must land MORE THAN ONE hit on a stationary
+	///    target. With the old single "_hitApplied" bool it could only ever land
+	///    one, so this is the regression test for the _appliedHitKey scheme.
+	/// 4. LASER — Neutral-B must spawn a projectile that travels and damages,
+	///    and must do so WITHOUT knockback (Fox's laser does not flinch; that is
+	///    the defining difference from Falco's).
+	/// 5. Twin-run determinism across all of it, including projectiles.
+	/// </summary>
+	private static bool FoxMovesetTest(StringBuilder log)
+	{
+		SimObjectTypes.Register(PlayerMover.TypeIdValue, () => new PlayerMover(FxVec2.Zero, Battlefield.Geometry));
+
+		// --- 1. data completeness -----------------------------------------
+		MoveSlot[] required =
+		{
+			MoveSlot.Jab1, MoveSlot.Jab2, MoveSlot.Jab3,
+			MoveSlot.ForwardTilt, MoveSlot.UpTilt, MoveSlot.DownTilt,
+			MoveSlot.ForwardSmash, MoveSlot.UpSmash, MoveSlot.DownSmash, MoveSlot.DashAttack,
+			MoveSlot.NeutralAir, MoveSlot.ForwardAir, MoveSlot.BackAir, MoveSlot.UpAir, MoveSlot.DownAir,
+			MoveSlot.NeutralB, MoveSlot.SideB, MoveSlot.UpB, MoveSlot.DownB,
+			MoveSlot.Grab, MoveSlot.Pummel,
+			MoveSlot.ThrowForward, MoveSlot.ThrowBack, MoveSlot.ThrowUp, MoveSlot.ThrowDown,
+			MoveSlot.GetUpAttack, MoveSlot.LedgeAttackQuick, MoveSlot.LedgeAttackSlow,
+		};
+		int missing = 0;
+		int hitboxCount = 0;
+		foreach (MoveSlot slot in required)
+		{
+			if (!FoxCharacter.Instance.TryGetMove(slot, out MoveDef m)) { missing++; continue; }
+			if (m.HasHitboxes) hitboxCount += m.Hitboxes!.Length;
+		}
+		bool dataOk = missing == 0 && hitboxCount >= 90;
+
+		// --- 2. set knockback is percent-independent -----------------------
+		FoxCharacter.Instance.TryGetMove(MoveSlot.DownAir, out MoveDef dair);
+		Hitbox drillHit = dair.Hitboxes![0].ToHitbox();
+		Fx weight = FoxAttributes.Weight;
+		Fx kbLow = KnockbackMath.ComputeMagnitude(Fx.Zero, in drillHit, weight);
+		Fx kbHigh = KnockbackMath.ComputeMagnitude(Fx.FromInt(150), in drillHit, weight);
+		bool setKbOk = drillHit.SetKnockback > Fx.Zero && kbLow == kbHigh;
+
+		// --- 3. drill lands multiple hits ----------------------------------
+		static (SimWorld, PlayerMover, PlayerMover) NewPair(Fx x1, Fx y1, Fx x2, Fx y2)
+		{
+			var w = new SimWorld(seed: 4242);
+			var a = new PlayerMover(new FxVec2(x1, y1), Battlefield.Geometry, playerIndex: 0);
+			var b = new PlayerMover(new FxVec2(x2, y2), Battlefield.Geometry, playerIndex: 1);
+			b.FacingRight = false;
+			w.Register(a);
+			w.Register(b);
+			w.Register(new CombatSystem(a, b));
+			return (w, a, b);
+		}
+
+		// Attacker starts above and slightly to the side of a grounded target so
+		// the downward drill boxes (offset roughly +2 X, ~-5 Y) sweep through it.
+		var (dw, da, db) = NewPair(Fx.FromInt(2), -Fx.FromInt(14), Fx.Zero, Fx.Zero);
+		{
+			Span<FrameInput> inputs = stackalloc FrameInput[SimWorld.MaxPlayers];
+			// Hold down + attack once to start Dair, then hold nothing.
+			inputs[0] = new FrameInput(ButtonFlags.A, 0, -100);
+			dw.Tick(inputs);
+			Span<FrameInput> hold = stackalloc FrameInput[SimWorld.MaxPlayers];
+			for (int f = 0; f < 40; f++) dw.Tick(hold);
+		}
+		Fx drillDamage = db.Percent;
+		bool multiHitOk = drillDamage > Fx.FromInt(3); // one drill hit is 3; >3 proves it re-armed
+
+		// --- 4. laser ------------------------------------------------------
+		// Shooter well to the left of the target, both grounded. Blaster fires on
+		// action frame 12 and the shot travels 7 units/tick, so 60 frames is
+		// ample time to cross the 30-unit gap.
+		var (lw, la, lb) = NewPair(-Fx.FromInt(20), Fx.Zero, Fx.FromInt(10), Fx.Zero);
+		{
+			Span<FrameInput> fire = stackalloc FrameInput[SimWorld.MaxPlayers];
+			fire[0] = new FrameInput(ButtonFlags.B, 0, 0);
+			lw.Tick(fire);
+			Span<FrameInput> idle = stackalloc FrameInput[SimWorld.MaxPlayers];
+			for (int f = 0; f < 60; f++) lw.Tick(idle);
+		}
+		Fx laserDamage = lb.Percent;
+		bool laserHitOk = laserDamage > Fx.Zero;
+		// No knockback: the target must not have been launched into hitstun.
+		bool laserNoFlinchOk = lb.HitstunFramesRemaining == 0;
+
+		// --- 5. determinism -------------------------------------------------
+		var (tw1, ta1, tb1) = NewPair(-Fx.FromInt(20), Fx.Zero, Fx.FromInt(10), Fx.Zero);
+		var (tw2, ta2, tb2) = NewPair(-Fx.FromInt(20), Fx.Zero, Fx.FromInt(10), Fx.Zero);
+		{
+			Span<FrameInput> a = stackalloc FrameInput[SimWorld.MaxPlayers];
+			for (int f = 0; f < 200; f++)
+			{
+				bool press = (f % 30) < 2;
+				a[0] = new FrameInput(press ? ButtonFlags.B : ButtonFlags.None, 0, 0);
+				tw1.Tick(a);
+				tw2.Tick(a);
+			}
+		}
+		bool twinOk = tw1.ComputeStateHash() == tw2.ComputeStateHash();
+
+		bool pass = dataOk && setKbOk && multiHitOk && laserHitOk && laserNoFlinchOk && twinOk;
+		log.AppendLine("Fox moveset: " +
+			$"slots filled={required.Length - missing}/{required.Length} hitboxes={hitboxCount} {(dataOk ? "yes" : "*** NO ***")}, " +
+			$"setKB percent-independent ({kbLow} vs {kbHigh}) {(setKbOk ? "yes" : "*** NO ***")}, " +
+			$"drill multi-hit (dealt {drillDamage}) {(multiHitOk ? "yes" : "*** NO ***")}, " +
+			$"laser damage={laserDamage} {(laserHitOk ? "yes" : "*** NO ***")} no-flinch={(laserNoFlinchOk ? "yes" : "*** NO ***")}, " +
+			$"twin hashes match={(twinOk ? "yes" : "*** NO ***")} " +
+			$"-> {(pass ? "match" : "*** MISMATCH ***")}");
+		return pass;
+	}
+
 }

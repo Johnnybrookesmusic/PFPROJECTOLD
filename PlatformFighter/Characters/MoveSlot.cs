@@ -13,28 +13,43 @@ namespace PlatformFighter.Characters;
 public enum MoveSlot
 {
     Jab1,
-    ForwardTilt,
-    UpTilt,
-    DownTilt,
-    ForwardSmash,
-    UpSmash,
-    DownSmash,
-    DashAttack,
+    /// <summary>Second hit of the jab combo (JAB2.js).</summary>
+    Jab2,
+	/// <summary>Fox's rapid jab (JAB3.js) — five cycling hitbox positions,
+	/// jab3_1..jab3_5, which loop while A is held.</summary>
+	Jab3,
+	ForwardTilt,
+	UpTilt,
+	DownTilt,
+	ForwardSmash,
+	UpSmash,
+	DownSmash,
+	DashAttack,
 
-    NeutralAir,
-    ForwardAir,
-    BackAir,
-    UpAir,
-    DownAir,
+	NeutralAir,
+	ForwardAir,
+	BackAir,
+	UpAir,
+	DownAir,
 
-    NeutralB,
-    SideB,
-    UpB,
-    DownB,
+	NeutralB,
+	SideB,
+	UpB,
+	DownB,
 
-    Grab,
-    ThrowForward,
-    ThrowBack,
-    ThrowUp,
-    ThrowDown,
+	Grab,
+	/// <summary>CATCHATTACK.js — the grab pummel.</summary>
+	Pummel,
+	ThrowForward,
+	ThrowBack,
+	ThrowUp,
+	ThrowDown,
+
+	/// <summary>DOWNATTACK.js — the attack from a knocked-down state. Two
+	/// stages (downattack1 hits behind, downattack2 in front).</summary>
+	GetUpAttack,
+	/// <summary>CLIFFATTACKQUICK.js — ledge attack under 100%.</summary>
+	LedgeAttackQuick,
+	/// <summary>CLIFFATTACKSLOW.js — ledge attack at 100% or above.</summary>
+	LedgeAttackSlow,
 }

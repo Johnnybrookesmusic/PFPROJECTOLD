@@ -147,6 +147,30 @@ public sealed class PlayerMover : ISimObject
     public int MoveFrame { get; private set; }
     private bool _hitApplied;
 
+    /// <summary>
+    /// Which specific hitbox instance has already connected, encoded as
+    /// (specIndex &lt;&lt; 16) | hitGroup. -1 = none yet this move.
+    ///
+    /// A move now owns MANY hitboxes (see Characters/HitboxSpec.cs), and a
+    /// multi-hit move is SUPPOSED to strike the same opponent repeatedly — the
+    /// drill hits every 3 frames, fair hits five times. A single "has this move
+    /// hit yet" bool cannot express that: it would let the drill land exactly
+    /// one of its up-to-seven hits. Keying on the specific box AND its
+    /// repetition index means a new hit is allowed exactly when the source
+    /// re-arms the box, and no more often.
+    /// </summary>
+    private int _appliedHitKey = -1;
+
+    /// <summary>
+    /// Set on the frame a move spawns a projectile; read and cleared by
+    /// CombatSystem, which owns the pool. PlayerMover deliberately does not
+    /// hold the pool itself — a fighter should not be able to reach into the
+    /// projectile system directly, and routing it through CombatSystem keeps
+    /// every damage source going through one place.
+    /// </summary>
+    public bool PendingProjectileSpawn { get; private set; }
+    public void ConsumeProjectileSpawn() => PendingProjectileSpawn = false;
+
     /// <summary>Phase 11: current self-launch velocity for a move with
     /// MoveDef.LaunchSpeed > 0 (Up-B/Side-B). Set once in TryStartAttack (aim is
     /// locked in at button-press, matching this engine's existing "no live
@@ -198,6 +222,10 @@ public sealed class PlayerMover : ISimObject
     private bool _prevAttackHeld;
     private bool _prevSpecialHeld;
     private bool _jumpHeldDuringSquat;
+    /// <summary>A fresh A press was seen during the current jab's own window, so
+    /// the next jab in the chain should fire. Mirrors MeleeLight's
+    /// <c>player[p].phys.jabCombo</c>.</summary>
+    private bool _jabComboQueued;
 
     public PlayerMover(FxVec2 start, StageGeometry stage, int playerIndex = 0, CharacterData? character = null)
     {
@@ -211,6 +239,11 @@ public sealed class PlayerMover : ISimObject
     /// <summary>Defender's weight for KnockbackMath — see ApplyHit's overload.</summary>
     public Fx Weight => _character.Physics.Weight;
     public FxVec2 HalfSize => _character.Physics.HalfSize;
+    /// <summary>The stage this fighter is simulating against. Exposed so
+    /// CombatSystem can reach the same geometry for projectile despawn without
+    /// needing it threaded through its constructor (which every caller would
+    /// have to change).</summary>
+    public StageGeometry Stage => _stage;
     /// <summary>Step 2: the real collision shape. Position is the FEET.</summary>
     public Ecb Ecb => _character.Physics.Ecb;
 
@@ -258,6 +291,8 @@ public sealed class PlayerMover : ISimObject
             CurrentMove = null;
             MoveFrame = 0;
             _hitApplied = false;
+            _appliedHitKey = -1;
+            PendingProjectileSpawn = false;
             HitlagFramesRemaining = 0;
             JumpSquatFramesRemaining = 0;
             DashFramesRemaining = 0;
@@ -308,6 +343,15 @@ public sealed class PlayerMover : ISimObject
         }
         else if (CurrentMove.HasValue)
         {
+            // JAB1.js/JAB2.js watch for a fresh A press DURING their own window
+            // and latch it; the chain fires a few frames later (see
+            // TickAttacking). Latching here, where the rising edge is already
+            // computed, means a press registers even on a frame the chain isn't
+            // allowed to fire yet — which is what makes mashing jab feel
+            // responsive instead of eating inputs.
+            if (attackPressed && (CurrentMove == MoveSlot.Jab1 || CurrentMove == MoveSlot.Jab2))
+                _jabComboQueued = true;
+
             TickAttacking(input);
         }
         else if (JumpSquatFramesRemaining > 0)
@@ -472,22 +516,75 @@ public sealed class PlayerMover : ISimObject
     /// Facing/position are NOT baked in here — CombatSystem reads Position/
     /// FacingRight/HalfSize directly to build the actual overlap test, since this
     /// engine has no separate hitbox spatial data (see MoveDef's doc comment).</summary>
-    public bool TryGetActiveHitbox(out Hitbox hitbox)
+    /// <summary>How many hitbox slots the current move has. CombatSystem walks
+    /// 0..this-1 and tests each; see TryGetActiveHitbox on why it must test them
+    /// all rather than only the first.</summary>
+    public int ActiveHitboxSlots
+    {
+        get
+        {
+            if (!CurrentMove.HasValue) return 0;
+            if (!_character.TryGetMove(CurrentMove.Value, out MoveDef m)) return 0;
+            return m.HasHitboxes ? m.Hitboxes!.Length : 1;
+        }
+    }
+
+    /// <summary>
+    /// The hitbox in slot <paramref name="index"/>, if it is live this frame and
+    /// has not already connected.
+    ///
+    /// WHY THIS TAKES AN INDEX. An earlier version returned only the first live
+    /// box. That is wrong twice over: Fox's up-tilt has FOUR boxes at four
+    /// different offsets, so if box 0 misses spatially, boxes 1-3 would never be
+    /// tested and the move would appear to whiff at ranges it should reach.
+    /// CombatSystem therefore walks every slot and takes the first that actually
+    /// OVERLAPS, which is the same thing MeleeLight's hit loop does.
+    ///
+    /// WHY THE KEY IS (FirstActiveFrame, HitGroup) AND NOT THE SLOT INDEX.
+    /// MeleeLight tracks "already hit" per hitbox OBJECT (a whole
+    /// createHitboxObject group shares one hitList), not per individual box.
+    /// Keying on the slot index would let a two-box move alternate boxes and
+    /// land a hit EVERY frame — the drill would deal 21 hits across its 5..25
+    /// window instead of 7. Keying on the box's own window start plus its
+    /// refresh cycle groups simultaneous boxes into one hit event (up-tilt's
+    /// four boxes = one hit) while keeping genuinely sequential hits distinct
+    /// (fair1..fair5 start on frames 6/9/12/15/18 = five separate hits).
+    /// </summary>
+    public bool TryGetActiveHitbox(int index, out Hitbox hitbox, out int hitKey)
     {
         hitbox = default;
-        if (!CurrentMove.HasValue || _hitApplied) return false;
+        hitKey = -1;
+        if (!CurrentMove.HasValue) return false;
         if (!_character.TryGetMove(CurrentMove.Value, out MoveDef move)) return false;
+
+        if (move.HasHitboxes)
+        {
+            var boxes = move.Hitboxes!;
+            if (index < 0 || index >= boxes.Length) return false;
+            if (!boxes[index].IsActiveOnFrame(MoveFrame)) return false;
+
+            hitKey = (boxes[index].FirstActiveFrame << 16)
+                   | (boxes[index].HitGroup(MoveFrame) & 0xFFFF);
+            if (hitKey == _appliedHitKey) return false;
+
+            hitbox = boxes[index].ToHitbox();
+            return true;
+        }
+
+        // Legacy flat single-hit path, for any move with no ported hitbox array.
+        if (index != 0) return false;
+        if (_hitApplied) return false;
         if (!move.IsActiveOnFrame(MoveFrame)) return false;
+        hitKey = 0;
         hitbox = move.ToHitbox();
         return true;
     }
 
-    /// <summary>Called by CombatSystem once this mover's active hitbox actually
-    /// connects, so the same activation can't hit twice (real Melee moves with a
-    /// multi-frame active window only need to land once per activation here,
-    /// since MoveDef collapses multi-hit moves to one representative hit anyway
-    /// — see MoveData.cs).</summary>
-    public void MarkHitApplied() => _hitApplied = true;
+    public void MarkHitApplied(int hitKey)
+    {
+        _hitApplied = true;
+        _appliedHitKey = hitKey;
+    }
 
     /// <summary>No stick input, no air control, no double jump, no fast-fall — just
     /// gravity (same cap as normal falling) plus knockback velocity decay. Real DI
@@ -609,6 +706,7 @@ public sealed class PlayerMover : ISimObject
         CurrentMove = slot;
         MoveFrame = 1;
         _hitApplied = false;
+        _appliedHitKey = -1;
 
         // Phase 11: moves with real self-propulsion (Up-B/Side-B) lock in their
         // launch direction/magnitude right here, once, at button-press — this
@@ -689,12 +787,47 @@ public sealed class PlayerMover : ISimObject
             Velocity = new FxVec2(Fx.Zero, Velocity.Y + _character.Physics.Gravity);
         }
 
+        // Blaster fires its projectile on one specific action frame
+        // (NEUTRALSPECIALGROUND.js: `timer === 12`). The flag is raised here and
+        // consumed by CombatSystem, which owns the pool — see
+        // PendingProjectileSpawn's doc comment on why PlayerMover doesn't hold it.
+        if (CurrentMove == MoveSlot.NeutralB && MoveFrame == Characters.Fox.FoxMoves.BlasterFireFrame)
+            PendingProjectileSpawn = true;
+
+        // JAB COMBO. JAB1.js/JAB2.js both watch for a fresh A press during their
+        // own window (`timer > 2 && timer < 32 && input[0].a && !input[1].a`) and
+        // set phys.jabCombo, then chain on the next frame past 5. JAB3 is Fox's
+        // rapid jab and re-loops itself (timer 43 -> 7) while A keeps being
+        // pressed. Chaining here rather than through TryStartAttack is
+        // deliberate: TryStartAttack is gated on not already being in a move,
+        // and the whole point of a jab combo is that it chains FROM one.
+        if (_jabComboQueued && MoveFrame > 5)
+        {
+            MoveSlot? next = CurrentMove switch
+            {
+                MoveSlot.Jab1 => MoveSlot.Jab2,
+                MoveSlot.Jab2 => MoveSlot.Jab3,
+                _ => null,
+            };
+            if (next.HasValue && _character.TryGetMove(next.Value, out _))
+            {
+                _jabComboQueued = false;
+                CurrentMove = next.Value;
+                MoveFrame = 1;
+                _hitApplied = false;
+                _appliedHitKey = -1;
+                return;
+            }
+            _jabComboQueued = false;
+        }
+
         MoveFrame++;
         if (MoveFrame > move.TotalFrames)
         {
             bool wasUpB = CurrentMove == MoveSlot.UpB;
             CurrentMove = null;
             MoveFrame = 0;
+            _appliedHitKey = -1;
 
             // Phase 11: real Melee makes Fox helpless after Fire Fox — no more
             // jumps or specials until landing. This engine has no dedicated
@@ -1111,6 +1244,9 @@ public sealed class PlayerMover : ISimObject
         w.WriteInt(HitstunFramesRemaining);
         w.WriteInt(CurrentMove.HasValue ? (int)CurrentMove.Value : -1);
         w.WriteInt(MoveFrame);
+        w.WriteInt(_appliedHitKey);
+        w.WriteBool(_jabComboQueued);
+        w.WriteBool(PendingProjectileSpawn);
         w.WriteBool(_hitApplied);
         w.WriteInt(HitlagFramesRemaining);
         var (smashX, smashY) = _smashTilt.SaveRaw();
@@ -1151,6 +1287,9 @@ public sealed class PlayerMover : ISimObject
         int moveRaw = r.ReadInt();
         CurrentMove = moveRaw < 0 ? null : (MoveSlot)moveRaw;
         MoveFrame = r.ReadInt();
+        _appliedHitKey = r.ReadInt();
+        _jabComboQueued = r.ReadBool();
+        PendingProjectileSpawn = r.ReadBool();
         _hitApplied = r.ReadBool();
         HitlagFramesRemaining = r.ReadInt();
         int smashX = r.ReadInt();

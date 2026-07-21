@@ -24,6 +24,17 @@ public enum MoveCategory
 /// DirX/DirY are baked in at construction time via AngleTable, from the
 /// Melee-style angle this move's data actually specifies — callers never
 /// touch AngleTable directly.
+///
+/// OffsetX/OffsetY/Radius (all optional, default zero): real per-move
+/// spatial hitbox placement, ported from MeleeLight's attributes.js
+/// `offsets[...]` tables (the specific frame used is that hitbox's FIRST
+/// active-frame position — same "one representative hit" simplification
+/// as everything else in this struct, just applied to position too) and
+/// each hitbox's own `size` field as Radius. Left at zero (the "no data
+/// ported yet" sentinel — see Hitbox.cs) for moves that don't have this
+/// wired in yet; CombatSystem falls back to the old flat-reach box for
+/// those. See Characters/Fox/FoxMoves.cs for which moves have real data
+/// and Docs/COMBAT.md for the port notes.
 /// </summary>
 public readonly struct MoveDef
 {
@@ -49,6 +60,27 @@ public readonly struct MoveDef
 	public readonly Fx KnockbackGrowth;
 	public readonly Fx DirX;
 	public readonly Fx DirY;
+	public readonly Fx OffsetX;
+	public readonly Fx OffsetY;
+	public readonly Fx Radius;
+
+	/// <summary>
+	/// The move's REAL hitboxes — every simultaneous box, every sequential hit,
+	/// each with its own window, offset, radius and knockback parameters. See
+	/// HitboxSpec.cs for the full rationale and for how repeating (multi-hit)
+	/// boxes are expressed.
+	///
+	/// Null/empty means "no per-hitbox data ported for this move", in which case
+	/// the flat single-hit fields above are used instead — the pre-existing
+	/// behaviour, kept working so a partially-ported move never silently loses
+	/// its hit. Every Fox move now supplies this array; the flat fields remain
+	/// as the move's REPRESENTATIVE hit (its strongest/first box) because the
+	/// debug HUD and several tests read them directly.
+	/// </summary>
+	public readonly HitboxSpec[]? Hitboxes;
+
+	/// <summary>True when real per-hitbox data exists for this move.</summary>
+	public bool HasHitboxes => Hitboxes is { Length: > 0 };
 
 	/// <summary>Phase 11: nonzero ONLY for Up-B (Fire Fox) and Side-B (Illusion) —
 	/// the two Fox specials that physically propel the character rather than just
@@ -67,8 +99,12 @@ public readonly struct MoveDef
         string name, MoveCategory category,
         int firstActiveFrame, int lastActiveFrame, int totalFrames, int iasaFrame,
         int damage, int angleDegrees, int knockbackBase, int knockbackGrowth,
-        int landingLagFrames = 0, Fx launchSpeed = default, Fx launchDecayPerTick = default)
+        int landingLagFrames = 0, Fx launchSpeed = default, Fx launchDecayPerTick = default,
+        Fx offsetX = default, Fx offsetY = default, Fx radius = default,
+        int setKnockback = 0, HitboxSpec[]? hitboxes = null)
     {
+        Hitboxes = hitboxes;
+        SetKnockback = Fx.FromInt(setKnockback);
         Name = name;
         Category = category;
         FirstActiveFrame = firstActiveFrame;
@@ -82,10 +118,43 @@ public readonly struct MoveDef
         (DirX, DirY) = AngleTable.Get(angleDegrees);
         LaunchSpeed = launchSpeed;
         LaunchDecayPerTick = launchDecayPerTick;
+        OffsetX = offsetX;
+        OffsetY = offsetY;
+        Radius = radius;
     }
 
-    public bool IsActiveOnFrame(int actionFrame) =>
-        actionFrame >= FirstActiveFrame && actionFrame <= LastActiveFrame;
+    public bool IsActiveOnFrame(int actionFrame)
+    {
+        if (HasHitboxes)
+        {
+            foreach (var hb in Hitboxes!)
+                if (hb.IsActiveOnFrame(actionFrame)) return true;
+            return false;
+        }
+        return actionFrame >= FirstActiveFrame && actionFrame <= LastActiveFrame;
+    }
 
-    public Hitbox ToHitbox() => new(Damage, KnockbackBase, KnockbackGrowth, DirX, DirY);
+    public readonly Fx SetKnockback;
+
+    public Hitbox ToHitbox() => new(
+        Damage, KnockbackBase, KnockbackGrowth, DirX, DirY,
+        OffsetX, OffsetY, Radius, SetKnockback);
+
+    /// <summary>
+	/// Last action frame on which ANY of this move's hitboxes is live. Used by
+	/// the tests and the HUD to answer "is this move still threatening" without
+	/// each caller re-scanning the array. Falls back to LastActiveFrame for a
+	/// move with no per-hitbox data.
+	/// </summary>
+	public int LastHitboxFrame
+	{
+		get
+		{
+			if (!HasHitboxes) return LastActiveFrame;
+			int last = 0;
+			foreach (var hb in Hitboxes!)
+				if (hb.LastActiveFrame > last) last = hb.LastActiveFrame;
+			return last;
+		}
+	}
 }

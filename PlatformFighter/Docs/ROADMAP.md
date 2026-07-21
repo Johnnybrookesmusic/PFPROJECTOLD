@@ -932,3 +932,66 @@ animation (Phase 8, not started); no match-end/game-over state once one
 fighter is eliminated (both movers just keep ticking — CombatSystem still
 runs, the eliminated one just can't be hit or act); stock count isn't
 configurable from anywhere external yet (compile-time constant only).
+
+## Master Directive v3, Phase 2 — Fox's moveset ported complete
+
+**Read `Docs/CURRENT_GOAL.md` first** — it carries the single current objective
+and the full session handoff. This entry is the historical log.
+
+Fox now has every move MeleeLight gives him: 24 MoveDefs, 96 hitboxes.
+
+**Both previously-documented blockers closed.**
+- *Set-knockback.* `KnockbackMath` gained the `sk != 0` branch from
+  `hitDetection.js:getKnockback`. This was the sole reason Down Air could not be
+  represented (every dair hitbox uses sk=30). The branch is percent-independent
+  by design: 43.60 knockback at 0% AND at 150%, versus 19.20 -> 79.20 for the
+  normal formula. Also unblocks upair1 (sk 30), pummel (30), the reflector's
+  real hit (80) and both ledge attacks (90).
+- *Projectiles.* New `Gameplay/Projectile.cs`: a fixed-capacity pool rather than
+  dynamic `SimWorld.Register`/`Unregister`. Deliberate — dynamic spawn/despawn
+  makes the sim's object ordering depend on history, which is exactly what
+  desyncs rollback later. Fixed slots also keep the snapshot a constant size.
+
+**Multi-hitbox is real.** `MoveDef` previously carried ONE hit (its own comment
+called that a scope cut). New `Characters/HitboxSpec.cs` gives each move its
+true array, with a `RefreshPeriod` for boxes that re-arm. Verified hit counts:
+DownAir 7 (every 3 frames over 5..25), UpTilt 1 (four simultaneous boxes are one
+hit event), ForwardAir 5, Jab3 5, and two hits each for UpSmash/Nair/Bair/FSmash.
+
+**Data was extracted programmatically**, not hand-typed — `setHitBoxes` joined
+against `setOffsets` (including the late `.push()` appends). At 97 hitboxes,
+hand-transcription reliably introduces errors that later look like gameplay bugs
+rather than typos. Frame windows were the exception; they live as `timer`
+comparisons inside each move's own JS and were read individually.
+
+**New moves:** DownAir, Jab2, Jab3, Grab, Pummel, GetUpAttack,
+LedgeAttackQuick, LedgeAttackSlow, all four throws, Blaster.
+
+**Two bugs caught in my own work before packaging.** (a) Keying "already hit" on
+the hitbox SLOT INDEX let a two-box move alternate boxes and hit every frame —
+the drill would have dealt 21 hits instead of 7. MeleeLight tracks `hitList` per
+hitbox OBJECT; the key is now `(FirstActiveFrame << 16) | HitGroup`. (b) Only
+the first live box was ever spatially tested, so up-tilt's other three boxes
+could never connect. `CombatSystem` now walks every slot and takes the first
+that actually overlaps.
+
+**Deliberate non-implementations.** `CombatSystem` skips hitbox types 2 (grab),
+7 (reflect) and 8 (inert): applying a grab box as a normal hit would make Fox's
+grab a 0-damage knockback move that launches and causes hitlag, which is worse
+than it not connecting. Data is complete; the state machines are not written.
+
+**Fox's laser has zero knockback and that is correct** — `isFox ? 0 : 100` in
+`articles.LASER`. It damages without flinch, which is the defining difference
+from Falco's laser. Documented emphatically in `ProjectileSpec.FoxLaser` so a
+future session does not "fix" it.
+
+**Verification:** brace/paren balance, duplicate-type scan, symbol existence,
+save/load parity (37/37), and an algorithm mirror run against the real generated
+data confirming every hit count above. Still no .NET SDK here — **NOT COMPILED**.
+New F9 test `FoxMovesetTest` covers slot completeness, hitbox count,
+set-knockback percent-independence, drill multi-hit, laser damage-without-flinch,
+and twin-run determinism including projectiles.
+
+**Known consequence:** `CombatSystem.SaveState` changed from empty to writing 16
+projectile slots, so any test asserting a LITERAL state hash will differ.
+Twin-run comparisons are unaffected.

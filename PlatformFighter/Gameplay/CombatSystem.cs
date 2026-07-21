@@ -1,3 +1,4 @@
+
 using PlatformFighter.Core.Combat;
 using PlatformFighter.Core.Sim;
 using PlatformFighter.Core.Math;
@@ -14,14 +15,15 @@ namespace PlatformFighter.Gameplay;
 /// time this ticks, both movers have already advanced their own attack-state
 /// for the frame and TryGetActiveHitbox reflects this tick's real state.
 ///
-/// Hit detection is whole-body-AABB-overlap, not real per-hitbox spatial
-/// placement — PlayerMover's class doc comment already flags this as a known
-/// simplification ("hurtbox-overlap hit detection instead of real spatial
-/// hitboxes... hitbox position and size per move aren't extracted from the
-/// data yet"). Good enough to prove hits connect and knockback/hitstun/hitlag
-/// flow correctly end-to-end; real per-move hitbox offsets are follow-up work
-/// (the offset data DOES exist in MeleeLight's attributes.js `offsets[...]`
-/// tables this phase pulled from — just not wired through MoveDef yet).
+/// Hit detection: REAL per-move spatial hitboxes (Directive Phase 1 — was the
+/// single biggest flagged accuracy gap, see Docs/CURRENT_GOAL.md's history).
+/// Each MoveDef that has ported spatial data (Hitbox.OffsetX/OffsetY/Radius,
+/// from MeleeLight's attributes.js `offsets[...]` tables — see Hitbox.cs and
+/// Characters/Fox/FoxMoves.cs) gets a real circle-vs-defender-AABB check at
+/// the attacker-relative offset. Moves that don't have spatial data ported
+/// yet (Hitbox.Radius == Fx.Zero — currently just Fox's Illusion, see its own
+/// doc comment in FoxMoves.cs) fall back to the old flat whole-body-plus-
+/// AttackReach box rather than silently going undetectable.
 ///
 /// Both attacker->defender checks run every tick (A hits B, then B hits A) so
 /// two attacks can trade in the same frame, same as real Melee.
@@ -54,63 +56,169 @@ public sealed class CombatSystem : ISimObject
     {
         ResolveAttack(_a, _b);
         ResolveAttack(_b, _a);
+        TickProjectiles();
     }
 
     /// <summary>
-    /// Step 2: how far in FRONT of the attacker's own body a hit reaches, in
-    /// MeleeLight units. A single flat constant standing in for real per-move
-    /// hitbox offsets, which genuinely exist in MeleeLight's <c>offsets[...]</c>
-    /// tables but are still not wired through MoveDef (the same gap Phase 9/10's
-    /// notes already flag as the biggest remaining accuracy hole).
-    ///
-    /// WHY IT HAD TO EXIST NOW rather than later: before Step 2 the "hitbox" was
-    /// the attacker's whole body, which was 40 units wide — accidentally about
-    /// the right reach, for entirely the wrong reason. With the real ECB the body
-    /// is 6 wide, so whole-body overlap would mean fighters had to be practically
-    /// inside each other to connect. 8 units is roughly Fox's jab range and is a
-    /// placeholder, not transcribed data.
-    ///
-    /// It is also strictly more correct than what it replaces in one way: reach
-    /// now extends in the direction the attacker FACES, instead of symmetrically,
-    /// so a jab no longer hits someone standing behind you.
+    /// Step 2: how far in FRONT of the attacker's own body the LEGACY fallback
+    /// hitbox reaches, in MeleeLight units. Still used for any move whose
+    /// Hitbox.Radius is Fx.Zero (no real spatial data ported yet — see
+    /// Hitbox.cs's doc comment) so those moves stay detectable instead of
+    /// silently doing nothing; moves with real ported offset/radius data no
+    /// longer touch this constant at all. 8 units is roughly Fox's jab range
+    /// and is a placeholder, not transcribed data — kept only as a fallback.
     /// </summary>
     public static readonly Fx AttackReach = Fx.FromInt(8);
 
+    /// <summary>
+    /// Live projectiles. Owned here rather than by PlayerMover so that every
+    /// damage source — fighter hitboxes and projectiles alike — resolves in one
+    /// place and in one deterministic order. See Gameplay/Projectile.cs.
+    /// </summary>
+    public readonly ProjectilePool Projectiles = new();
+
+    /// <summary>
+    /// Spawn any projectile a fighter asked for this tick, advance the ones
+    /// already in flight, then resolve them against the opposing fighter.
+    /// Called after both fighters' own attacks resolve, so a shot fired this
+    /// frame does not also travel and connect on the same frame — matching
+    /// MeleeLight, where article.LASER.init pushes the article and its main()
+    /// runs from the next tick's article loop.
+    /// </summary>
+    private void TickProjectiles()
+    {
+        TrySpawnFor(_a, 0);
+        TrySpawnFor(_b, 1);
+
+        Projectiles.Tick(_a.Stage);
+
+        for (int i = 0; i < ProjectilePool.Capacity; i++)
+        {
+            ref Projectile shot = ref Projectiles[i];
+            if (!shot.Active) continue;
+
+            PlayerMover target = shot.OwnerIndex == 0 ? _b : _a;
+            if (target.IsInvincible || target.IsEliminated) continue;
+
+            var targetBox = FxAabb.FromMinMax(
+                new FxVec2(target.Position.X - target.HalfSize.X, target.Position.Y - target.Ecb.TopHeight),
+                new FxVec2(target.Position.X + target.HalfSize.X, target.Position.Y));
+
+            if (!CircleOverlapsAabb(shot.Position, ProjectileSpec.FoxLaser.Radius, targetBox)) continue;
+
+            Hitbox laserHit = ProjectileSpec.FoxLaser.ToHitbox();
+            target.ApplyHit(in laserHit, shot.MovingRight, target.Weight);
+
+            // Fox's laser causes no hitlag either — with zero knockback there is
+            // nothing to freeze for, and adding hitlag would interrupt the
+            // shooter's own follow-up, which is precisely what makes Fox's
+            // laser different from Falco's. See ProjectileSpec.FoxLaser.
+            if (ProjectileSpec.FoxLaser.DestroyOnHit) shot.Deactivate();
+        }
+    }
+
+    private void TrySpawnFor(PlayerMover shooter, int ownerIndex)
+    {
+        if (!shooter.PendingProjectileSpawn) return;
+        shooter.ConsumeProjectileSpawn();
+        Projectiles.TrySpawn(in ProjectileSpec.FoxLaser, shooter.Position, shooter.FacingRight, ownerIndex);
+    }
+
     private static void ResolveAttack(PlayerMover attacker, PlayerMover defender)
     {
-        if (!attacker.TryGetActiveHitbox(out Hitbox hit)) return;
         // Directive Phase 1: a just-respawned fighter can't be re-hit — see
         // PlayerMover.IsInvincible / RespawnInvincibilityFrames.
         if (defender.IsInvincible) return;
 
-        // Attacker's body, extended forward by AttackReach in its facing direction.
-        Fx half = attacker.HalfSize.X;
-        Fx front = attacker.FacingRight
-            ? attacker.Position.X + half + AttackReach
-            : attacker.Position.X - half - AttackReach;
-        Fx back = attacker.FacingRight
-            ? attacker.Position.X - half
-            : attacker.Position.X + half;
-
-        var attackerBox = FxAabb.FromMinMax(
-            new FxVec2(Fx.Min(front, back), attacker.Position.Y - attacker.Ecb.TopHeight),
-            new FxVec2(Fx.Max(front, back), attacker.Position.Y));
         var defenderBox = FxAabb.FromMinMax(
             new FxVec2(defender.Position.X - defender.HalfSize.X, defender.Position.Y - defender.Ecb.TopHeight),
             new FxVec2(defender.Position.X + defender.HalfSize.X, defender.Position.Y));
-        if (!attackerBox.Overlaps(defenderBox)) return;
 
-        attacker.MarkHitApplied();
-        defender.ApplyHit(in hit, attacker.FacingRight, defender.Weight);
+        // Walk EVERY live hitbox of the current move, not just the first. Fox's
+        // up-tilt has four boxes at four offsets; if only box 0 were tested the
+        // move would whiff at ranges the other three cover. First box that
+        // actually overlaps wins, which is what MeleeLight's own hit loop does.
+        int slots = attacker.ActiveHitboxSlots;
+        for (int i = 0; i < slots; i++)
+        {
+            if (!attacker.TryGetActiveHitbox(i, out Hitbox hit, out int hitKey)) continue;
 
-        int hitlagFrames = HitlagMath.ComputeHitlagFrames(hit.Damage);
-        attacker.ApplyHitlag(hitlagFrames);
-        defender.ApplyHitlag(hitlagFrames);
+            // NON-DAMAGING HITBOX TYPES. MeleeLight tags every hitbox with a
+            // `type` (see Hitbox.HitType); three of them are not attacks:
+            //   2 grab    — should initiate a grab, which needs a grab/grabbed
+            //               state machine this engine does not have yet.
+            //               Applying it as a normal hit would turn Fox's grab
+            //               into a 0-damage knockback move that launches and
+            //               causes hitlag — worse than simply not connecting.
+            //   7 reflect — the reflector's reflect field, not its hit.
+            //   8 inert   — explicitly does nothing.
+            // Skipping is the honest "not implemented" behaviour; the DATA is
+            // ported and correct (see FoxMoves.Grab), only dispatch is missing.
+            if (hit.IsGrab || hit.IsReflector || hit.HitType == Hitbox.TypeInert) continue;
+
+            bool hitConnects;
+            if (hit.Radius > Fx.Zero)
+            {
+                // Real per-move spatial hitbox: attacker.Position + the ported
+                // offset (X mirrored by facing, same convention as DirX — see
+                // Hitbox.cs), checked as a circle of the ported Radius against
+                // the defender's existing hurtbox AABB.
+                Fx mirroredOffsetX = attacker.FacingRight ? hit.OffsetX : -hit.OffsetX;
+                var hitboxCenter = new FxVec2(
+                    attacker.Position.X + mirroredOffsetX,
+                    attacker.Position.Y + hit.OffsetY);
+                hitConnects = CircleOverlapsAabb(hitboxCenter, hit.Radius, defenderBox);
+            }
+            else
+            {
+                // Legacy fallback (see AttackReach's doc comment): attacker's
+                // whole body extended forward by AttackReach.
+                Fx half = attacker.HalfSize.X;
+                Fx front = attacker.FacingRight
+                    ? attacker.Position.X + half + AttackReach
+                    : attacker.Position.X - half - AttackReach;
+                Fx back = attacker.FacingRight
+                    ? attacker.Position.X - half
+                    : attacker.Position.X + half;
+
+                var attackerBox = FxAabb.FromMinMax(
+                    new FxVec2(Fx.Min(front, back), attacker.Position.Y - attacker.Ecb.TopHeight),
+                    new FxVec2(Fx.Max(front, back), attacker.Position.Y));
+                hitConnects = attackerBox.Overlaps(defenderBox);
+            }
+
+            if (!hitConnects) continue;
+
+            attacker.MarkHitApplied(hitKey);
+            defender.ApplyHit(in hit, attacker.FacingRight, defender.Weight);
+
+            int hitlagFrames = HitlagMath.ComputeHitlagFrames(hit.Damage);
+            attacker.ApplyHitlag(hitlagFrames);
+            defender.ApplyHitlag(hitlagFrames);
+            return;
+        }
+    }
+
+    /// <summary>Standard circle-vs-AABB overlap: clamp the circle's center into
+    /// the box, then compare the (squared) distance to that clamped point
+    /// against the (squared) radius — avoids needing an Fx square-root.</summary>
+    private static bool CircleOverlapsAabb(FxVec2 center, Fx radius, FxAabb box)
+    {
+        Fx closestX = Fx.Clamp(center.X, box.Left, box.Right);
+        Fx closestY = Fx.Clamp(center.Y, box.Top, box.Bottom);
+        Fx dx = center.X - closestX;
+        Fx dy = center.Y - closestY;
+        Fx distSq = dx * dx + dy * dy;
+        return distSq <= radius * radius;
     }
 
     /// <summary>No independent state — everything ApplyHit/ApplyHitlag touched
     /// already lives in (and is saved by) the two PlayerMovers themselves.</summary>
-    public void SaveState(StateWriter w) { }
+    /// <summary>The projectile pool IS sim state — a laser in flight has a
+    /// position and a lifetime that a rollback must restore exactly. Every slot
+    /// serializes unconditionally so the layout is a fixed size regardless of
+    /// how many shots are live; see ProjectilePool's doc comment.</summary>
+    public void SaveState(StateWriter w) => Projectiles.SaveState(w);
 
-    public void LoadState(StateReader r) { }
+    public void LoadState(StateReader r) => Projectiles.LoadState(r);
 }

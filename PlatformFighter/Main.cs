@@ -2,6 +2,7 @@ using Godot;
 using PlatformFighter.Characters.Fox;
 using PlatformFighter.Core;
 using PlatformFighter.Core.Math;
+using PlatformFighter.Core.Rendering;
 using PlatformFighter.Core.Sim;
 using PlatformFighter.Debug;
 using PlatformFighter.Gameplay;
@@ -58,10 +59,23 @@ public partial class Main : Node2D
 		if (HasNode("TestSprite2"))
 			_sprite2 = GetNode<Sprite2D>("TestSprite2");
 
-		// Step 2: one transform node carries sim->screen (scale + origin) for
+				// Step 2: one transform node carries sim->screen (scale + origin) for
 		// everything, so all render code below stays in sim units.
-		_world = new Node2D { Name = "World", Scale = new Vector2(RenderScale, RenderScale), Position = WorldOrigin };
+		_world = new Node2D
+		{
+			Name = "World",
+			Scale = new Vector2(RenderScale, RenderScale),
+			Position = WorldOrigin
+		};
 		AddChild(_world);
+
+		// Directive v3: initialize the Melee-style camera from the real stage
+		// geometry and current viewport. The initial RenderScale/WorldOrigin above
+		// remain as the first-frame fallback until _Process begins driving _world.
+		_camera = new CameraController(
+			Battlefield.Geometry,
+			GetViewportRect().Size);
+
 		// Godot's own Node.Reparent. keepGlobalTransform:false is deliberate — we
 		// WANT these to inherit _world's sim-to-screen transform, not to be
 		// compensated back to their old screen positions. _Process repositions them
@@ -74,9 +88,10 @@ public partial class Main : Node2D
 	}
 
 	private Sprite2D _shadow1 = null!;
-	private Sprite2D? _shadow2;
-	private Node2D _world = null!;
-	private Fx _floorTopY = Fx.Zero; // sim-space ground height; set in BuildPlaceholderVisuals
+private Sprite2D? _shadow2;
+private Node2D _world = null!;
+private CameraController _camera = null!;
+private Fx _floorTopY = Fx.Zero; // sim-space ground height; set in BuildPlaceholderVisuals
 
 	/// <summary>Step 2: sim units are MeleeLight units and the RENDER layer converts
 	/// to pixels — the sim never inflates itself to suit a camera. 4.5 is not a
@@ -293,13 +308,28 @@ public partial class Main : Node2D
 		_sprite.FlipH = !_p1.FacingRight;
 		UpdateShadow(_shadow1, _sprite.Position);
 
-		if (_sprite2 != null)
+				if (_sprite2 != null)
 		{
 			_sprite2.Position = _p2.PreviousPosition.ToGodot()
 								   .Lerp(_p2.Position.ToGodot(), a);
 			_sprite2.FlipH = !_p2.FacingRight;
-			if (_shadow2 != null) UpdateShadow(_shadow2, _sprite2.Position);
+			if (_shadow2 != null)
+				UpdateShadow(_shadow2, _sprite2.Position);
 		}
+
+		// Melee-style framing camera (Directive v3): frame on both fighters'
+		// interpolated sim positions and drive _world's zoom+pan. Render-only —
+		// reads sim state, never writes it. Uses the same RenderAlpha-interpolated
+		// positions the sprites use so camera and fighters move in lockstep.
+		Vector2 camP1 = _p1.PreviousPosition.ToGodot()
+			.Lerp(_p1.Position.ToGodot(), a);
+		Vector2 camP2 = _p2.PreviousPosition.ToGodot()
+			.Lerp(_p2.Position.ToGodot(), a);
+
+		var (worldScale, worldPos) = _camera.Update(camP1, camP2, (float)delta);
+
+		_world.Scale = worldScale;
+		_world.Position = worldPos;
 
 		// F9 = run the determinism acceptance tests (view-side key, edge-triggered).
 		bool f9 = Input.IsPhysicalKeyPressed(Key.F9);
