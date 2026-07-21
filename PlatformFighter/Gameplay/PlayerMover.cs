@@ -1,5 +1,5 @@
 using PlatformFighter.Characters;
-using PlatformFighter.Characters.Hybrid;
+using PlatformFighter.Characters.Fox;
 using PlatformFighter.Core.Combat;
 using PlatformFighter.Core.Input;
 using PlatformFighter.Core.Math;
@@ -15,6 +15,14 @@ public enum GroundState : int
     Walk = 1,
     Dash = 2,
     Run = 3,
+    /// <summary>Step 3: MeleeLight's TILTTURN — a slow turnaround from a gentle
+    /// stick flick. Faces the new direction on frame 6, brakes with double
+    /// traction meanwhile.</summary>
+    TiltTurn = 4,
+    /// <summary>Step 3: MeleeLight's SMASHTURN — the hard flick that produces a
+    /// pivot. Faces immediately, brakes with double traction. This is the state
+    /// dash-dancing bounces through.</summary>
+    SmashTurn = 5,
 }
 
 /// <summary>
@@ -41,6 +49,18 @@ public enum PlayerActionState : int
     Landing = 8,
     Hitstun = 9,
     Attack = 10,
+    /// <summary>Directive Phase 1: airborne-and-invincible window right after a
+    /// blast-zone death teleports the fighter back to their respawn point — see
+    /// PlayerMover.RespawnInvincibilityFramesRemaining. Real Melee's "star
+    /// platform" hold/steer/drop sequence is NOT modeled (documented
+    /// simplification, see PlayerMover's respawn-handling doc comment) — this
+    /// engine drops the fighter with full normal airborne control immediately,
+    /// just briefly unhittable.</summary>
+    Respawning = 11,
+    /// <summary>Directive Phase 1: out of stocks. Tick() returns immediately for
+    /// an eliminated fighter (see its own doc comment) — no physics, no input,
+    /// not hittable, doesn't move. Terminal; nothing clears this state.</summary>
+    Eliminated = 12,
 }
 
 /// <summary>
@@ -81,11 +101,28 @@ public sealed class PlayerMover : ISimObject
     public FxVec2 PreviousPosition;
     public FxVec2 Velocity;
     public bool Grounded;
+
+    /// <summary>Step 2: WHICH surface this fighter is standing on. Must survive
+    /// save/load and must be round-tripped into the next resolve — losing it turns
+    /// "walk along this ledge" into "re-search the stage and maybe pick a different
+    /// surface", i.e. fighters teleporting between platforms. See
+    /// SegmentCollisionResolver.cs.</summary>
+    public SurfaceKind Surface;
+    public int SurfaceIndex = -1;
+
     public bool FacingRight = true;
     public bool FastFalling;
 
     public GroundState Ground;
     public int DashFramesRemaining;
+
+    /// <summary>Step 3: MeleeLight's per-action-state <c>timer</c>, counting UP from
+    /// 1 on the first frame of DASH/TILTTURN/SMASHTURN. Every dash decision in
+    /// DASH.js is expressed against this (frame 2 impulse, &gt;4 smash-turn,
+    /// &gt;dashFrameMin run, &gt;dashFrameMax re-dash), so counting up and comparing
+    /// to the real thresholds is a direct transcription rather than a
+    /// re-derivation of the old count-down DashFramesRemaining.</summary>
+    public int GroundTimer;
     public int JumpSquatFramesRemaining;
     public int JumpsRemaining;
 
@@ -123,6 +160,25 @@ public sealed class PlayerMover : ISimObject
     /// Checked first thing in Tick(), ahead of even hitstun.</summary>
     public int HitlagFramesRemaining { get; private set; }
 
+    /// <summary>Directive Phase 1: MeleeLight/real Melee don't fix a single
+    /// universal stock count (it's a match-setup option); 4 is competitive
+    /// standard and used here as a documented default, not transcribed data.</summary>
+    public const int StartingStocks = 4;
+    /// <summary>Directive Phase 1: how long a just-respawned fighter can't be
+    /// hit. Real Melee's invincibility duration is tied to the star-platform
+    /// hold/steer sequence this engine doesn't model (see PlayerActionState.
+    /// Respawning's doc comment) — 120 ticks (~2s at 60fps) is a documented
+    /// placeholder standing in for that, not a transcribed number.</summary>
+    public const int RespawnInvincibilityFrames = 120;
+
+    public int Stocks { get; private set; } = StartingStocks;
+    /// <summary>Out of stocks — terminal, see PlayerActionState.Eliminated.</summary>
+    public bool IsEliminated { get; private set; }
+    private int _respawnInvincibilityFramesRemaining;
+    /// <summary>Consumed by CombatSystem to skip ApplyHit entirely for a
+    /// just-respawned fighter.</summary>
+    public bool IsInvincible => _respawnInvincibilityFramesRemaining > 0;
+
     private readonly int _playerIndex;
     private readonly StageGeometry _stage;
     private readonly CharacterData _character;
@@ -132,6 +188,11 @@ public sealed class PlayerMover : ISimObject
     // (Docs/INPUT.md): needed for edge detection, but not itself part of
     // the wire format, so it lives here rather than on FrameInput.
     private sbyte _prevStickX;
+    /// <summary>Stick X TWO frames ago. MeleeLight's smash-turn / re-dash checks
+    /// read <c>input[p][2].lsX</c> — two frames back, not one — so detecting a
+    /// fresh flick needs this as well as <see cref="_prevStickX"/>. Without it a
+    /// held stick reads as a new flick every frame and dash-dance is impossible.</summary>
+    private sbyte _prevStickX2;
     private sbyte _prevStickY;
     private bool _prevJumpHeld;
     private bool _prevAttackHeld;
@@ -143,16 +204,75 @@ public sealed class PlayerMover : ISimObject
         Position = PreviousPosition = start;
         _stage = stage;
         _playerIndex = playerIndex;
-        _character = character ?? FoxFalcoHybrid.Instance;
+        _character = character ?? FoxCharacter.Instance;
         JumpsRemaining = _character.Physics.ExtraJumps;
     }
 
     /// <summary>Defender's weight for KnockbackMath — see ApplyHit's overload.</summary>
     public Fx Weight => _character.Physics.Weight;
     public FxVec2 HalfSize => _character.Physics.HalfSize;
+    /// <summary>Step 2: the real collision shape. Position is the FEET.</summary>
+    public Ecb Ecb => _character.Physics.Ecb;
 
     public void Tick(SimWorld world)
     {
+        // Directive Phase 1: eliminated is terminal — no physics, no input,
+        // not hittable (CombatSystem never sees an active hitbox because
+        // TryGetActiveHitbox requires CurrentMove, which this never sets again).
+        if (IsEliminated)
+        {
+            PreviousPosition = Position;
+            return;
+        }
+
+        // Directive Phase 1: blast zone check runs before hitlag/hitstun/anything
+        // else — going past the blast zone always wins, same as real Melee (you
+        // can die out of hitstun, mid-attack, mid-hitlag). Checked against the
+        // position this fighter actually ended LAST tick (this tick's movement
+        // hasn't happened yet), which is what a "did I go past the blast zone"
+        // check should compare — resolving on stale data would let one extra
+        // tick of off-screen movement through.
+        if (_stage.IsPastBlastZone(Position))
+        {
+            Stocks--;
+            if (Stocks <= 0)
+            {
+                IsEliminated = true;
+                CurrentState = PlayerActionState.Eliminated;
+                StateFrame = 0;
+                PreviousPosition = Position;
+                return;
+            }
+
+            var respawn = _stage.RespawnPoints.Count > 0
+                ? _stage.RespawnPoints[_playerIndex % _stage.RespawnPoints.Count]
+                : new FacingPoint(FxVec2.Zero, 1);
+            Position = PreviousPosition = respawn.Position;
+            Velocity = FxVec2.Zero;
+            FacingRight = respawn.Face > 0;
+            Grounded = false;
+            Surface = SurfaceKind.None;
+            SurfaceIndex = -1;
+            Percent = Fx.Zero;
+            HitstunFramesRemaining = 0;
+            CurrentMove = null;
+            MoveFrame = 0;
+            _hitApplied = false;
+            HitlagFramesRemaining = 0;
+            JumpSquatFramesRemaining = 0;
+            DashFramesRemaining = 0;
+            FastFalling = false;
+            Ground = GroundState.Idle;
+            JumpsRemaining = _character.Physics.ExtraJumps;
+            _respawnInvincibilityFramesRemaining = RespawnInvincibilityFrames;
+            CurrentState = PlayerActionState.Respawning;
+            StateFrame = 0;
+            return; // Directive Phase 1: respawn teleport is its own tick, same
+                     // convention as ApplyHit fully owning the tick a hit lands.
+        }
+
+        if (_respawnInvincibilityFramesRemaining > 0) _respawnInvincibilityFramesRemaining--;
+
         if (HitlagFramesRemaining > 0)
         {
             // Frozen: no movement, no input processing, no gravity — both
@@ -209,14 +329,21 @@ public sealed class PlayerMover : ISimObject
                 TickAirborne(input, jumpPressed, holdingDown);
         }
 
+        // Step 2: real segment collision. Position is the FEET origin (see
+        // Core/Sim/Collision/Ecb.cs) and Surface/SurfaceIndex are round-tripped
+        // so a grounded fighter follows the surface it is actually standing on
+        // rather than re-searching the stage every tick.
         FxVec2 movedPosition = Position + Velocity;
-        var result = CollisionResolver.Resolve(
-            PreviousPosition, movedPosition, Velocity, _character.Physics.HalfSize, _stage, holdingDown);
+        var result = SegmentCollisionResolver.Resolve(
+            PreviousPosition, movedPosition, Velocity, _character.Physics.Ecb, _stage,
+            wasGrounded, Surface, SurfaceIndex, holdingDown);
 
         Position = result.Position;
         Velocity = result.Velocity;
         bool justLanded = result.Grounded && !wasGrounded;
         Grounded = result.Grounded;
+        Surface = result.Surface;
+        SurfaceIndex = result.SurfaceIndex;
 
         if (justLanded)
         {
@@ -246,6 +373,11 @@ public sealed class PlayerMover : ISimObject
             _landingFramesRemaining--;
         }
 
+        // Step 3: shift the 2-frame stick history BEFORE overwriting frame-1.
+        // Order matters — assigning _prevStickX first would make _prevStickX2 a
+        // copy of this frame, and every smash-turn check would read as "held",
+        // silently killing dash-dance.
+        _prevStickX2 = _prevStickX;
         _prevStickX = input.MainX;
         _prevStickY = input.MainY;
         _prevJumpHeld = jumpHeld;
@@ -262,7 +394,9 @@ public sealed class PlayerMover : ISimObject
     /// input — every branch here is something Phase 7/8 can key off later.</summary>
     private PlayerActionState DeriveActionState()
     {
+        if (IsEliminated) return PlayerActionState.Eliminated;
         if (HitstunFramesRemaining > 0) return PlayerActionState.Hitstun;
+        if (IsInvincible) return PlayerActionState.Respawning;
         if (CurrentMove.HasValue) return PlayerActionState.Attack;
         if (JumpSquatFramesRemaining > 0) return PlayerActionState.JumpSquat;
         if (!Grounded)
@@ -571,87 +705,345 @@ public sealed class PlayerMover : ISimObject
         }
     }
 
+    // ---- Step 3: Fox locomotion, transcribed from MeleeLight ---------------
+    // Sources: src/characters/shared/moves/{WAIT,WALK,DASH,RUN,TILTTURN,SMASHTURN}.js
+    // and src/physics/actionStateShortcuts.js (reduceByTraction, checkForSmashTurn).
+    //
+    // UNITS: MeleeLight's lsX is -1..1; this engine's FrameInput.MainX is -100..100
+    // (Docs/Gameplay/AnalogInputRules.md). Every threshold below is therefore the
+    // source's decimal x100 -- 0.79 -> 79, 0.62 -> 62, 0.3 -> 30 -- and StickX()
+    // converts the raw byte to an Fx fraction for the accel formulas.
+
+    /// <summary>Stick X as MeleeLight's lsX: a -1..1 fraction.</summary>
+    private static Fx StickX(FrameInput input) => Fx.Ratio(input.MainX, 100);
+
+    /// <summary>
+    /// MeleeLight's <c>reduceByTraction</c>. Bleeds |Velocity.X| toward zero by
+    /// traction, clamping through zero rather than overshooting into a reversal.
+    /// <paramref name="applyDouble"/> doubles it while above walk speed — that is
+    /// what makes a pivot out of a run brake hard instead of mushy.
+    /// </summary>
+    private void ReduceByTraction(bool applyDouble)
+    {
+        Fx traction = _character.Physics.GroundTraction;
+        Fx vx = Velocity.X;
+        Fx walkMax = _character.Physics.WalkSpeed;
+
+        if (vx > Fx.Zero)
+        {
+            vx -= (applyDouble && vx > walkMax) ? traction + traction : traction;
+            if (vx < Fx.Zero) vx = Fx.Zero;
+        }
+        else if (vx < Fx.Zero)
+        {
+            vx += (applyDouble && vx < -walkMax) ? traction + traction : traction;
+            if (vx > Fx.Zero) vx = Fx.Zero;
+        }
+
+        Velocity = new FxVec2(vx, Velocity.Y);
+    }
+
+    /// <summary>
+    /// MeleeLight's <c>checkForSmashTurn</c>: the stick is hard the OPPOSITE way
+    /// to our facing right now, and was not two frames ago. Two frames, not one —
+    /// that is what distinguishes a deliberate flick from a stick already held
+    /// over, and it is the mechanism dash-dancing runs on.
+    /// </summary>
+    private bool CheckForSmashTurn(sbyte x)
+    {
+        int face = FacingRight ? 1 : -1;
+        return x * face < -InputDecode.DashThresholdUnits
+            && _prevStickX2 * face > -30;
+    }
+
     private void TickGrounded(FrameInput input, bool jumpPressed)
     {
         if (jumpPressed)
         {
             JumpSquatFramesRemaining = _character.Physics.JumpSquatFrames;
             _jumpHeldDuringSquat = true;
-            TickJumpSquat(jumpHeld: true); // consume this frame too — squat lasts exactly JumpSquatFrames ticks
+            TickJumpSquat(jumpHeld: true); // consume this frame too
             return;
         }
 
         sbyte x = input.MainX;
+        int absX = System.Math.Abs((int)x);
         int dir = System.Math.Sign((int)x);
-        bool pastWalk = System.Math.Abs((int)x) >= InputDecode.StickDeadzoneUnits;
-        bool pastDash = System.Math.Abs((int)x) >= InputDecode.DashThresholdUnits;
+        int face = FacingRight ? 1 : -1;
+        var physics = _character.Physics;
 
         switch (Ground)
         {
+            // ---- WAIT / WALK ------------------------------------------------
             case GroundState.Idle:
             case GroundState.Walk:
-                if (InputDecode.IsDashInitiate(_prevStickX, x, out int dashDir))
+                if (CheckForSmashTurn(x))
                 {
-                    Ground = GroundState.Dash;
-                    DashFramesRemaining = _character.Physics.DashInitiateFrames;
-                    FacingRight = dashDir > 0;
-                    Velocity = new FxVec2(_character.Physics.DashSpeed * Fx.FromInt(dashDir), Velocity.Y);
+                    // SMASHTURN.js: face flips immediately, then brake hard.
+                    EnterGroundState(GroundState.SmashTurn);
+                    FacingRight = dir > 0;
+                    ReduceByTraction(true);
                 }
-                else if (pastWalk)
+                else if (dir != 0 && dir != face && absX >= InputDecode.StickDeadzoneUnits)
+                {
+                    // TILTTURN.js: a gentle flick the other way. Face does NOT
+                    // flip until frame 6 (handled in the TiltTurn case).
+                    EnterGroundState(GroundState.TiltTurn);
+                    ReduceByTraction(true);
+                }
+                else if (absX >= InputDecode.DashThresholdUnits && dir == face)
+                {
+                    StartDash(x, absX, face);
+                }
+                else if (absX >= InputDecode.StickDeadzoneUnits)
                 {
                     Ground = GroundState.Walk;
                     FacingRight = dir > 0;
-                    Fx target = _character.Physics.WalkSpeed * Fx.Ratio(x, 100);
-                    Velocity = new FxVec2(MoveToward(Velocity.X, target, _character.Physics.GroundAccel), Velocity.Y);
+                    TickWalk(x);
                 }
                 else
                 {
                     Ground = GroundState.Idle;
-                    Velocity = new FxVec2(MoveToward(Velocity.X, Fx.Zero, _character.Physics.GroundTraction), Velocity.Y);
+                    ReduceByTraction(false);
                 }
                 break;
 
+            // ---- DASH -------------------------------------------------------
             case GroundState.Dash:
-                DashFramesRemaining--;
-                if (!pastWalk)
-                {
-                    // Stick released mid-dash: dash-stop, back to Idle.
-                    Ground = GroundState.Idle;
-                    DashFramesRemaining = 0;
-                    Velocity = new FxVec2(MoveToward(Velocity.X, Fx.Zero, _character.Physics.GroundTraction), Velocity.Y);
-                }
-                else if (dir != 0 && ((FacingRight && dir < 0) || (!FacingRight && dir > 0)))
-                {
-                    // Turn-around during dash resets the dash window.
-                    FacingRight = dir > 0;
-                    DashFramesRemaining = _character.Physics.DashInitiateFrames;
-                    Velocity = new FxVec2(_character.Physics.DashSpeed * Fx.FromInt(dir), Velocity.Y);
-                }
-                else if (DashFramesRemaining <= 0)
-                {
-                    Ground = pastDash ? GroundState.Run : GroundState.Idle;
-                }
+                GroundTimer++;
+                TickDash(x, absX, face);
                 break;
 
+            // ---- RUN --------------------------------------------------------
             case GroundState.Run:
-                if (!pastWalk)
+                if (CheckForSmashTurn(x))
                 {
+                    EnterGroundState(GroundState.SmashTurn);
+                    FacingRight = dir > 0;
+                    ReduceByTraction(true);
+                }
+                else if (absX < 30)
+                {
+                    // RUNBRAKE, collapsed to Idle + double traction: this engine
+                    // has no separate brake action state yet (it needs an
+                    // animation to be worth naming -- Phase 8).
                     Ground = GroundState.Idle;
-                    Velocity = new FxVec2(MoveToward(Velocity.X, Fx.Zero, _character.Physics.GroundTraction), Velocity.Y);
+                    ReduceByTraction(true);
                 }
                 else
                 {
-                    FacingRight = dir > 0;
-                    Fx target = _character.Physics.RunSpeed * Fx.Ratio(x, 100);
-                    Velocity = new FxVec2(MoveToward(Velocity.X, target, _character.Physics.GroundAccel), Velocity.Y);
+                    TickRun(x);
                 }
+                break;
+
+            // ---- TILTTURN / SMASHTURN --------------------------------------
+            case GroundState.TiltTurn:
+                GroundTimer++;
+                // TILTTURN.js: facing flips on frame 6 exactly, and frame 6 is
+                // also the only frame it can dash out of (source additionally
+                // gates that on a dash buffer this engine doesn't model yet).
+                if (GroundTimer == 6)
+                {
+                    FacingRight = !FacingRight;
+                    if (x * (FacingRight ? 1 : -1) > InputDecode.DashThresholdUnits)
+                    {
+                        StartDash(x, absX, FacingRight ? 1 : -1);
+                        break;
+                    }
+                }
+                ReduceByTraction(true);
+                if (GroundTimer > 11) EnterGroundState(GroundState.Idle);
+                break;
+
+            case GroundState.SmashTurn:
+                GroundTimer++;
+                // SMASHTURN.js: dash-out is allowed on frame 2 EXACTLY -- not a
+                // window, a single frame (`timer === 2 && lsX*face > 0.79`). That
+                // one-frame gate is what makes real dash-dancing timing-sensitive
+                // rather than something you get for free by waggling the stick;
+                // an earlier draft of this used a >=5 window and produced a
+                // dash-dance that drifted across the stage instead of holding
+                // position. Otherwise it runs to frame 11 and returns to WAIT.
+                if (GroundTimer == 2 && x * face > InputDecode.DashThresholdUnits)
+                {
+                    StartDash(x, absX, face);
+                    break;
+                }
+                ReduceByTraction(true);
+                if (GroundTimer > 11) EnterGroundState(GroundState.Idle);
                 break;
         }
 
         // See TickJumpSquat's comment: the resolver only re-confirms Grounded when
         // Velocity.Y is downward this tick, so resting contact needs re-triggering
-        // every tick rather than staying latched from the frame we actually landed.
-        Velocity = new FxVec2(Velocity.X, Velocity.Y + _character.Physics.Gravity);
+        // every tick rather than staying latched from the frame we landed.
+        Velocity = new FxVec2(Velocity.X, Velocity.Y + physics.Gravity);
+    }
+
+    /// <summary>
+    /// Begin a dash AND run its first frame immediately. MeleeLight's
+    /// <c>init()</c> always calls <c>main()</c> on the same frame, so a dash
+    /// entered this tick is already on timer 1 — not 0. Splitting them would push
+    /// the frame-2 impulse a tick late, which is exactly the kind of one-frame
+    /// drift that makes dash-dance feel wrong without ever looking broken.
+    /// </summary>
+    private void StartDash(sbyte x, int absX, int face)
+    {
+        EnterGroundState(GroundState.Dash);
+        GroundTimer++;
+        TickDash(x, absX, face);
+    }
+
+    /// <summary>Enter a ground state and restart its frame timer, so every
+    /// "timer == n" comparison below means the same thing MeleeLight's does.</summary>
+    private void EnterGroundState(GroundState state)
+    {
+        Ground = state;
+        GroundTimer = 0;
+        if (state == GroundState.Dash) DashFramesRemaining = _character.Physics.DashFrameMax;
+    }
+
+    /// <summary>
+    /// DASH.js's main + interrupt, in source order. The dash-dance behaviour
+    /// everything else in Step 3 exists for lives in the two timer thresholds at
+    /// the bottom: past dashFrameMax a fresh flick re-dashes, past dashFrameMin a
+    /// held stick becomes a run.
+    /// </summary>
+    private void TickDash(sbyte x, int absX, int face)
+    {
+        var physics = _character.Physics;
+
+        // interrupt(): smash-turn is allowed only after frame 4.
+        if (GroundTimer > 4 && CheckForSmashTurn(x))
+        {
+            Velocity = new FxVec2(Velocity.X * Fx.Ratio(1, 4), Velocity.Y);
+            EnterGroundState(GroundState.SmashTurn);
+            FacingRight = System.Math.Sign((int)x) > 0;
+            return;
+        }
+
+        // Re-dash (the dash-dance): past dashFrameMax, stick freshly flicked
+        // forward again. Source uses input[2] for "freshly" -- same two-frame
+        // rule as the smash-turn check.
+        if (GroundTimer > physics.DashFrameMax
+            && x * face > InputDecode.DashThresholdUnits
+            && _prevStickX2 * face < 30)
+        {
+            StartDash(x, absX, face);
+            return;
+        }
+
+        // Held forward past dashFrameMin -> RUN.
+        if (GroundTimer > physics.DashFrameMin && x * face > 62)
+        {
+            EnterGroundState(GroundState.Run);
+            return;
+        }
+
+        // Animation over -> WAIT.
+        if (GroundTimer > physics.DashTotalFrames)
+        {
+            EnterGroundState(GroundState.Idle);
+            return;
+        }
+
+        // main(): frame 2 applies the dash impulse, clamped to dMaxV.
+        if (GroundTimer == 2)
+        {
+            Fx vx = Velocity.X + physics.DashInitialSpeed * Fx.FromInt(face);
+            if (Fx.Abs(vx) > physics.RunSpeed) vx = physics.RunSpeed * Fx.FromInt(face);
+            Velocity = new FxVec2(vx, Velocity.Y);
+        }
+
+        if (GroundTimer > 1)
+        {
+            if (absX < 30)
+            {
+                ReduceByTraction(false);
+            }
+            else
+            {
+                Fx lsX = Fx.Ratio(x, 100);
+                Fx tempMax = lsX * physics.RunSpeed;
+                Fx tempAcc = lsX * physics.DashAccelA;
+                Fx vx = Velocity.X + tempAcc;
+
+                bool overshot = (tempMax > Fx.Zero && vx > tempMax) || (tempMax < Fx.Zero && vx < tempMax);
+                if (overshot)
+                {
+                    Velocity = new FxVec2(vx, Velocity.Y);
+                    ReduceByTraction(false);
+                    vx = Velocity.X;
+                    if ((tempMax > Fx.Zero && vx < tempMax) || (tempMax < Fx.Zero && vx > tempMax))
+                        vx = tempMax;
+                }
+                else
+                {
+                    // NOT a transcription slip: DASH.js really does add tempAcc a
+                    // SECOND time on this branch (it adds once before the check,
+                    // then again inside the else). Kept faithful -- if this ever
+                    // looks wrong, check the source before "fixing" it.
+                    vx += tempAcc;
+                    if ((tempMax > Fx.Zero && vx > tempMax) || (tempMax < Fx.Zero && vx < tempMax))
+                        vx = tempMax;
+                }
+
+                Velocity = new FxVec2(vx, Velocity.Y);
+            }
+        }
+    }
+
+    /// <summary>
+    /// WALK.js. The acceleration is proportional to the gap to target, not a flat
+    /// per-tick step — which is why walking has that soft ramp in Melee and why a
+    /// MoveToward() approximation never felt right.
+    /// Source: <c>(tempMax - vx) * (1/(walkMaxV*2)) * (walkInitV + walkAcc)</c>.
+    /// </summary>
+    private void TickWalk(sbyte x)
+    {
+        var physics = _character.Physics;
+        Fx tempMax = physics.WalkSpeed * Fx.Ratio(x, 100);
+
+        if (Fx.Abs(Velocity.X) > Fx.Abs(tempMax))
+        {
+            ReduceByTraction(true);
+            return;
+        }
+
+        Fx denom = physics.WalkSpeed * Fx.FromInt(2);
+        Fx tempAcc = (tempMax - Velocity.X) / denom * (physics.WalkInitialSpeed + physics.GroundAccel);
+        Fx vx = Velocity.X + tempAcc;
+
+        int face = FacingRight ? 1 : -1;
+        Fx faceFx = Fx.FromInt(face);
+        if (vx * faceFx > tempMax * faceFx) vx = tempMax;
+
+        Velocity = new FxVec2(vx, Velocity.Y);
+    }
+
+    /// <summary>
+    /// RUN.js. Same gap-proportional shape as walk but with the two-stage dash
+    /// acceleration, where the second stage is divided by |lsX| — so a partly
+    /// tilted stick accelerates HARDER per unit of input, not softer.
+    /// Source: <c>vx += (dMaxV*lsX - vx) * (1/(dMaxV*2.5)) * (dAccA + dAccB/|lsX|)</c>.
+    /// </summary>
+    private void TickRun(sbyte x)
+    {
+        var physics = _character.Physics;
+        Fx lsX = Fx.Ratio(x, 100);
+        Fx absLsX = Fx.Abs(lsX);
+        if (absLsX == Fx.Zero) return; // guarded: the source divides by this
+
+        Fx tempMax = lsX * physics.RunSpeed;
+        Fx denom = physics.RunSpeed * Fx.Ratio(25, 10);
+        Fx accel = physics.DashAccelA + physics.DashAccelB / absLsX;
+        Fx vx = Velocity.X + (tempMax - Velocity.X) / denom * accel;
+
+        int face = FacingRight ? 1 : -1;
+        Fx faceFx = Fx.FromInt(face);
+        if (vx * faceFx > tempMax * faceFx) vx = tempMax;
+
+        Velocity = new FxVec2(vx, Velocity.Y);
     }
 
     private void TickAirborne(FrameInput input, bool jumpPressed, bool holdingDown)
@@ -696,13 +1088,17 @@ public sealed class PlayerMover : ISimObject
         w.WriteFxVec2(PreviousPosition);
         w.WriteFxVec2(Velocity);
         w.WriteBool(Grounded);
+        w.WriteInt((int)Surface);
+        w.WriteInt(SurfaceIndex);
         w.WriteBool(FacingRight);
         w.WriteBool(FastFalling);
         w.WriteInt((int)Ground);
+        w.WriteInt(GroundTimer);
         w.WriteInt(DashFramesRemaining);
         w.WriteInt(JumpSquatFramesRemaining);
         w.WriteInt(JumpsRemaining);
         w.WriteByte((byte)_prevStickX);
+        w.WriteByte((byte)_prevStickX2);
         w.WriteByte((byte)_prevStickY);
         w.WriteBool(_prevJumpHeld);
         w.WriteBool(_prevAttackHeld);
@@ -720,6 +1116,9 @@ public sealed class PlayerMover : ISimObject
         var (smashX, smashY) = _smashTilt.SaveRaw();
         w.WriteInt(smashX);
         w.WriteInt(smashY);
+        w.WriteInt(Stocks);
+        w.WriteBool(IsEliminated);
+        w.WriteInt(_respawnInvincibilityFramesRemaining);
     }
 
     public void LoadState(StateReader r)
@@ -728,13 +1127,17 @@ public sealed class PlayerMover : ISimObject
         PreviousPosition = r.ReadFxVec2();
         Velocity = r.ReadFxVec2();
         Grounded = r.ReadBool();
+        Surface = (SurfaceKind)r.ReadInt();
+        SurfaceIndex = r.ReadInt();
         FacingRight = r.ReadBool();
         FastFalling = r.ReadBool();
         Ground = (GroundState)r.ReadInt();
+        GroundTimer = r.ReadInt();
         DashFramesRemaining = r.ReadInt();
         JumpSquatFramesRemaining = r.ReadInt();
         JumpsRemaining = r.ReadInt();
         _prevStickX = (sbyte)r.ReadByte();
+        _prevStickX2 = (sbyte)r.ReadByte();
         _prevStickY = (sbyte)r.ReadByte();
         _prevJumpHeld = r.ReadBool();
         _prevAttackHeld = r.ReadBool();
@@ -753,5 +1156,8 @@ public sealed class PlayerMover : ISimObject
         int smashX = r.ReadInt();
         int smashY = r.ReadInt();
         _smashTilt.LoadRaw(smashX, smashY);
+        Stocks = r.ReadInt();
+        IsEliminated = r.ReadBool();
+        _respawnInvincibilityFramesRemaining = r.ReadInt();
     }
 }

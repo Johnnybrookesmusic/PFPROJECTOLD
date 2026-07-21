@@ -1,4 +1,5 @@
 using PlatformFighter.Core.Math;
+using PlatformFighter.Core.Sim.Collision;
 
 namespace PlatformFighter.Characters;
 
@@ -29,6 +30,33 @@ public readonly struct CharacterPhysics
     public readonly Fx GroundTraction;
     public readonly int DashInitiateFrames;
 
+    // ---- Step 3: real MeleeLight ground-locomotion stats -------------------
+    // These are what DASH.js / RUN.js / WALK.js actually read. They were all
+    // already transcribed in FoxAttributes.cs and sitting unused; Step 3 wires
+	// them in. Names map to MeleeLight's attribute keys, given in each comment.
+	/// <summary>MeleeLight <c>walkInitV</c>. Part of WALK.js's acceleration
+    /// factor, NOT a starting speed despite the name.</summary>
+    public readonly Fx WalkInitialSpeed;
+    /// <summary>MeleeLight <c>dInitV</c> — the impulse DASH.js adds on its 2nd frame.</summary>
+    public readonly Fx DashInitialSpeed;
+    /// <summary>MeleeLight <c>dTInitV</c> — dash-TURN initial velocity. Distinct
+    /// from <see cref="DashInitialSpeed"/>; conflating the two was a latent bug
+    /// FoxAttributes.cs already flagged.</summary>
+    public readonly Fx DashTurnSpeed;
+    /// <summary>MeleeLight <c>dAccA</c> — first-stage dash/run acceleration.</summary>
+    public readonly Fx DashAccelA;
+    /// <summary>MeleeLight <c>dAccB</c> — second-stage dash/run acceleration.</summary>
+    public readonly Fx DashAccelB;
+    /// <summary>MeleeLight <c>dashFrameMin</c> — earliest dash frame that can
+    /// transition into RUN.</summary>
+    public readonly int DashFrameMin;
+    /// <summary>MeleeLight <c>dashFrameMax</c> — after this a fresh dash input
+    /// re-dashes instead of running. This is the dash-dance window.</summary>
+    public readonly int DashFrameMax;
+    /// <summary>MeleeLight <c>framesData.DASH</c> — total dash animation length;
+    /// past it, DASH falls back to WAIT.</summary>
+    public readonly int DashTotalFrames;
+
     // ---- Air movement -----------------------------------------------------
     public readonly Fx AirSpeedMax;
     public readonly Fx AirAccel;
@@ -48,14 +76,25 @@ public readonly struct CharacterPhysics
     // ---- Landing / misc -----------------------------------------------------
     public readonly int LandingFrames;
     public readonly Fx Weight;
-    public readonly FxVec2 HalfSize;
+
+    /// <summary>Step 2: the real Environmental Collision Box (see Core/Sim/Collision/Ecb.cs).
+    /// This is what fighter-vs-stage resolution actually uses now. Feet-origin.</summary>
+    public readonly Ecb Ecb;
+
+    /// <summary>DERIVED from <see cref="Ecb"/>, kept only for the systems that still
+	/// want a symmetric centre+halfsize box (CombatSystem's hurtbox overlap). It is no
+	/// longer independent data that can drift out of sync with the collision shape —
+	/// which is exactly how it came to be 6.7x too large (see FoxEcb.cs's header).</summary>
+    public FxVec2 HalfSize => new(Ecb.HalfWidth, Ecb.TopHeight / (Fx.One + Fx.One));
 
     public CharacterPhysics(
         Fx walkSpeed, Fx dashSpeed, Fx runSpeed, Fx groundAccel, Fx groundTraction, int dashInitiateFrames,
+        Fx walkInitialSpeed, Fx dashInitialSpeed, Fx dashTurnSpeed, Fx dashAccelA, Fx dashAccelB,
+        int dashFrameMin, int dashFrameMax, int dashTotalFrames,
         Fx airSpeedMax, Fx airAccel,
         Fx gravity, Fx fallSpeedCap, Fx fastFallSpeedCap,
         int jumpSquatFrames, Fx shortHopVelocity, Fx fullHopVelocity, Fx doubleJumpVelocity, int extraJumps,
-        int landingFrames, Fx weight, FxVec2 halfSize)
+        int landingFrames, Fx weight, Ecb ecb)
     {
         WalkSpeed = walkSpeed;
         DashSpeed = dashSpeed;
@@ -63,6 +102,14 @@ public readonly struct CharacterPhysics
         GroundAccel = groundAccel;
         GroundTraction = groundTraction;
         DashInitiateFrames = dashInitiateFrames;
+        WalkInitialSpeed = walkInitialSpeed;
+        DashInitialSpeed = dashInitialSpeed;
+        DashTurnSpeed = dashTurnSpeed;
+        DashAccelA = dashAccelA;
+        DashAccelB = dashAccelB;
+        DashFrameMin = dashFrameMin;
+        DashFrameMax = dashFrameMax;
+        DashTotalFrames = dashTotalFrames;
         AirSpeedMax = airSpeedMax;
         AirAccel = airAccel;
         Gravity = gravity;
@@ -75,7 +122,7 @@ public readonly struct CharacterPhysics
         ExtraJumps = extraJumps;
         LandingFrames = landingFrames;
         Weight = weight;
-        HalfSize = halfSize;
+        Ecb = ecb;
     }
 
     /// <summary>Updated this pass to resolve every DAT-vs-MeleeLight disagreement
@@ -89,27 +136,17 @@ public readonly struct CharacterPhysics
 	/// DashInitiateFrames (12) is still the MovementConstants placeholder — no
 	/// MeleeLight dash-lock-frame field was found this pass either.
 	///
-	/// HalfSize: REVERTED to the old flat 20x30 pixel placeholder after a prior
-	/// version of this pass swapped it for MeleeLight's real ECB-derived size
-	/// (~3.5 x 11) and broke hit detection — DeterminismTest.cs's
-	/// HybridSelfPlayCombatTest spawns P1/P2 a fixed 30 (pixel-scale) units
-	/// apart, which only lands a hit because CombatSystem's whole-body AABB
-    /// overlap check (attacker.HalfSize + defender.HalfSize reach) exceeds that
-    /// gap at the OLD size (20+20=40 > 30). At the ECB-derived size the combined
-    /// reach was only ~7, so Jab1 whiffed every time — confirmed by re-running
-    /// the F9 suite, which failed exactly this check. This is the same
-    /// MeleeLight-native-units-vs-pixel-scale-engine mismatch flagged (and
-	/// deliberately not chased) at the end of the physics pass: MeleeLight's
-	/// ECB/ATTRIBUTES numbers are NOT in the same unit system as this engine's
-	/// stage geometry and player spacing, so they can't be substituted in
-	/// directly. Fixing this for real needs either (a) a world-scale constant
-	/// that converts MeleeLight units to pixels consistently for every
-	/// distance-based system (spacing, stage size, hurtbox, per-move hitbox
-	/// offsets, all at once), or (b) rescaling the stage/spacing to MeleeLight's
-    /// native units instead. Half-measures like this one — swapping ONE
-    /// distance value to the other unit system while everything around it
-    /// stays in pixels — break hit detection. Do that reconciliation before
-    /// touching HalfSize again.</summary>
+	/// HalfSize/ECB: RESOLVED in Step 2. The old flat 20x30 pixel placeholder made
+	/// Fox 40 units wide on Step 1's real 136.8-wide Battlefield -- 29.2% of the whole
+    /// stage, against a true 4.4%. A previous pass reverted the fix because swapping
+	/// HalfSize alone broke DeterminismTest's combat check (P1/P2 spawned a fixed 30
+	/// apart, which only landed a hit at the inflated size). That reasoning was right --
+	/// a half-measure IS worse -- but the fix was to move the spawn distances too, which
+	/// Step 2 does. Velocities/gravity/traction were ALREADY in MeleeLight units and
+	/// consistent with the stage; body size was the sole outlier, so there is no
+	/// whole-engine rescale. Render scale (4.5, from battlefield.js) is the render
+	/// layer's job -- see Main.cs. HalfSize is now DERIVED from Ecb and cannot drift
+    /// from it again.</summary>
     public static CharacterPhysics FromFox() => new(
         walkSpeed: Fox.FoxAttributes.WalkSpeed,
         dashSpeed: Fox.FoxAttributes.InitialDashSpeed,
@@ -117,6 +154,14 @@ public readonly struct CharacterPhysics
         groundAccel: Fox.FoxAttributes.WalkAccelMeleeLight,
         groundTraction: Fox.FoxAttributes.GroundTraction,
         dashInitiateFrames: 12,
+        walkInitialSpeed: Fox.FoxAttributes.InitialWalkSpeedMeleeLight,
+        dashInitialSpeed: Fox.FoxAttributes.InitialDashSpeed,
+        dashTurnSpeed: Fox.FoxAttributes.DashSpeed,
+        dashAccelA: Fox.FoxAttributes.DashAccelA,
+        dashAccelB: Fox.FoxAttributes.DashAccelB,
+        dashFrameMin: 11,
+        dashFrameMax: 21,
+        dashTotalFrames: 21,
         airSpeedMax: Fox.FoxAttributes.AirSpeedMax,
         airAccel: Fox.FoxAttributes.AirAccel,
         gravity: Fox.FoxAttributes.Gravity,
@@ -129,7 +174,7 @@ public readonly struct CharacterPhysics
         extraJumps: Fox.FoxAttributes.ExtraJumps,
         landingFrames: Fox.FoxAttributes.LandingFrames,
         weight: Fox.FoxAttributes.Weight,
-        halfSize: new FxVec2(Fx.FromInt(20), Fx.FromInt(30)));
+        ecb: Fox.FoxEcb.Default);
 
     /// <summary>MeleeLight src/characters/falco/attributes.js only — see class-level
     /// doc comment. Not consumed by the Phase 9 hybrid (which uses FromFox()
@@ -141,6 +186,14 @@ public readonly struct CharacterPhysics
         groundAccel: Fx.Ratio(100_000, 1_000_000),
         groundTraction: Fx.Ratio(80_000, 1_000_000),
         dashInitiateFrames: 12,
+        walkInitialSpeed: Fx.Ratio(200_000, 1_000_000),   // falco walkInitV 0.2
+        dashInitialSpeed: Fx.Ratio(1_820_000, 1_000_000), // falco dInitV 1.82
+        dashTurnSpeed: Fx.Ratio(1_900_000, 1_000_000),    // falco dTInitV 1.9
+        dashAccelA: Fx.Ratio(100_000, 1_000_000),         // falco dAccA 0.1
+        dashAccelB: Fx.Ratio(20_000, 1_000_000),          // falco dAccB 0.02
+        dashFrameMin: 11,
+        dashFrameMax: 21,
+        dashTotalFrames: 21,
         airSpeedMax: Fx.Ratio(830_000, 1_000_000),
         airAccel: Fx.Ratio(50_000, 1_000_000),
         gravity: Fx.Ratio(170_000, 1_000_000),
@@ -153,5 +206,5 @@ public readonly struct CharacterPhysics
         extraJumps: 1,
         landingFrames: 4,
         weight: Fx.FromInt(80),
-        halfSize: new FxVec2(Fx.FromInt(20), Fx.FromInt(30)));
+        ecb: Fox.FoxEcb.Default);
 }

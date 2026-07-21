@@ -1,5 +1,6 @@
 using PlatformFighter.Core.Combat;
 using PlatformFighter.Core.Sim;
+using PlatformFighter.Core.Math;
 using PlatformFighter.Core.Sim.Collision;
 
 namespace PlatformFighter.Gameplay;
@@ -55,12 +56,48 @@ public sealed class CombatSystem : ISimObject
         ResolveAttack(_b, _a);
     }
 
+    /// <summary>
+    /// Step 2: how far in FRONT of the attacker's own body a hit reaches, in
+    /// MeleeLight units. A single flat constant standing in for real per-move
+    /// hitbox offsets, which genuinely exist in MeleeLight's <c>offsets[...]</c>
+    /// tables but are still not wired through MoveDef (the same gap Phase 9/10's
+    /// notes already flag as the biggest remaining accuracy hole).
+    ///
+    /// WHY IT HAD TO EXIST NOW rather than later: before Step 2 the "hitbox" was
+    /// the attacker's whole body, which was 40 units wide — accidentally about
+    /// the right reach, for entirely the wrong reason. With the real ECB the body
+    /// is 6 wide, so whole-body overlap would mean fighters had to be practically
+    /// inside each other to connect. 8 units is roughly Fox's jab range and is a
+    /// placeholder, not transcribed data.
+    ///
+    /// It is also strictly more correct than what it replaces in one way: reach
+    /// now extends in the direction the attacker FACES, instead of symmetrically,
+    /// so a jab no longer hits someone standing behind you.
+    /// </summary>
+    public static readonly Fx AttackReach = Fx.FromInt(8);
+
     private static void ResolveAttack(PlayerMover attacker, PlayerMover defender)
     {
         if (!attacker.TryGetActiveHitbox(out Hitbox hit)) return;
+        // Directive Phase 1: a just-respawned fighter can't be re-hit — see
+        // PlayerMover.IsInvincible / RespawnInvincibilityFrames.
+        if (defender.IsInvincible) return;
 
-        var attackerBox = new FxAabb(attacker.Position, attacker.HalfSize);
-        var defenderBox = new FxAabb(defender.Position, defender.HalfSize);
+        // Attacker's body, extended forward by AttackReach in its facing direction.
+        Fx half = attacker.HalfSize.X;
+        Fx front = attacker.FacingRight
+            ? attacker.Position.X + half + AttackReach
+            : attacker.Position.X - half - AttackReach;
+        Fx back = attacker.FacingRight
+            ? attacker.Position.X - half
+            : attacker.Position.X + half;
+
+        var attackerBox = FxAabb.FromMinMax(
+            new FxVec2(Fx.Min(front, back), attacker.Position.Y - attacker.Ecb.TopHeight),
+            new FxVec2(Fx.Max(front, back), attacker.Position.Y));
+        var defenderBox = FxAabb.FromMinMax(
+            new FxVec2(defender.Position.X - defender.HalfSize.X, defender.Position.Y - defender.Ecb.TopHeight),
+            new FxVec2(defender.Position.X + defender.HalfSize.X, defender.Position.Y));
         if (!attackerBox.Overlaps(defenderBox)) return;
 
         attacker.MarkHitApplied();
