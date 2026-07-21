@@ -1,4 +1,127 @@
-# READ THIS FIRST — CURRENT GOAL (above ROADMAP.md, above everything else)
+# READ THIS FIRST —# READ THIS FIRST — CURRENT GOAL (above ROADMAP.md, above everything else)
+
+**Last updated:** this session (Master Directive v3 in effect). Read this
+file before ROADMAP.md, before any source file.
+
+## Corrections to prior handoffs (read this first)
+
+Two things prior sessions' docs got stale on — the user caught both:
+
+1. **Camera is DONE, not "Not started."** `Core/Rendering/CameraController.cs`
+   is a complete, real-Melee-algorithm-accurate framing camera (subject
+   bounds -> interest point -> per-stage clamp -> smoothed pan/zoom), wired
+   into `Main.cs` (`_camera = new CameraController(...)`, used every frame).
+   ROADMAP.md's Phase 13 line and every "camera: Not Started" mention across
+   the docs were stale and have been corrected this session.
+2. **Fox's moveset is essentially complete, not mid-port.** All 28
+   `MoveSlot` entries have real ported `MoveDef` data in `FoxMoves.cs` and
+   are wired into `FoxCharacter.cs` — grounded normals, all 5 aerials, all 4
+   specials (Blaster/Illusion/FireBird/Reflector), grab, pummel, all 4
+   throws, get-up attack, both ledge attacks. `FoxCharacter.cs`'s own doc
+   comment claiming NeutralB/DownAir were "left unfilled" was WRONG (the code
+   two lines below it fills both) — fixed. `MoveSlot.cs`'s comment claiming
+   only grounded normals/aerials/NeutralB were input-reachable was also
+   stale — `TryStartAttack` has read stick direction on the special button
+   (UpB/DownB/SideB/NeutralB) since a prior session (search "Phase 11" in
+   `PlayerMover.cs`) — fixed.
+
+## What was actually still missing, and what THIS session did about it
+
+Data-complete but DISPATCH-missing, per the last accurate handoff: Grab,
+Pummel, the four Throws, GetUpAttack, LedgeAttackQuick/Slow. This session
+implemented the grab/pummel/throw state machine for real, ported from
+MeleeLight's actual source (not guessed) — see the file list below. Get-up
+attack and both ledge attacks are STILL not dispatched (they need a downed/
+tech state and a ledge-grab state that don't exist yet — out of scope for
+this pass, and honestly noted rather than faked).
+
+### Grab / pummel / throw — NEW, ported from real MeleeLight source
+
+Sources read this session (all in the freshly-uploaded `meleelight.zip`):
+`src/characters/shared/moves/{CAPTUREPULLED,CAPTUREWAIT,CATCHWAIT}.js`,
+`src/characters/fox/moves/{GRAB,CATCHATTACK,THROWUP,THROWBACK,THROWFORWARD,
+THROWDOWN}.js`, `src/physics/hitDetection.js:executeGrabHits`,
+`src/physics/actionStateShortcuts.js:mashOut`, and
+`src/characters/fox/attributes.js`'s `framesData` block (CATCHWAIT=30,
+CAPTUREWAIT=80, THROWNFOXUP/BACK/FORWARD/DOWN=5/6/10/32).
+
+**Real verified numbers now in the code** (see each constant's own doc
+comment in `PlayerMover.cs`/`FoxMoves.cs` for the derivation):
+- Grab: active frames 7-8, 30-frame whiff duration (already existed).
+- Escape formula (CAPTUREPULLED.js, exact): `stuckTimer = 100 + 2*percent`
+  at the moment of connect, decremented 1/tick, extra -3 on a fresh mash
+  (button press or stick flick past 0.8) — CAPTUREWAIT.js/mashOut exact.
+- Pummel: real active frame 10, damage 3 (already-ported `FoxMoves.Pummel`).
+- Throw release frames, DERIVED exactly (not approximated) from the source's
+  variable-rate timer-sync math, since Fox-throwing-Fox is the only case
+  Phase 1 needs: Up=6, Back=7, Forward=11, Down=33 real ticks after the
+  direction commits. Throw direction threshold is 0.7 (CATCHWAIT.js) — a
+  DIFFERENT verified constant from `InputDecode.DashThresholdUnits` (0.79,
+  a different gesture) — don't conflate them, a previous draft of this
+  session's own code briefly did before being corrected.
+
+**Deliberately NOT ported, documented as such (not silently skipped):**
+- Grab-tech (two opposing grabs connecting the same tick) — CombatSystem's
+  guard just lets whichever grab's `ResolveAttack` call happens to run first
+  win; `executeGrabTech`'s real mutual-bounce isn't there.
+- CAPTUREWAIT's random position jitter on mash (`0.5*Math.sign(random()-0.5)`)
+  — cosmetic only, since the position gets force-set every tick by
+  CombatSystem's pin regardless; not worth a fixed-point RNG source for.
+- The 2-frame CAPTUREPULLED pull-in animation, and both CATCHWAIT's and
+  CAPTUREWAIT's periodic no-op self-reinit every 30/80 frames (neither has
+  any gameplay effect in the source — confirmed by reading it, not assumed).
+- Attacker's post-throw recovery tail: real Melee locks the attacker a few
+  more frames after the throw's hit lands (scaled-timer caps of 33/32/33/43
+  map to slightly different real-frame totals for Up/Back due to the
+  rubber-band scaling this port didn't replicate). This engine frees the
+  attacker to act the INSTANT the throw hitbox applies instead. Flagged as a
+  known simplification, not verified-accurate.
+- Pummel's real SetKnockback (30) is not applied to the victim's velocity —
+  see `ApplyPummelDamage`'s doc comment for why that's a no-op in practice
+  in the real source too (position gets stomped every frame regardless).
+
+### Architecture note for whoever picks this up
+
+`PlayerMover` still never references its opponent directly (existing rule,
+kept). Each fighter's own `Tick()` drives its own half
+(`TickGrabbed`/`TickGrabbing`, next to `TickHitstun` in `PlayerMover.cs`);
+`CombatSystem.TickGrabs()` (new, called from `CombatSystem.Tick()` right
+after both `ResolveAttack` calls) is the only place that reaches across —
+grab-connect, the position pin, pummel's real-frame damage application, and
+throw release all happen there.
+
+## Verification NOT performed (standing caveat, unchanged across every session)
+
+No .NET SDK in this authoring environment. Done this session: brace/paren
+balance check on every touched file (`PlayerMover.cs` 124/124 braces,
+531/531 parens; `CombatSystem.cs` 21/21, 110/110; `FoxMoves.cs` 31/31,
+532/532 — all balanced). **Not compiled. Not run.** The user's own Godot
+editor / F9 debug harness is the real verification loop, same as always.
+
+## CURRENT OBJECTIVE (exactly one task)
+
+**Compile, run F9, and confirm nothing regressed — then playtest a grab.**
+Grab a stationary or moving opponent, mash out of one grab, let a hold time
+out without pummeling/throwing (confirm nothing weird happens — there's no
+explicit timeout path other than mash-escape, matching the real source,
+which also has no non-mash timeout for the victim), pummel a few times,
+and try all four throw directions. Watch for: victim's position visibly
+snapping to the hold spot every frame (should look locked, not floaty);
+facing flipping correctly on connect; both fighters returning to normal
+control after a throw lands or an escape happens.
+
+If F9 passes and grabbing feels right in the editor: **get-up attack and
+both ledge attacks are next** — they need a downed/tech state (get-up) and
+a ledge-grab/ledge-hang state (both ledge attacks) that don't exist in this
+engine yet. Neither is a data problem (both MoveDefs already exist in
+`FoxMoves.cs`); both are new state machines, same category of work this
+session's grab system was, just for a different trigger condition.
+DOCEOF
+echo written
+Output
+
+written
+
 
 **Last updated:** this session. If you are a fresh AI picking this project
 up, read this file before ROADMAP.md, before any source file.

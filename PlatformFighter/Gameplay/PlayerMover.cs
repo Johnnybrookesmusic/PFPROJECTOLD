@@ -57,6 +57,15 @@ public enum PlayerActionState : int
     /// engine drops the fighter with full normal airborne control immediately,
     /// just briefly unhittable.</summary>
     Respawning = 11,
+    /// <summary>Holding an opponent — CATCHWAIT/CATCHATTACK/THROW* in
+    /// MeleeLight terms, all folded into one reported state (see
+    /// PlayerMover.TickGrabbing's doc comment for why). Top priority, same
+    /// tier as Hitstun/Grabbed — a grabbing fighter cannot be doing anything
+    /// else.</summary>
+    Grabbing = 12,
+    /// <summary>Held by an opponent — CAPTUREPULLED/CAPTUREWAIT folded into
+    /// one reported state. See PlayerMover.TickGrabbed.</summary>
+    Grabbed = 13,
     /// <summary>Directive Phase 1: out of stocks. Tick() returns immediately for
     /// an eliminated fighter (see its own doc comment) — no physics, no input,
     /// not hittable, doesn't move. Terminal; nothing clears this state.</summary>
@@ -227,6 +236,34 @@ public sealed class PlayerMover : ISimObject
     /// <c>player[p].phys.jabCombo</c>.</summary>
     private bool _jabComboQueued;
 
+    // ---- Grab/throw state (real MeleeLight port — see TickGrabbing/TickGrabbed) ----
+    /// <summary>True while this fighter is holding a grabbed opponent
+    /// (CATCHWAIT/CATCHATTACK/THROW* folded together — see TickGrabbing).</summary>
+    public bool IsGrabbingOpponent { get; private set; }
+    /// <summary>True while this fighter is held by an opponent's grab
+    /// (CAPTUREPULLED/CAPTUREWAIT folded together — see TickGrabbed).</summary>
+    public bool IsGrabbedByOpponent { get; private set; }
+    /// <summary>Victim-side only. MeleeLight's phys.stuckTimer — counts down
+    /// every tick, extra -3 on a fresh mash input (CAPTUREWAIT.js). Escape
+    /// when it goes negative.</summary>
+    private int _grabStuckTimer;
+    /// <summary>Attacker-side only. >0 while a pummel (CATCHATTACK) is playing;
+    /// the actual damage application at the real active frame is CombatSystem's
+    /// job (it is the one that can reach the victim) — see PummelFrame.</summary>
+    private int _pummelFrame;
+    /// <summary>Attacker-side: current pummel sub-state frame, exposed so
+    /// CombatSystem can apply CATCHATTACK's hit on its real active frame (10)
+    /// without PlayerMover needing a reference to its victim.</summary>
+    public int PummelFrame => _pummelFrame;
+    /// <summary>Attacker-side: which throw direction has been committed, if any.
+    /// Null while still in the CATCHWAIT hold pose.</summary>
+    public MoveSlot? CommittedThrow { get; private set; }
+    /// <summary>Attacker-side: real ticks elapsed since CommittedThrow was set.
+    /// -1 when CommittedThrow is null. CombatSystem compares this against each
+    /// throw's real release frame (FoxMoves.ThrowXReleaseFrame) to know exactly
+    /// when to apply the throw's damage/knockback to the victim.</summary>
+    public int ThrowFrame { get; private set; } = -1;
+
     public PlayerMover(FxVec2 start, StageGeometry stage, int playerIndex = 0, CharacterData? character = null)
     {
         Position = PreviousPosition = start;
@@ -341,6 +378,14 @@ public sealed class PlayerMover : ISimObject
         {
             TickHitstun();
         }
+        else if (IsGrabbedByOpponent)
+        {
+            TickGrabbed(input, attackPressed, specialPressed, jumpPressed);
+        }
+        else if (IsGrabbingOpponent)
+        {
+            TickGrabbing(input, attackPressed);
+        }
         else if (CurrentMove.HasValue)
         {
             // JAB1.js/JAB2.js watch for a fresh A press DURING their own window
@@ -440,6 +485,8 @@ public sealed class PlayerMover : ISimObject
     {
         if (IsEliminated) return PlayerActionState.Eliminated;
         if (HitstunFramesRemaining > 0) return PlayerActionState.Hitstun;
+        if (IsGrabbedByOpponent) return PlayerActionState.Grabbed;
+        if (IsGrabbingOpponent) return PlayerActionState.Grabbing;
         if (IsInvincible) return PlayerActionState.Respawning;
         if (CurrentMove.HasValue) return PlayerActionState.Attack;
         if (JumpSquatFramesRemaining > 0) return PlayerActionState.JumpSquat;
@@ -493,7 +540,10 @@ public sealed class PlayerMover : ISimObject
         HitstunFramesRemaining = KnockbackMath.ComputeHitstunFrames(magnitude);
 
         // A hit always interrupts cleanly — no partial jump-squats, half-finished
-        // dashes, or in-progress attacks carried into hitstun.
+        // dashes, or in-progress attacks carried into hitstun. Also always ends
+        // any grab involvement: a throw's release goes through this exact path
+        // (see CombatSystem's throw-release handling), and if a grabBING fighter
+        // takes a hit from elsewhere, real Melee lets go of the grab too.
         JumpSquatFramesRemaining = 0;
         DashFramesRemaining = 0;
         Ground = GroundState.Idle;
@@ -501,6 +551,11 @@ public sealed class PlayerMover : ISimObject
         Grounded = false;
         CurrentMove = null;
         MoveFrame = 0;
+        IsGrabbedByOpponent = false;
+        IsGrabbingOpponent = false;
+        CommittedThrow = null;
+        ThrowFrame = -1;
+        _pummelFrame = 0;
     }
 
     /// <summary>Phase 9: freeze this fighter (no input, no movement) for the
@@ -607,6 +662,178 @@ public sealed class PlayerMover : ISimObject
         if (value > Fx.Zero) return Fx.Max(Fx.Zero, value - amount);
         if (value < Fx.Zero) return Fx.Min(Fx.Zero, value + amount);
         return value;
+    }
+
+    // ---- Grab / throw (real MeleeLight port) -------------------------------
+    // Sources: src/characters/shared/moves/{CAPTUREPULLED,CAPTUREWAIT,CATCHWAIT}.js,
+    // src/characters/fox/moves/{GRAB,CATCHATTACK,THROWUP,THROWBACK,THROWFORWARD,
+    // THROWDOWN}.js, src/physics/hitDetection.js:executeGrabHits,
+    // src/physics/actionStateShortcuts.js:mashOut.
+    //
+    // ARCHITECTURE: PlayerMover never references its opponent directly (same
+    // rule ApplyHit already follows — CombatSystem is the only thing that ever
+    // holds both PlayerMovers at once). So the split is: each fighter's OWN
+    // Tick() drives its OWN half of the grab (stuck-timer/mash for the victim,
+    // hold/pummel/throw-commit for the attacker) exactly like every other
+    // state in this class; CombatSystem is what actually reaches across to
+    // apply damage, pin the victim's position, and keep both sides' flags in
+    // sync (grab connect, pummel's real hit frame, a throw's release frame,
+    // and "victim escaped -> release attacker too"). See CombatSystem.cs's
+    // grab handling for that half.
+    //
+    // FOLDED STATES, on purpose: CAPTUREPULLED's 2-frame pull-in animation and
+    // the periodic no-op self-reinit both CATCHWAIT and CAPTUREWAIT do every
+    // framesData.CATCHWAIT/CAPTUREWAIT ticks (30/80 for Fox) are skipped —
+    // neither has any gameplay effect in the source (the reinit just restarts
+    // that state's own local animation timer; nothing reads it). CATCHATTACK
+    // (pummel) and every THROW* are folded into the single "grabbing" state
+    // rather than getting their own PlayerActionState entries, since none of
+    // them change what the ATTACKER can do (nothing) — only PummelFrame/
+    // CommittedThrow, which CombatSystem already reads directly, distinguish
+    // them.
+    //
+    // NOT IMPLEMENTED: grab clank/tech (two opposing grabs connecting the same
+    // tick) — CombatSystem's grab-connect guard just lets whichever resolves
+    // first win, rather than porting executeGrabTech's mutual-bounce. Real
+    // Melee's escape RNG jitter (CAPTUREWAIT.js's
+    // `pos.x += 0.5*Math.sign(Math.random()-0.5)`) is also skipped — it's
+    // cosmetic (position gets overwritten by the pin next frame regardless)
+    // and a real RNG source is a bigger standing gap than this one call site.
+
+    /// <summary>Real per-mash stuck-timer penalty (CAPTUREWAIT.js: `stuckTimer -= 3`
+    /// in addition to the normal per-frame decrement) on top of whatever this
+    /// tick's normal decrement already did.</summary>
+    private const int GrabMashStuckPenalty = 3;
+    /// <summary>Real mashOut() hard-stick-flick threshold (0.8 on a -1..1 axis) —
+    /// converted to this engine's -100..100 FrameInput.MainX/Y scale.</summary>
+    private const int GrabMashStickThreshold = 80;
+    /// <summary>Real CATCHWAIT.js throw-direction stick threshold (0.7 on a
+    /// -1..1 axis, e.g. `input[p][0].lsY > 0.7`) — NOT the same as
+    /// InputDecode.DashThresholdUnits (0.79), which is a different verified
+    /// constant for a different gesture (smash-turn). Converted to this
+    /// engine's -100..100 scale.</summary>
+    private const int GrabThrowStickThreshold = 70;
+
+    /// <summary>Called by CombatSystem the instant a grab hitbox connects.
+    /// stuckTimer's real formula (CAPTUREPULLED.js): 100 + 2*percent, using the
+    /// victim's percent AT THE MOMENT OF CONNECT — grabs themselves deal no
+    /// damage, so this is simply Percent as it already stands.</summary>
+    public void EnterGrabbed()
+    {
+        IsGrabbedByOpponent = true;
+        _grabStuckTimer = 100 + 2 * Percent.ToIntFloor();
+        Velocity = FxVec2.Zero;
+        Grounded = true;
+        CurrentMove = null;
+        MoveFrame = 0;
+        JumpSquatFramesRemaining = 0;
+        DashFramesRemaining = 0;
+        FastFalling = false;
+    }
+
+    /// <summary>Called by CombatSystem on the attacker in the same instant.</summary>
+    public void EnterGrabbing()
+    {
+        IsGrabbingOpponent = true;
+        Velocity = FxVec2.Zero;
+        CurrentMove = null;
+        MoveFrame = 0;
+        _pummelFrame = 0;
+        CommittedThrow = null;
+        ThrowFrame = -1;
+    }
+
+    /// <summary>Called by CombatSystem once it notices the victim is no longer
+    /// grabbed (escaped via mash, or a throw just released them) — mirrors real
+    /// Melee's CATCHCUT triggering on the attacker whenever CAPTURECUT triggers
+    /// on the victim.</summary>
+    public void ReleaseGrab()
+    {
+        IsGrabbingOpponent = false;
+        _pummelFrame = 0;
+        CommittedThrow = null;
+        ThrowFrame = -1;
+    }
+
+    /// <summary>Pummel damage only — deliberately NOT routed through the normal
+    /// ApplyHit pipeline. In the real source, CATCHATTACK's hit goes through the
+    /// exact same hit pipeline as any other attack (including its SetKnockback
+    /// of 30), but CAPTUREWAIT.main() unconditionally force-sets the victim's
+    /// position back to the grab hold spot every single frame regardless of
+    /// velocity — so any knockback the pummel formula computes is overwritten
+    /// a frame later and has no observable effect. Reproducing "compute real
+    /// knockback, then immediately stomp position" would cost real complexity
+    /// for a behaviorally identical result, so this applies only the damage,
+    /// which IS the entire observable effect.</summary>
+    public void ApplyPummelDamage(Fx damage) => Percent += damage;
+
+    /// <summary>Victim side. mashOut(): a FRESH press this frame on any action
+    /// button this engine has (attack/special/jump — the real source's A/B/X/Y
+    /// all map onto these three), OR a hard stick flick past 0.8. Escapes when
+    /// stuckTimer goes negative — CombatSystem notices next tick and releases
+    /// the attacker too.</summary>
+    private void TickGrabbed(FrameInput input, bool attackPressed, bool specialPressed, bool jumpPressed)
+    {
+        Velocity = FxVec2.Zero;
+        Grounded = true;
+
+        bool mashedButton = attackPressed || specialPressed || jumpPressed;
+        bool mashedStick = input.MainX > GrabMashStickThreshold || input.MainX < -GrabMashStickThreshold
+                         || input.MainY > GrabMashStickThreshold || input.MainY < -GrabMashStickThreshold;
+
+        _grabStuckTimer--;
+        if (mashedButton || mashedStick) _grabStuckTimer -= GrabMashStuckPenalty;
+
+        if (_grabStuckTimer < 0)
+        {
+            IsGrabbedByOpponent = false;
+        }
+    }
+
+    /// <summary>Attacker side. Holding pose (CATCHWAIT) watches for a fresh
+    /// pummel press or a fresh throw-direction flick; once a throw is
+    /// committed it just counts real ticks (ThrowFrame) — CombatSystem is what
+    /// compares that against each throw's real release frame and actually
+    /// applies it, since only CombatSystem can reach the victim.</summary>
+    private void TickGrabbing(FrameInput input, bool attackPressed)
+    {
+        Velocity = FxVec2.Zero;
+
+        if (_pummelFrame > 0)
+        {
+            _pummelFrame++;
+            // CATCHATTACK.js: interrupt at timer > 24 -> back to the hold pose.
+            if (_pummelFrame > 24) _pummelFrame = 0;
+            return;
+        }
+
+        if (CommittedThrow.HasValue)
+        {
+            ThrowFrame++;
+            return;
+        }
+
+        if (attackPressed)
+        {
+            _pummelFrame = 1;
+            return;
+        }
+
+        // Fresh stick flick, same rising-edge convention as everywhere else in
+        // this file (compare this frame's raw input to last frame's, which
+        // _prevStickX/_prevStickY already track for every state).
+        bool freshUp = input.MainY > GrabThrowStickThreshold && _prevStickY <= GrabThrowStickThreshold;
+        bool freshDown = input.MainY < -GrabThrowStickThreshold && _prevStickY >= -GrabThrowStickThreshold;
+        bool freshBack = (FacingRight ? input.MainX < -GrabThrowStickThreshold : input.MainX > GrabThrowStickThreshold)
+                       && (FacingRight ? _prevStickX >= -GrabThrowStickThreshold : _prevStickX <= GrabThrowStickThreshold);
+        bool freshForward = (FacingRight ? input.MainX > GrabThrowStickThreshold : input.MainX < -GrabThrowStickThreshold)
+                          && (FacingRight ? _prevStickX <= GrabThrowStickThreshold : _prevStickX >= -GrabThrowStickThreshold);
+
+        // CATCHWAIT.js checks up/down/back/forward in that exact order.
+        if (freshUp) { CommittedThrow = MoveSlot.ThrowUp; ThrowFrame = 0; }
+        else if (freshDown) { CommittedThrow = MoveSlot.ThrowDown; ThrowFrame = 0; }
+        else if (freshBack) { CommittedThrow = MoveSlot.ThrowBack; ThrowFrame = 0; }
+        else if (freshForward) { CommittedThrow = MoveSlot.ThrowForward; ThrowFrame = 0; }
     }
 
     private void TickJumpSquat(bool jumpHeld)

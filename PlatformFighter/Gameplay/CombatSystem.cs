@@ -1,8 +1,9 @@
-
 using PlatformFighter.Core.Combat;
 using PlatformFighter.Core.Sim;
 using PlatformFighter.Core.Math;
 using PlatformFighter.Core.Sim.Collision;
+using PlatformFighter.Characters;
+using PlatformFighter.Characters.Fox;
 
 namespace PlatformFighter.Gameplay;
 
@@ -56,7 +57,89 @@ public sealed class CombatSystem : ISimObject
     {
         ResolveAttack(_a, _b);
         ResolveAttack(_b, _a);
+        TickGrabs();
         TickProjectiles();
+    }
+
+    /// <summary>
+    /// Per-tick grab maintenance — the half of the grab/throw system that
+    /// needs both PlayerMovers at once (PlayerMover's own Tick() already
+    /// advanced each side's OWN half: victim's stuck-timer/mash in
+    /// TickGrabbed, attacker's hold/pummel-count/throw-commit in
+    /// TickGrabbing — see PlayerMover.cs's grab section doc comment).
+    ///
+    /// Runs AFTER both ResolveAttack calls (so a grab that connects THIS tick
+    /// is pinned/resolved starting next tick, same one-tick-delay every other
+    /// cross-player effect in this class already has) and BEFORE projectiles.
+    /// </summary>
+    private void TickGrabs()
+    {
+        MaintainGrabPair(_a, _b);
+        MaintainGrabPair(_b, _a);
+    }
+
+    private static void MaintainGrabPair(PlayerMover attacker, PlayerMover defender)
+    {
+        if (!attacker.IsGrabbingOpponent) return;
+
+        // Victim escaped (mash) or was released by a throw already processed
+        // this tick — real Melee's CATCHCUT triggering on the attacker
+        // whenever CAPTURECUT triggers on the victim.
+        if (!defender.IsGrabbedByOpponent)
+        {
+            attacker.ReleaseGrab();
+            return;
+        }
+
+        // Real CAPTUREWAIT.js: victim.face = -attacker.face (set once, at
+        // connect, in the real source's CAPTUREPULLED.init — applied here
+        // every tick instead, which is harmless since neither side's facing
+        // changes again while held) and victim.pos.x is force-set to
+        // attacker.pos.x + 9.04298*attacker.face every single frame
+        // (-9.04298*victim.face, and victim.face == -attacker.face).
+        defender.FacingRight = !attacker.FacingRight;
+        Fx holdOffset = Fx.Ratio(9_042_980, 1_000_000);
+        Fx faceSign = attacker.FacingRight ? Fx.FromInt(1) : Fx.FromInt(-1);
+        defender.Position = new FxVec2(attacker.Position.X + holdOffset * faceSign, attacker.Position.Y);
+
+        // Pummel's real active frame (CATCHATTACK.js: timer === 10).
+        if (attacker.PummelFrame == 10)
+        {
+            defender.ApplyPummelDamage(FoxMoves.Pummel.Damage);
+        }
+
+        // Throw release: compare ThrowFrame against each throw's real,
+        // verified release frame (see FoxMoves.cs's ThrowXReleaseFrame
+        // constants for the derivation from THROW*.js).
+        if (attacker.CommittedThrow.HasValue)
+        {
+            int releaseFrame = attacker.CommittedThrow.Value switch
+            {
+                MoveSlot.ThrowUp => FoxMoves.ThrowUpReleaseFrame,
+                MoveSlot.ThrowBack => FoxMoves.ThrowBackReleaseFrame,
+                MoveSlot.ThrowForward => FoxMoves.ThrowForwardReleaseFrame,
+                MoveSlot.ThrowDown => FoxMoves.ThrowDownReleaseFrame,
+                _ => int.MaxValue,
+            };
+            if (attacker.ThrowFrame >= releaseFrame)
+            {
+                MoveDef throwMove = attacker.CommittedThrow.Value switch
+                {
+                    MoveSlot.ThrowUp => FoxMoves.ThrowUp,
+                    MoveSlot.ThrowBack => FoxMoves.ThrowBack,
+                    MoveSlot.ThrowForward => FoxMoves.ThrowForward,
+                    MoveSlot.ThrowDown => FoxMoves.ThrowDown,
+                    _ => FoxMoves.ThrowForward,
+                };
+                Hitbox throwHit = throwMove.ToHitbox();
+                // ApplyHit clears IsGrabbedByOpponent on the defender itself;
+                // this same tick's earlier-in-the-loop check on the ATTACKER
+                // side won't see that until next tick, so release explicitly
+                // here too rather than waiting a tick.
+                defender.ApplyHit(in throwHit, attacker.FacingRight, defender.Weight);
+                attacker.ReleaseGrab();
+            }
+        }
     }
 
     /// <summary>
@@ -145,16 +228,26 @@ public sealed class CombatSystem : ISimObject
 
             // NON-DAMAGING HITBOX TYPES. MeleeLight tags every hitbox with a
             // `type` (see Hitbox.HitType); three of them are not attacks:
-            //   2 grab    — should initiate a grab, which needs a grab/grabbed
-            //               state machine this engine does not have yet.
-            //               Applying it as a normal hit would turn Fox's grab
-            //               into a 0-damage knockback move that launches and
-            //               causes hitlag — worse than simply not connecting.
+            //   2 grab    — now handled for real, see below (was skipped).
             //   7 reflect — the reflector's reflect field, not its hit.
             //   8 inert   — explicitly does nothing.
-            // Skipping is the honest "not implemented" behaviour; the DATA is
-            // ported and correct (see FoxMoves.Grab), only dispatch is missing.
-            if (hit.IsGrab || hit.IsReflector || hit.HitType == Hitbox.TypeInert) continue;
+            if (hit.IsGrab)
+            {
+                // executeGrabHits' real guard: neither side already grabbing/
+                // grabbed. Grab-tech (two opposing grabs same tick) is NOT
+                // ported — see PlayerMover's grab-machinery doc comment.
+                if (!attacker.IsGrabbingOpponent && !defender.IsGrabbedByOpponent
+                    && !attacker.IsGrabbedByOpponent && !defender.IsGrabbingOpponent)
+                {
+                    attacker.MarkHitApplied(hitKey);
+                    defender.EnterGrabbed();
+                    attacker.EnterGrabbing();
+                    // Real Melee: grabs cause no hitlag (executeGrabHits never
+                    // touches hit.hitlag — only executeRegularHit does).
+                }
+                return;
+            }
+            if (hit.IsReflector || hit.HitType == Hitbox.TypeInert) continue;
 
             bool hitConnects;
             if (hit.Radius > Fx.Zero)

@@ -680,6 +680,35 @@ public static readonly MoveDef ReflectorHit = new(
 	/// NEUTRALSPECIALGROUND.js: <c>if (player[p].timer === 12)</c>.</summary>
 	public const int BlasterFireFrame = 12;
 
+	/// <summary>
+	/// Real throw release frames — the tick (counted from the moment the throw
+	/// direction is committed) on which the victim actually takes the throw's
+	/// damage/knockback and is released. Source: each THROW*.js's own
+	/// <c>hitQueue.push</c> call, cross-checked against
+	/// <c>framesData[FOX_ID].THROWNFOXUP/BACK/FORWARD/DOWN</c> (5/6/10/32) +1 —
+	/// see each constant below for the derivation. MeleeLight scales the
+	/// attacker's own timer to stay in sync with the VICTIM's thrown-animation
+	/// length (a generic cross-character feature); Fox-throwing-Fox is the only
+	/// case this engine needs (Directive Phase 1), so the scaled and real frame
+	/// counts have been resolved to a single number for each throw rather than
+	/// porting the whole rubber-banding formula.
+	/// </summary>
+	// THROWUP.js: main() advances timer by 7/releaseFrame each real tick; hit
+	// fires at scaled-timer>=7. releaseFrame = framesData.THROWNFOXUP(5)+1 = 6.
+	// Since the scale numerator (7) and releaseFrame (6) aren't equal, this
+	// throw is NOT 1:1 — solving 7/6 * n >= 7 for the smallest integer n gives
+	// n = 6: the real hit tick.
+	public const int ThrowUpReleaseFrame = 6;
+	// THROWBACK.js: numerator 8, releaseFrame = framesData.THROWNFOXBACK(6)+1 = 7.
+	// 8/7 * n >= 8 -> n = 7.
+	public const int ThrowBackReleaseFrame = 7;
+	// THROWFORWARD.js: numerator 11, releaseFrame = framesData.THROWNFOXFORWARD(10)+1 = 11.
+	// Exactly 1:1 (Fox throwing Fox happens to match the reference length) -> n = 11.
+	public const int ThrowForwardReleaseFrame = 11;
+	// THROWDOWN.js: numerator 33, releaseFrame = framesData.THROWNFOXDOWN(32)+1 = 33.
+	// Exactly 1:1 -> n = 33.
+	public const int ThrowDownReleaseFrame = 33;
+
 
 	/// <summary>Grounded normals, keyed for CharacterData's moveset table.</summary>
 	public static readonly Dictionary<MoveSlot, MoveDef> GroundedNormals = new()
