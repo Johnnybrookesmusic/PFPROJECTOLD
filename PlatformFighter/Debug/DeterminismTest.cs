@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using PlatformFighter.Characters;
 using PlatformFighter.Characters.Fox;
 using PlatformFighter.Core.Combat;
 using PlatformFighter.Core.Input;
